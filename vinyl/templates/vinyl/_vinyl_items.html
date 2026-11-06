@@ -6,7 +6,7 @@
             <span class="sleeve-disc" aria-hidden="true"></span>
             <div class="sleeve-art">
                 {% if vinyl.cover_image %}
-                    <img src="{{ vinyl.cover_image.url }}" class="vinyl-cover" alt="" loading="lazy">
+                    <img src="{{ vinyl.cover_image.url }}" class="vinyl-cover" alt="" {% if forloop.first and not page_obj.has_previous %}fetchpriority="high"{% elif forloop.counter0 < 5 and not page_obj.has_previous %}{% else %}loading="lazy"{% endif %}>
                 {% else %}
                     <div class="vinyl-cover-placeholder"><span class="text-muted small">{% trans "Nessuna copertina" %}</span></div>
                 {% endif %}

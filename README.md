@@ -58,6 +58,8 @@ After your first password login, open the user menu at the top right → **Passk
 | `BEHIND_PROXY` | `True` if the app runs behind a proxy that terminates TLS. | off |
 | `CSRF_TRUSTED_ORIGINS` | Trusted origins for forms, e.g. `https://vinyl.example.com`. | empty |
 | `SECURE_HSTS_SECONDS` | HSTS duration in production. Keep `0` until HTTPS is stable. | `0` |
+| `SECURE_HSTS_INCLUDE_SUBDOMAINS` | `True` to apply HSTS to all subdomains. Only if every subdomain is HTTPS-only. | `False` |
+| `SECURE_HSTS_PRELOAD` | `True` to allow browser preload-list submission. Hard to undo. | `False` |
 
 For PostgreSQL or MySQL, see [Using PostgreSQL or MySQL](#using-postgresql-or-mysql).
 

@@ -177,6 +177,9 @@ if not DEBUG:
     CSRF_COOKIE_SECURE = True
     # HSTS è difficile da annullare: parte da 0 (disattivato); alzalo solo quando HTTPS è stabile.
     SECURE_HSTS_SECONDS = int(os.environ.get('SECURE_HSTS_SECONDS', '0'))
+    # Opzionali, solo con HSTS attivo: includono i sottodomini / richiedono la preload list (difficili da annullare).
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = os.environ.get('SECURE_HSTS_INCLUDE_SUBDOMAINS', 'False') == 'True'
+    SECURE_HSTS_PRELOAD = os.environ.get('SECURE_HSTS_PRELOAD', 'False') == 'True'
 
 # Dietro nginx (TLS terminato dal proxy): senza questo SECURE_SSL_REDIRECT va in loop di redirect.
 # Attivalo solo se l'app è raggiungibile esclusivamente tramite il proxy, che imposta X-Forwarded-Proto.
