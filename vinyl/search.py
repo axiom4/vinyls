@@ -35,5 +35,5 @@ connection_created.connect(_register_sqlite_fold)
 def search_q(query):
     """Q accent/case-insensitive su titolo, artista e numero di catalogo."""
     q = fold(query)
-    return (Q(title__fold__contains=q) | Q(artist__name__fold__contains=q)
-            | Q(catalog_number__fold__contains=q))
+    return (Q(title__fold__icontains=q) | Q(artist__name__fold__icontains=q)
+            | Q(catalog_number__fold__icontains=q))
