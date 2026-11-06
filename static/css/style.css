@@ -212,7 +212,7 @@ label, .form-label { font-weight: 600; font-size: 0.9rem; }
 
 /* Pagina elenco: lo sleeve */
 .sleeve { display: block; color: inherit; text-decoration: none; position: relative; }
-.sleeve-frame { position: relative; }
+.sleeve-frame { position: relative; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
 .sleeve-art { position: relative; z-index: 2; border-radius: 6px; overflow: hidden; background: var(--line);
     box-shadow: 0 1px 2px rgba(21,22,26,.12), 0 10px 24px -14px rgba(21,22,26,.45);
     transition: transform .25s ease; }
@@ -235,13 +235,13 @@ label, .form-label { font-weight: 600; font-size: 0.9rem; }
 .sleeve-dot { width: .55rem; height: .55rem; border-radius: 50%; background: #b9b9b2; display: inline-block; }
 .sleeve-dot.on { background: var(--ok); }
 @media (hover: hover) {
-    .sleeve:hover .sleeve-art { transform: translateX(-4px); }
+    .sleeve:hover .sleeve-frame { transform: rotate(4deg); }
     .sleeve:hover .sleeve-disc { transform: translateX(18%) rotate(40deg); }
 }
 .sleeve:focus-visible { outline-offset: 6px; border-radius: 8px; }
 @media (prefers-reduced-motion: reduce) {
-    .sleeve-art, .sleeve-disc { transition: none; }
-    .sleeve:hover .sleeve-art, .sleeve:hover .sleeve-disc { transform: none; }
+    .sleeve-frame, .sleeve-art, .sleeve-disc { transition: none; }
+    .sleeve:hover .sleeve-frame, .sleeve:hover .sleeve-disc { transform: none; }
 }
 
 /* Dettaglio, tabelle e liste */
