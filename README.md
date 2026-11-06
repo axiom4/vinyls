@@ -138,13 +138,9 @@ Passkeys are stored in the database and are copied too, so they keep working as 
 
 ## Production installation
 
-With `DEBUG=False` the app enforces HTTPS and secure cookies. The example below uses nginx and gunicorn.
+With `DEBUG=False` the app enforces HTTPS and secure cookies. The example below uses nginx and uvicorn (ASGI server, already in `requirements.txt`).
 
-1. Follow the local installation steps, then install the WSGI server:
-
-   ```bash
-   pip install gunicorn
-   ```
+1. Follow the local installation steps. No extra server needs to be installed.
 
 2. Set `.env` for production, adjusting the domain:
 
@@ -171,8 +167,12 @@ With `DEBUG=False` the app enforces HTTPS and secure cookies. The example below 
 4. Start the application, for example with systemd or supervisor:
 
    ```bash
-   gunicorn mysite.wsgi:application --bind 127.0.0.1:8002
+   uvicorn mysite.asgi:application --host 127.0.0.1 --port 8002 --workers 2 --proxy-headers
    ```
+
+   Uvicorn does not serve static or media files: nginx must do it (next step). `runserver` remains the way to develop locally.
+
+   Prefer a WSGI server? `pip install gunicorn` and run `gunicorn mysite.wsgi:application --bind 127.0.0.1:8002`.
 
 5. Configure nginx. A complete example is in `deploy/nginx/` (proxy to `127.0.0.1:8002`, TLS, security headers). nginx must serve these directly:
    - `/static/` from the `staticfiles/` folder
@@ -206,7 +206,7 @@ python manage.py migrate
 python manage.py collectstatic --noinput
 ```
 
-Then restart gunicorn.
+Then restart uvicorn.
 
 ## Maintenance
 
