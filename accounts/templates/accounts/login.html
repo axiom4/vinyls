@@ -3,16 +3,21 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#212529">
     <title>Accesso</title>
     <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v={{ CSS_VERSION }}">
 </head>
-<body class="bg-light">
-<div class="container" style="max-width: 420px; margin-top: 12vh;">
-    <div class="card shadow-sm"><div class="card-body p-4">
-        <h1 class="h4 mb-4 text-center">🎵 La Mia Collezione</h1>
-        <button id="passkey-login" type="button" class="btn btn-dark w-100 mb-2">🔑 Accedi con impronta digitale</button>
+<body>
+<div class="container" style="max-width: 420px; margin-top: 8vh;">
+    <div class="login-card"><div class="p-4 p-sm-5">
+        <div class="text-center mb-4"><img src="{% static 'img/favicon.svg' %}" alt="" width="56" height="56" class="mb-3"><h1 class="h3 mb-0">Vinyl</h1></div>
+        <button id="passkey-login" type="button" class="btn btn-primary w-100 mb-2">Accedi con impronta digitale</button>
         <div id="passkey-error" class="text-danger small mb-3" hidden></div>
         <hr>
         <form method="post">

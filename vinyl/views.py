@@ -374,7 +374,7 @@ class VinylListView(ListView):
     model = Vinyl
     template_name = 'vinyl/vinyl_list.html'
     context_object_name = 'vinyls'
-    paginate_by = 10
+    paginate_by = 24
 
     def get_queryset(self):
         queryset = Vinyl.objects.all()
@@ -397,7 +397,7 @@ class VinylListView(ListView):
         valid_sorts = ['title', '-title', 'artist__name', '-artist__name',
                        'release_year', '-release_year', '-rating', '-added_date']
         if sort_by in valid_sorts:
-            queryset = queryset.order_by(sort_by)
+            queryset = queryset.order_by(sort_by, 'pk')  # 'pk' rende stabile l'ordine tra pagine
 
         return queryset
 
@@ -405,6 +405,19 @@ class VinylListView(ListView):
         context = super().get_context_data(**kwargs)
         context['genres'] = VinylGenre.objects.all()
         return context
+
+    # Infinite scroll: ?partial=1 restituisce solo le copertine della pagina richiesta
+    def get_template_names(self):
+        if self.request.GET.get('partial'):
+            return ['vinyl/_vinyl_items.html']
+        return super().get_template_names()
+
+    def render_to_response(self, context, **kwargs):
+        response = super().render_to_response(context, **kwargs)
+        page = context.get('page_obj')
+        if self.request.GET.get('partial') and page and page.has_next():
+            response['X-Next-Page'] = str(page.next_page_number())
+        return response
 
 
 class VinylDetailView(DetailView):

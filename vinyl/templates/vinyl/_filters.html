@@ -1,0 +1,30 @@
+<form method="get" class="{{ form_class }}" aria-label="Filtri">
+    {% if query %}<input type="hidden" name="q" value="{{ query }}">{% endif %}
+    <div class="{{ col_class }}">
+        <select name="genre" class="form-select" onchange="this.form.submit()">
+            <option value="">Tutti i generi</option>
+            {% for genre in genres %}
+                <option value="{{ genre.id }}" {% if request.GET.genre == genre.id|stringformat:"s" %}selected{% endif %}>{{ genre.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="{{ col_class }}">
+        <select name="status" class="form-select" onchange="this.form.submit()">
+            <option value="">Tutti gli stati</option>
+            <option value="true" {% if request.GET.status == 'true' %}selected{% endif %}>Disponibile</option>
+            <option value="false" {% if request.GET.status == 'false' %}selected{% endif %}>Non disponibile</option>
+        </select>
+    </div>
+    <div class="{{ col_class }}">
+        <select name="sort" class="form-select" onchange="this.form.submit()">
+            <option value="title" {% if not request.GET.sort or request.GET.sort == 'title' %}selected{% endif %}>Titolo (A-Z)</option>
+            <option value="-title" {% if request.GET.sort == '-title' %}selected{% endif %}>Titolo (Z-A)</option>
+            <option value="-added_date" {% if request.GET.sort == '-added_date' %}selected{% endif %}>Aggiunti di recente</option>
+            <option value="artist__name" {% if request.GET.sort == 'artist__name' %}selected{% endif %}>Artista (A-Z)</option>
+            <option value="-artist__name" {% if request.GET.sort == '-artist__name' %}selected{% endif %}>Artista (Z-A)</option>
+            <option value="release_year" {% if request.GET.sort == 'release_year' %}selected{% endif %}>Anno (crescente)</option>
+            <option value="-release_year" {% if request.GET.sort == '-release_year' %}selected{% endif %}>Anno (decrescente)</option>
+            <option value="-rating" {% if request.GET.sort == '-rating' %}selected{% endif %}>Valutazione</option>
+        </select>
+    </div>
+</form>
