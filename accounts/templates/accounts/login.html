@@ -15,7 +15,7 @@
 <body>
 <div class="container login-wrap">
     <div class="login-card"><div class="p-4 p-sm-5">
-        <div class="d-flex justify-content-end mb-2">{% include "library/_lang_switch.html" with mode="select" %}</div>
+        <div class="d-flex justify-content-end mb-2">{% include "library/_lang_switch.html" with mode="dropdown" %}</div>
         <div class="text-center mb-4"><img src="{% static 'img/favicon.svg' %}" alt="" width="56" height="56" class="mb-3"><h1 class="h3 mb-0">Vinyl</h1></div>
         <button id="passkey-login" type="button" class="btn btn-primary w-100 mb-2">{% trans "Accedi con impronta digitale" %}</button>
         <div id="passkey-error" class="text-danger small mb-3" hidden></div>
@@ -70,6 +70,7 @@ if (!supported) {
     });
 }
 </script>
+<script src="{% static 'vendor/bootstrap/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'js/lang.js' %}?v={{ CSS_VERSION }}"></script>
 </body>
 </html>

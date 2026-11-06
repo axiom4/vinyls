@@ -1,18 +1,18 @@
 {% load i18n %}{% get_current_language as CUR %}{% get_language_info_list for LANGUAGES as langs %}
-{# mode="select": sempre il select nativo, solo bandiere (pagina di login, senza JS di Bootstrap) #}
+{# mode="dropdown": sempre e solo il pulsante con la bandiera + menu a tendina (pagina di login) #}
 <form action="{% url 'set_language' %}" method="post" class="lang-switch ms-2">{% csrf_token %}
     <input type="hidden" name="next" value="{{ request.get_full_path }}">
+    {% if mode != 'dropdown' %}
     {# telefono / menu compresso: select con bandiera e nome esteso #}
-    <select name="language" class="form-select{% if mode != 'select' %} d-lg-none{% endif %}" onchange="this.form.submit()" aria-label="{% trans 'Lingua' %}">
-        {% for l in langs %}<option value="{{ l.code }}" lang="{{ l.code }}" title="{{ l.name_local|capfirst }}"{% if l.code == CUR %} selected{% endif %}>{% include "library/_flag.html" with code=l.code %}{% if mode != 'select' %} {{ l.name_local|capfirst }}{% endif %}</option>{% endfor %}
+    <select name="language" class="form-select d-lg-none" onchange="this.form.submit()" aria-label="{% trans 'Lingua' %}">
+        {% for l in langs %}<option value="{{ l.code }}" lang="{{ l.code }}"{% if l.code == CUR %} selected{% endif %}>{% include "library/_flag.html" with code=l.code %} {{ l.name_local|capfirst }}</option>{% endfor %}
     </select>
+    {% endif %}
     {# barra estesa: solo il pulsante con la bandiera, le lingue nel menu a tendina #}
-    {% if mode != 'select' %}
-    <div class="dropdown d-none d-lg-block">
-        <button class="btn btn-outline-light lang-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="{% trans 'Lingua' %}">{% include "library/_flag.html" with code=CUR %}</button>
+    <div class="dropdown{% if mode != 'dropdown' %} d-none d-lg-block{% endif %}">
+        <button class="btn {% if mode == 'dropdown' %}btn-outline-secondary{% else %}btn-outline-light{% endif %} lang-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="{% trans 'Lingua' %}">{% include "library/_flag.html" with code=CUR %}</button>
         <ul class="dropdown-menu dropdown-menu-end">
             {% for l in langs %}<li><button class="dropdown-item{% if l.code == CUR %} active{% endif %}" type="submit" name="language" value="{{ l.code }}" lang="{{ l.code }}">{% include "library/_flag.html" with code=l.code %} {{ l.name_local|capfirst }}</button></li>{% endfor %}
         </ul>
     </div>
-    {% endif %}
 </form>
