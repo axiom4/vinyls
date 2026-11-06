@@ -11,8 +11,8 @@ Django application for cataloguing your vinyl (and book) collection. Access is p
 ## Local installation
 
 ```bash
-git clone <repository-url> vinyl
-cd vinyl
+git clone https://github.com/axiom4/vinyls.git
+cd vinyls
 
 python3 -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\activate
