@@ -1,9 +1,11 @@
 from django.conf import settings
 
+_ASSETS = ('static/css/style.css', 'static/js/vinyl-list.js')
+
 
 def css_version(request):
-    """Versione = mtime di style.css: i browser (Safari su iPhone/iPad) ricaricano il CSS quando cambia."""
+    """Versione = mtime più recente di CSS/JS propri: i browser (Safari su iPhone/iPad) li ricaricano quando cambiano."""
     try:
-        return {'CSS_VERSION': int((settings.BASE_DIR / 'static/css/style.css').stat().st_mtime)}
+        return {'CSS_VERSION': int(max((settings.BASE_DIR / p).stat().st_mtime for p in _ASSETS))}
     except OSError:
         return {'CSS_VERSION': 0}

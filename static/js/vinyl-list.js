@@ -7,7 +7,7 @@
     const title = document.getElementById('list-title');
     const spinner = sentinel.innerHTML;
     let gen = 0;          // incrementa a ogni nuova ricerca: scarta risposte vecchie
-    let ctrl = null;
+    let ctrl = new AbortController();
     let loading = false;
 
     const fetchPage = (params) => {
@@ -18,7 +18,8 @@
     function setNext(next) {
         sentinel.dataset.next = next || '';
         sentinel.hidden = !next;
-        if (next) { sentinel.innerHTML = spinner; observer.observe(sentinel); } else { observer.unobserve(sentinel); }
+        observer.unobserve(sentinel);  // unobserve+observe forza una nuova verifica se il sentinella è ancora visibile
+        if (next) { sentinel.innerHTML = spinner; observer.observe(sentinel); }
     }
 
     async function loadMore() {
