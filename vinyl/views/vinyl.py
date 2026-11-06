@@ -38,6 +38,10 @@ class VinylListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['genres'] = VinylGenre.objects.all()
+        context['query'] = self.request.GET.get('q', '').strip()
+        genre_id = self.request.GET.get('genre')
+        if genre_id:
+            context['active_genre'] = context['genres'].filter(pk=genre_id).first()
         return context
 
     # Infinite scroll: ?partial=1 restituisce solo le copertine della pagina richiesta

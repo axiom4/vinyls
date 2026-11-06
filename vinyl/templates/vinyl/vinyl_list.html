@@ -12,14 +12,14 @@
 
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Vinili<span id="list-title">{% if query %} - Risultati per "{{ query }}"{% endif %}</span></h1>
+    <h1>Vinili{% if active_genre %} <small class="title-sub">({{ active_genre.name }})</small>{% endif %}<span id="list-title" class="title-sub">{% if query %} ({{ query }}){% endif %}</span></h1>
 </div>
 
 <div class="d-none d-lg-block mb-4">
     {% include "vinyl/_filters.html" with form_class="row g-2" col_class="col-auto" %}
 </div>
 
-<div id="vinyl-grid" class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 g-md-5 mb-2">
+<div id="vinyl-grid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 g-md-5 mb-2">
     {% include "vinyl/_vinyl_items.html" %}
 </div>
 

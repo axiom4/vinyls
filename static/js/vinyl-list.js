@@ -63,7 +63,7 @@
             grid.innerHTML = html;
             empty.textContent = 'Nessun vinile trovato.';
             empty.hidden = grid.children.length > 0;
-            title.textContent = q ? ' - Risultati per "' + q + '"' : '';
+            title.textContent = q ? ' (' + q + ')' : '';
             setNext(r.headers.get('X-Next-Page'));
         } catch (e) {
             if (e.name === 'AbortError' || my !== gen) return;
