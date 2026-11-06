@@ -140,6 +140,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # destinazione di `manage.py collectstatic`
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 MEDIA_URL = 'media/'
@@ -162,3 +163,11 @@ if not DEBUG:
     CSRF_COOKIE_SECURE = True
     # HSTS è difficile da annullare: parte da 0 (disattivato); alzalo solo quando HTTPS è stabile.
     SECURE_HSTS_SECONDS = int(os.environ.get('SECURE_HSTS_SECONDS', '0'))
+
+# Dietro nginx (TLS terminato dal proxy): senza questo SECURE_SSL_REDIRECT va in loop di redirect.
+# Attivalo solo se l'app è raggiungibile esclusivamente tramite il proxy, che imposta X-Forwarded-Proto.
+if os.environ.get('BEHIND_PROXY', '').lower() in ('1', 'true', 'yes'):
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    USE_X_FORWARDED_HOST = False
+
+CSRF_TRUSTED_ORIGINS = [o for o in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',') if o]
