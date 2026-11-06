@@ -1,5 +1,5 @@
 {% extends 'library/base.html' %}
-{% load i18n %}
+{% load i18n thumbs %}
 
 {% block title %}{% trans "Libri" %} - {% trans "La Mia Libreria" %}{% endblock %}
 
@@ -44,7 +44,7 @@
     <div class="col">
         <div class="card h-100">
             {% if book.cover_image %}
-                <img src="{{ book.cover_image.url }}" class="card-img-top book-cover" alt="{{ book.title }}">
+                <img src="{{ book.cover_image|thumb }}" class="card-img-top book-cover" alt="{{ book.title }}">
             {% else %}
                 <div class="card-img-top book-cover-placeholder bg-secondary-subtle">
                     <span class="text-muted">{% trans "Nessuna copertina" %}</span>

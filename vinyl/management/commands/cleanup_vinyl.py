@@ -35,7 +35,7 @@ class Command(BaseCommand):
             self.stdout.write(f'{covers_dir} non esiste: nessuna copertina da controllare.')
             return
         used = {v.cover_image.name.rsplit('/', 1)[-1] for v in Vinyl.objects.exclude(cover_image='')}
-        unused = [f for f in covers_dir.iterdir() if f.is_file() and f.name not in used]
+        unused = [f for f in covers_dir.iterdir() if f.is_file() and f.name not in used and '_t' not in f.stem[-6:]]
         size_kb = sum(f.stat().st_size for f in unused) // 1024
         self.stdout.write(f'{prefix}copertine non usate: {len(unused)} ({size_kb} KB)')
         for f in unused:
