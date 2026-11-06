@@ -5,23 +5,28 @@
     if (!grid || !sentinel) return;
     const empty = document.getElementById('empty-msg');
     const title = document.getElementById('list-title');
-    const spinner = sentinel.innerHTML;
+    const spinner = [...sentinel.childNodes];
     // testi tradotti: arrivano dal template (data-*)
     const T = {empty: empty.dataset.empty, error: empty.dataset.error, retry: sentinel.dataset.retry};
     let gen = 0;          // incrementa a ogni nuova ricerca: scarta risposte vecchie
     let ctrl = new AbortController();
     let loading = false;
 
+    // DOMParser: documento inerte, gli script non vengono eseguiti
+    const parse = html => new DOMParser().parseFromString(html, 'text/html').body.childNodes;
+
     const fetchPage = (params) => {
         params.set('partial', '1');
         return fetch('?' + params, {headers: {'X-Requested-With': 'fetch'}, signal: ctrl.signal});
     };
 
+    const showSpinner = () => sentinel.replaceChildren(...spinner.map(n => n.cloneNode(true)));
+
     function setNext(next) {
         sentinel.dataset.next = next || '';
         sentinel.hidden = !next;
         observer.unobserve(sentinel);  // unobserve+observe forza una nuova verifica se il sentinella è ancora visibile
-        if (next) { sentinel.innerHTML = spinner; observer.observe(sentinel); }
+        if (next) { showSpinner(); observer.observe(sentinel); }
     }
 
     async function loadMore() {
@@ -35,13 +40,16 @@
             if (!r.ok) throw new Error(r.status);
             const html = await r.text();
             if (my !== gen) return;
-            grid.insertAdjacentHTML('beforeend', html);
+            grid.append(...parse(html));
             setNext(r.headers.get('X-Next-Page'));
         } catch (e) {
             if (e.name === 'AbortError' || my !== gen) return;
-            sentinel.innerHTML = '<button type="button" class="btn btn-outline-secondary"></button>';
-            sentinel.querySelector('button').textContent = T.retry;
-            sentinel.querySelector('button').onclick = () => { sentinel.innerHTML = spinner; loadMore(); };
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'btn btn-outline-secondary';
+            btn.textContent = T.retry;
+            btn.onclick = () => { showSpinner(); loadMore(); };
+            sentinel.replaceChildren(btn);
         } finally { if (my === gen) loading = false; }
     }
 
@@ -63,14 +71,14 @@
             if (!r.ok) throw new Error(r.status);
             const html = await r.text();
             if (my !== gen) return;
-            grid.innerHTML = html;
+            grid.replaceChildren(...parse(html));
             empty.textContent = T.empty;
             empty.hidden = grid.children.length > 0;
             title.textContent = q ? ' (' + q + ')' : '';
             setNext(r.headers.get('X-Next-Page'));
         } catch (e) {
             if (e.name === 'AbortError' || my !== gen) return;
-            grid.innerHTML = '';
+            grid.replaceChildren();
             empty.textContent = T.error;
             empty.hidden = false;
             setNext('');
