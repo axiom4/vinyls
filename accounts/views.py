@@ -38,7 +38,10 @@ def login_view(request):
     form = AuthenticationForm(request, data=request.POST or None)
     if request.method == 'POST' and form.is_valid():
         login(request, form.get_user())
-        return redirect(_safe_next(request))
+        nxt = request.POST.get('next', '')
+        if url_has_allowed_host_and_scheme(nxt, allowed_hosts={request.get_host()}, require_https=request.is_secure()):
+            return redirect(nxt)
+        return redirect('/')
     return render(request, 'accounts/login.html', {'form': form, 'next': _safe_next(request)})
 
 

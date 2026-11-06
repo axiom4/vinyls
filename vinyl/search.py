@@ -15,6 +15,14 @@ class Fold(Transform):
     lookup_name = 'fold'
     function = 'FOLD'
 
+    def as_postgresql(self, compiler, connection, **kwargs):
+        # richiede: CREATE EXTENSION unaccent;
+        return self.as_sql(compiler, connection, function='UNACCENT', template='LOWER(%(function)s(%(expressions)s))', **kwargs)
+
+    def as_mysql(self, compiler, connection, **kwargs):
+        # le collation *_ci di MySQL ignorano già maiuscole e accenti
+        return compiler.compile(self.lhs)
+
 
 def _register_sqlite_fold(sender, connection, **kwargs):
     if connection.vendor == 'sqlite':
