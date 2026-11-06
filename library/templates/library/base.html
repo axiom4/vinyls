@@ -22,7 +22,7 @@
     <nav class="navbar navbar-expand-lg site-nav mb-4">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{% url 'vinyl:vinyl_list' %}"><img src="{% static 'img/favicon.svg' %}" alt="" width="28" height="28" class="brand-icon me-2">{% trans "La Mia Collezione" %}</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="{% trans 'Menu' %}">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">

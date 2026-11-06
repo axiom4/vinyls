@@ -17,7 +17,7 @@ def thumb(field, size=300):
         if not dst.exists() or dst.stat().st_mtime < src.stat().st_mtime:
             with Image.open(src) as im:
                 im.thumbnail((size, size))
-                im.convert('RGB').save(dst, 'WEBP', quality=60)
+                im.convert('RGB').save(dst, 'WEBP', quality=45, method=6)
         return field.url.rsplit('/', 1)[0] + '/' + dst.name
     except (OSError, ValueError):
         return field.url
