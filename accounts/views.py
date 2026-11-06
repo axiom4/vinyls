@@ -1,4 +1,5 @@
 import json
+import logging
 
 from django.conf import settings
 from django.contrib import messages
@@ -20,6 +21,7 @@ from webauthn.helpers.structs import (
 
 from .models import Passkey
 
+logger = logging.getLogger(__name__)
 BACKEND = 'django.contrib.auth.backends.ModelBackend'
 UV = UserVerificationRequirement.REQUIRED  # impronta / PIN obbligatori
 
@@ -88,6 +90,7 @@ def register_verify(request):
             require_user_verification=True,
         )
     except Exception:
+        logger.exception('registrazione passkey fallita')
         return JsonResponse({'error': 'registrazione non valida'}, status=400)
     Passkey.objects.create(
         user=request.user,
@@ -125,6 +128,7 @@ def login_verify(request):
             require_user_verification=True,
         )
     except Exception:
+        logger.exception('verifica passkey fallita')
         return JsonResponse({'error': 'autenticazione non valida'}, status=400)
     if not passkey.user.is_active:
         return JsonResponse({'error': 'utente disattivato'}, status=403)
