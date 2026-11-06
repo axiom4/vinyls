@@ -279,3 +279,8 @@ label, .form-label { font-weight: 600; font-size: 0.9rem; }
     /* niente animazione di altezza: spostarebbe il contenuto */
     .site-nav .navbar-collapse.collapsing { height: auto; transition: none; }
 }
+
+/* Ex stili inline */
+.brand-icon { border-radius: 50%; box-shadow: 0 0 0 1px rgba(21, 22, 26, 0.15); }
+.passkey-add { max-width: 460px; }
+.login-wrap { max-width: 420px; margin-top: 8vh; }

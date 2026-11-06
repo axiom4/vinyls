@@ -8,17 +8,16 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>{% block title %}La Mia Libreria{% endblock %}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preload" href="{% static 'fonts/InstrumentSans-latin-e190a6.woff2' %}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
     <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}?v={{ CSS_VERSION }}">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg site-nav mb-4">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="{% url 'vinyl:vinyl_list' %}"><img src="{% static 'img/favicon.svg' %}" alt="" width="28" height="28" class="me-2 rounded-circle" style="box-shadow: 0 0 0 1px rgba(21,22,26,.15);">La Mia Collezione</a>
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'vinyl:vinyl_list' %}"><img src="{% static 'img/favicon.svg' %}" alt="" width="28" height="28" class="brand-icon me-2">La Mia Collezione</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -73,6 +72,6 @@
         {% block content %}{% endblock %}
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'vendor/bootstrap/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
