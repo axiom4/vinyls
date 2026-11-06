@@ -169,7 +169,7 @@ With `DEBUG=False` the app enforces HTTPS and secure cookies. The example below 
 4. Start the application, for example with systemd or supervisor:
 
    ```bash
-   uvicorn mysite.asgi:application --host 127.0.0.1 --port 8002 --workers 2 --proxy-headers
+   uvicorn vinyls.asgi:application --host 127.0.0.1 --port 8002 --workers 2 --proxy-headers
    ```
 
    Uvicorn does not serve static or media files: nginx must do it (next step). `runserver` remains the way to develop locally.
@@ -180,7 +180,7 @@ With `DEBUG=False` the app enforces HTTPS and secure cookies. The example below 
    [fcgi-program:vinyl]
    socket=tcp://127.0.0.1:8002
    directory=/path/to/vinyls
-   command=/path/to/vinyls/venv/bin/uvicorn mysite.asgi:application --fd 0 --access-log --proxy-headers
+   command=/path/to/vinyls/venv/bin/uvicorn vinyls.asgi:application --fd 0 --access-log --proxy-headers
    numprocs=4
    process_name=asgi%(process_num)d
    autostart=true
@@ -190,9 +190,9 @@ With `DEBUG=False` the app enforces HTTPS and secure cookies. The example below 
    user=www-data
    ```
 
-   The module is `mysite.asgi` (the Django project package), not the repository name.
+   The module is `vinyls.asgi` (the Django project package), not the repository name.
 
-   Prefer a WSGI server? `pip install gunicorn` and run `gunicorn mysite.wsgi:application --bind 127.0.0.1:8002`.
+   Prefer a WSGI server? `pip install gunicorn` and run `gunicorn vinyls.wsgi:application --bind 127.0.0.1:8002`.
 
 5. Configure nginx. A complete example is in `deploy/nginx/` (proxy to `127.0.0.1:8002`, TLS, security headers). nginx must serve these directly:
    - `/static/` from the `staticfiles/` folder
@@ -214,7 +214,7 @@ python manage.py makemessages -a --ignore=venv --ignore=staticfiles
 python manage.py compilemessages -l en -l fr -l de -l ru -l zh_Hans -l es -l ja
 ```
 
-To add a language, add it to `LANGUAGES` in `mysite/settings.py` and run `makemessages -l <code>`. The `cleanup_vinyl` command output is not translated.
+To add a language, add it to `LANGUAGES` in `vinyls/settings.py` and run `makemessages -l <code>`. The `cleanup_vinyl` command output is not translated.
 
 ## Updating
 
