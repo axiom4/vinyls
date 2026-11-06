@@ -1,10 +1,10 @@
 {% load i18n %}{% get_current_language as CUR %}{% get_language_info_list for LANGUAGES as langs %}
-{# mode="select": sempre il select nativo (pagina di login, senza JS di Bootstrap) #}
+{# mode="select": sempre il select nativo, solo bandiere (pagina di login, senza JS di Bootstrap) #}
 <form action="{% url 'set_language' %}" method="post" class="lang-switch ms-2">{% csrf_token %}
     <input type="hidden" name="next" value="{{ request.get_full_path }}">
     {# telefono / menu compresso: select con bandiera e nome esteso #}
     <select name="language" class="form-select{% if mode != 'select' %} d-lg-none{% endif %}" onchange="this.form.submit()" aria-label="{% trans 'Lingua' %}">
-        {% for l in langs %}<option value="{{ l.code }}" lang="{{ l.code }}"{% if l.code == CUR %} selected{% endif %}>{% include "library/_flag.html" with code=l.code %} {{ l.name_local|capfirst }}</option>{% endfor %}
+        {% for l in langs %}<option value="{{ l.code }}" lang="{{ l.code }}" title="{{ l.name_local|capfirst }}"{% if l.code == CUR %} selected{% endif %}>{% include "library/_flag.html" with code=l.code %}{% if mode != 'select' %} {{ l.name_local|capfirst }}{% endif %}</option>{% endfor %}
     </select>
     {# barra estesa: solo il pulsante con la bandiera, le lingue nel menu a tendina #}
     {% if mode != 'select' %}
