@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             name='Passkey',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('credential_id', models.BinaryField(unique=True)),
+                ('credential_id', models.BinaryField()),
                 ('public_key', models.BinaryField()),
                 ('sign_count', models.PositiveBigIntegerField(default=0)),
                 ('name', models.CharField(max_length=100)),
