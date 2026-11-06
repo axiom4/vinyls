@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}La Mia Libreria{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'vinyl:vinyl_list' %}">🎵 La Mia Collezione</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">🎵 Vinili</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'vinyl:vinyl_list' %}">Elenco vinili</a></li>
+                            <li><a class="dropdown-item" href="{% url 'vinyl:vinyl_add' %}">Aggiungi vinile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'vinyl:artist_list' %}">Artisti</a></li>
+                            <li><a class="dropdown-item" href="{% url 'vinyl:label_list' %}">Etichette</a></li>
+                            <li><a class="dropdown-item" href="{% url 'vinyl:genre_list' %}">Generi</a></li>
+                            <li><a class="dropdown-item" href="{% url 'vinyl:statistics' %}">Statistiche</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                {% block navbar_actions %}
+                <form class="d-flex" role="search" method="get" action="{% url 'library:search_books' %}">
+                    <input class="form-control me-2" type="search" name="q" placeholder="Cerca libri..." value="{{ query|default:'' }}">
+                    <button class="btn btn-outline-light" type="submit">Cerca</button>
+                </form>
+                <a href="{% url 'library:book_add' %}" class="btn btn-success ms-2">+ Aggiungi libro</a>
+                {% endblock %}
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

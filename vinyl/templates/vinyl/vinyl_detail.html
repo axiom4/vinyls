@@ -1,0 +1,63 @@
+{% extends 'vinyl/base.html' %}
+
+{% block title %}{{ vinyl.title }} - La Mia Collezione{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        {% if vinyl.cover_image %}
+            <img src="{{ vinyl.cover_image.url }}" class="rounded shadow vinyl-cover-detail" alt="{{ vinyl.title }}">
+        {% else %}
+            <div class="bg-secondary-subtle rounded vinyl-cover-detail vinyl-cover-placeholder">
+                <span class="text-muted">Nessuna copertina</span>
+            </div>
+        {% endif %}
+    </div>
+    <div class="col-md-8">
+        <h1>{{ vinyl.title }}</h1>
+        <h4 class="text-muted">{{ vinyl.artist }}</h4>
+
+        <p class="mt-3">
+            <span class="badge bg-{% if vinyl.is_available %}success{% else %}secondary{% endif %}">
+                {% if vinyl.is_available %}Disponibile{% else %}Non disponibile{% endif %}
+            </span>
+            {% if vinyl.rating %}<span class="badge bg-warning text-dark">★ {{ vinyl.rating }}</span>{% endif %}
+            {% for genre in vinyl.genre.all %}
+                <span class="badge bg-info text-dark">{{ genre.name }}</span>
+            {% endfor %}
+        </p>
+
+        <table class="table table-sm w-auto">
+            <tbody>
+                <tr><th>Etichetta</th><td>{{ vinyl.label|default:"-" }}</td></tr>
+                <tr><th>Anno di uscita</th><td>{{ vinyl.release_year }}</td></tr>
+                <tr><th>Formato</th><td>{{ vinyl.get_size_display }} - {{ vinyl.get_speed_display }}</td></tr>
+                <tr><th>Condizione</th><td>{{ vinyl.get_condition_display }}</td></tr>
+                <tr><th>Numero di catalogo</th><td>{{ vinyl.catalog_number|default:"-" }}</td></tr>
+                <tr><th>Tracce</th><td>{{ vinyl.tracks|default:"-" }}</td></tr>
+                <tr><th>Aggiunto il</th><td>{{ vinyl.added_date }}</td></tr>
+            </tbody>
+        </table>
+
+        {% if vinyl.tracklist %}
+        <h5>Canzoni</h5>
+        <ol class="list-group list-group-numbered mb-3">
+            {% for track in vinyl.tracklist.splitlines %}
+                {% if track %}<li class="list-group-item">{{ track }}</li>{% endif %}
+            {% endfor %}
+        </ol>
+        {% endif %}
+
+        {% if vinyl.description %}
+        <h5>Descrizione</h5>
+        <p>{{ vinyl.description|linebreaks }}</p>
+        {% endif %}
+
+        <div class="mt-3">
+            <a href="{% url 'vinyl:vinyl_edit' vinyl.pk %}" class="btn btn-primary">Modifica</a>
+            <a href="{% url 'vinyl:vinyl_delete' vinyl.pk %}" class="btn btn-danger">Elimina</a>
+            <a href="{% url 'vinyl:vinyl_list' %}" class="btn btn-outline-secondary">Torna alla lista</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

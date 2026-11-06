@@ -1,0 +1,66 @@
+.book-cover {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    object-position: center;
+}
+
+.book-cover-placeholder {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-cover-detail {
+    width: 100%;
+    max-width: 200px;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    object-position: center;
+}
+
+.vinyl-cover {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+}
+
+.vinyl-cover-placeholder {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vinyl-cover-detail {
+    width: 100%;
+    max-width: 250px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+}
+
+.cover-search-thumb {
+    height: 140px;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 0.25rem;
+}
+
+.cover-search-thumb-square {
+    aspect-ratio: 1 / 1;
+}
+
+.cover-search-thumb:hover {
+    border-color: var(--bs-secondary);
+}
+
+.cover-search-thumb.selected {
+    border-color: var(--bs-primary);
+}

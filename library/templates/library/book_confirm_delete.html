@@ -1,0 +1,15 @@
+{% extends 'library/base.html' %}
+
+{% block title %}Elimina libro - La Mia Libreria{% endblock %}
+
+{% block content %}
+<h1>Elimina libro</h1>
+
+<p>Sei sicuro di voler eliminare <strong>"{{ book.title }}"</strong> di {{ book.author }}? Questa azione non può essere annullata.</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sì, elimina</button>
+    <a href="{% url 'library:book_detail' book.pk %}" class="btn btn-outline-secondary">Annulla</a>
+</form>
+{% endblock %}

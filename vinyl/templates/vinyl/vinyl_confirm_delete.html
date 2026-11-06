@@ -1,0 +1,15 @@
+{% extends 'vinyl/base.html' %}
+
+{% block title %}Elimina vinile - La Mia Collezione{% endblock %}
+
+{% block content %}
+<h1>Elimina vinile</h1>
+
+<p>Sei sicuro di voler eliminare <strong>"{{ vinyl.title }}"</strong> di {{ vinyl.artist }}? Questa azione non può essere annullata.</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sì, elimina</button>
+    <a href="{% url 'vinyl:vinyl_detail' vinyl.pk %}" class="btn btn-outline-secondary">Annulla</a>
+</form>
+{% endblock %}

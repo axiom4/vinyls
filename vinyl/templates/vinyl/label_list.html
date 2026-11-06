@@ -1,0 +1,25 @@
+{% extends 'vinyl/base.html' %}
+
+{% block title %}Etichette - La Mia Collezione{% endblock %}
+
+{% block content %}
+<h1>Etichette discografiche</h1>
+
+{% if labels %}
+<div class="list-group">
+    {% for label in labels %}
+    <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+            {{ label.name }}
+            {% if label.website %}
+                <a href="{{ label.website }}" target="_blank" rel="noopener noreferrer" class="ms-2 small">sito web</a>
+            {% endif %}
+        </div>
+        <span class="badge bg-primary rounded-pill">{{ label.vinyls.count }} vinile/i</span>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info">Nessuna etichetta trovata.</div>
+{% endif %}
+{% endblock %}

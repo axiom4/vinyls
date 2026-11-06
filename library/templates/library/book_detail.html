@@ -1,0 +1,65 @@
+{% extends 'library/base.html' %}
+
+{% block title %}{{ book.title }} - La Mia Libreria{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        {% if book.cover_image %}
+            <img src="{{ book.cover_image.url }}" class="rounded shadow book-cover-detail" alt="{{ book.title }}">
+        {% else %}
+            <div class="bg-secondary-subtle rounded book-cover-detail book-cover-placeholder">
+                <span class="text-muted">Nessuna copertina</span>
+            </div>
+        {% endif %}
+    </div>
+    <div class="col-md-8">
+        <h1>{{ book.title }}</h1>
+        <h4 class="text-muted">{{ book.author }}</h4>
+
+        <p class="mt-3">
+            <span class="badge bg-{% if book.is_available %}success{% else %}secondary{% endif %}">
+                {% if book.is_available %}Disponibile{% else %}Non disponibile{% endif %}
+            </span>
+            {% if book.rating %}<span class="badge bg-warning text-dark">★ {{ book.rating }}</span>{% endif %}
+            {% for genre in book.genre.all %}
+                <span class="badge bg-info text-dark">{{ genre.name }}</span>
+            {% endfor %}
+        </p>
+
+        <table class="table table-sm w-auto">
+            <tbody>
+                <tr><th>Editore</th><td>{{ book.publisher|default:"-" }}</td></tr>
+                <tr><th>ISBN</th><td>{{ book.get_isbn_type_display }}: {{ book.isbn_number }}</td></tr>
+                <tr><th>Anno di pubblicazione</th><td>{{ book.publication_year }}</td></tr>
+                <tr><th>Pagine</th><td>{{ book.pages|default:"-" }}</td></tr>
+                <tr><th>Lingua</th><td>{{ book.language }}</td></tr>
+                <tr><th>Aggiunto il</th><td>{{ book.added_date }}</td></tr>
+            </tbody>
+        </table>
+
+        {% if book.description %}
+        <h5>Descrizione</h5>
+        <p>{{ book.description|linebreaks }}</p>
+        {% endif %}
+
+        <div class="mt-3">
+            <a href="{% url 'library:book_edit' book.pk %}" class="btn btn-primary">Modifica</a>
+            <a href="{% url 'library:book_delete' book.pk %}" class="btn btn-danger">Elimina</a>
+            <a href="{% url 'library:book_list' %}" class="btn btn-outline-secondary">Torna alla lista</a>
+        </div>
+
+        {% if book.records.all %}
+        <h5 class="mt-4">Storico letture</h5>
+        <ul class="list-group">
+            {% for record in book.records.all %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>{{ record.get_status_display }}{% if record.rating_given %} - ★ {{ record.rating_given }}{% endif %}</span>
+                <small class="text-muted">{{ record.date_added }}</small>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

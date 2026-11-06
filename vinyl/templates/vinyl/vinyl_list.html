@@ -1,0 +1,91 @@
+{% extends 'vinyl/base.html' %}
+
+{% block title %}Vinili - La Mia Collezione{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Vinili{% if query %} - Risultati per "{{ query }}"{% endif %}</h1>
+</div>
+
+<form method="get" class="row g-2 mb-4">
+    <div class="col-auto">
+        <select name="genre" class="form-select" onchange="this.form.submit()">
+            <option value="">Tutti i generi</option>
+            {% for genre in genres %}
+                <option value="{{ genre.id }}" {% if request.GET.genre == genre.id|stringformat:"s" %}selected{% endif %}>{{ genre.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-auto">
+        <select name="status" class="form-select" onchange="this.form.submit()">
+            <option value="">Tutti gli stati</option>
+            <option value="true" {% if request.GET.status == 'true' %}selected{% endif %}>Disponibile</option>
+            <option value="false" {% if request.GET.status == 'false' %}selected{% endif %}>Non disponibile</option>
+        </select>
+    </div>
+    <div class="col-auto">
+        <select name="sort" class="form-select" onchange="this.form.submit()">
+            <option value="title" {% if not request.GET.sort or request.GET.sort == 'title' %}selected{% endif %}>Titolo (A-Z)</option>
+            <option value="-title" {% if request.GET.sort == '-title' %}selected{% endif %}>Titolo (Z-A)</option>
+            <option value="-added_date" {% if request.GET.sort == '-added_date' %}selected{% endif %}>Aggiunti di recente</option>
+            <option value="artist__name" {% if request.GET.sort == 'artist__name' %}selected{% endif %}>Artista (A-Z)</option>
+            <option value="-artist__name" {% if request.GET.sort == '-artist__name' %}selected{% endif %}>Artista (Z-A)</option>
+            <option value="release_year" {% if request.GET.sort == 'release_year' %}selected{% endif %}>Anno (crescente)</option>
+            <option value="-release_year" {% if request.GET.sort == '-release_year' %}selected{% endif %}>Anno (decrescente)</option>
+            <option value="-rating" {% if request.GET.sort == '-rating' %}selected{% endif %}>Valutazione</option>
+        </select>
+    </div>
+</form>
+
+{% if vinyls %}
+<div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3">
+    {% for vinyl in vinyls %}
+    <div class="col">
+        <div class="card h-100">
+            {% if vinyl.cover_image %}
+                <img src="{{ vinyl.cover_image.url }}" class="card-img-top vinyl-cover" alt="{{ vinyl.title }}">
+            {% else %}
+                <div class="card-img-top vinyl-cover-placeholder bg-secondary-subtle">
+                    <span class="text-muted">Nessuna copertina</span>
+                </div>
+            {% endif %}
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ vinyl.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ vinyl.artist }}</h6>
+                <p class="card-text">
+                    <span class="badge bg-{% if vinyl.is_available %}success{% else %}secondary{% endif %}">
+                        {% if vinyl.is_available %}Disponibile{% else %}Non disponibile{% endif %}
+                    </span>
+                    <span class="badge bg-info text-dark">{{ vinyl.release_year }}</span>
+                    <span class="badge bg-secondary">{{ vinyl.get_speed_display }}</span>
+                    {% if vinyl.rating %}<span class="badge bg-warning text-dark">★ {{ vinyl.rating }}</span>{% endif %}
+                </p>
+                <a href="{% url 'vinyl:vinyl_detail' vinyl.pk %}" class="btn btn-primary mt-auto stretched-link">Dettagli</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% if is_paginated %}
+<nav class="mt-4" aria-label="Paginazione vinili">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Precedente</a></li>
+        {% else %}
+            <li class="page-item disabled"><span class="page-link">Precedente</span></li>
+        {% endif %}
+        <li class="page-item disabled"><span class="page-link">Pagina {{ page_obj.number }} di {{ page_obj.paginator.num_pages }}</span></li>
+        {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Successiva</a></li>
+        {% else %}
+            <li class="page-item disabled"><span class="page-link">Successiva</span></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+
+{% else %}
+<div class="alert alert-info">Nessun vinile trovato.</div>
+{% endif %}
+{% endblock %}

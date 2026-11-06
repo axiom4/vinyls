@@ -1,0 +1,294 @@
+{% extends 'vinyl/base.html' %}
+
+{% block title %}{% if object %}Modifica vinile{% else %}Aggiungi vinile{% endif %} - La Mia Collezione{% endblock %}
+
+{% block content %}
+<h1>{% if object %}Modifica vinile{% else %}Aggiungi vinile{% endif %}</h1>
+
+<form method="post" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="mb-3">
+        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+        {{ field }}
+        {% if field.help_text %}
+            <div class="form-text">{{ field.help_text }}</div>
+        {% endif %}
+        {% for error in field.errors %}
+            <div class="text-danger small">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    {% if field.name == 'title' %}
+    <div class="mb-3 border rounded p-3 bg-body-tertiary">
+        <label class="form-label">Compila automaticamente dai dati online</label>
+        <div class="d-flex align-items-center gap-2 flex-wrap mb-2">
+            <input type="text" id="vinyl-info-artist" class="form-control form-control-sm w-auto"
+                   placeholder="Artista (opzionale, restringe la ricerca)">
+            <button type="button" id="vinyl-info-search-btn" class="btn btn-outline-secondary btn-sm">Cerca informazioni sul disco</button>
+        </div>
+        <div id="vinyl-info-status" class="small text-muted mt-2 mb-2"></div>
+        <div id="vinyl-info-results" class="list-group"></div>
+    </div>
+    {% endif %}
+
+    {% if field.name == 'cover_image' %}
+    <div class="mb-3 border rounded p-3 bg-body-tertiary">
+        <label class="form-label">Oppure cerca una copertina online</label>
+        <div class="input-group mb-2">
+            <input type="text" id="cover-search-input" class="form-control"
+                   placeholder="Titolo e artista..." value="{{ object.title|default:'' }}">
+            <button type="button" id="cover-search-btn" class="btn btn-outline-secondary">Cerca</button>
+        </div>
+        <div id="cover-search-status" class="small text-muted mb-2"></div>
+        <div id="cover-search-results" class="d-flex flex-wrap gap-2"></div>
+        <div id="cover-selected-preview" class="mt-2"></div>
+        <input type="hidden" name="cover_image_url" id="cover-image-url-input">
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary">Salva</button>
+    <a href="{% url 'vinyl:vinyl_list' %}" class="btn btn-outline-secondary">Annulla</a>
+</form>
+
+<script>
+(function() {
+    const searchBtn = document.getElementById('cover-search-btn');
+    const searchInput = document.getElementById('cover-search-input');
+    const resultsDiv = document.getElementById('cover-search-results');
+    const statusDiv = document.getElementById('cover-search-status');
+    const urlInput = document.getElementById('cover-image-url-input');
+    const previewDiv = document.getElementById('cover-selected-preview');
+
+    async function runSearch() {
+        const q = searchInput.value.trim();
+        resultsDiv.innerHTML = '';
+        if (!q) {
+            statusDiv.textContent = 'Inserisci titolo e/o artista per cercare.';
+            return;
+        }
+        statusDiv.textContent = 'Ricerca in corso...';
+        try {
+            const resp = await fetch("{% url 'vinyl:search_cover' %}?q=" + encodeURIComponent(q), {signal: AbortSignal.timeout(15000)});
+            const data = await resp.json();
+            if (!data.results || !data.results.length) {
+                statusDiv.textContent = 'Nessuna copertina trovata.';
+                return;
+            }
+            statusDiv.textContent = 'Clicca su una copertina per selezionarla:';
+            data.results.forEach(function(r) {
+                const img = document.createElement('img');
+                img.src = r.thumb_url;
+                img.alt = r.title;
+                img.title = r.title + (r.author ? ' - ' + r.author : '');
+                img.className = 'cover-search-thumb cover-search-thumb-square';
+                img.addEventListener('click', function() {
+                    urlInput.value = r.full_url;
+                    document.querySelectorAll('.cover-search-thumb').forEach(function(el) {
+                        el.classList.remove('selected');
+                    });
+                    img.classList.add('selected');
+                    previewDiv.innerHTML =
+                        '<p class="small text-success mb-1">Copertina selezionata (verrà salvata al momento del salvataggio):</p>' +
+                        '<img src="' + r.full_url + '" class="vinyl-cover-detail rounded border">';
+                });
+                resultsDiv.appendChild(img);
+            });
+        } catch (e) {
+            statusDiv.textContent = 'Errore durante la ricerca.';
+        }
+    }
+
+    searchBtn.addEventListener('click', runSearch);
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            runSearch();
+        }
+    });
+})();
+
+(function() {
+    const infoBtn = document.getElementById('vinyl-info-search-btn');
+    const titleInput = document.getElementById('id_title');
+    const resultsDiv = document.getElementById('vinyl-info-results');
+    const statusDiv = document.getElementById('vinyl-info-status');
+
+    if (!infoBtn || !titleInput) return;
+
+    function csrftoken() {
+        const m = document.cookie.match(/csrftoken=([^;]+)/);
+        return m ? m[1] : '';
+    }
+
+    function setFieldValue(id, value) {
+        const el = document.getElementById(id);
+        if (el && value !== undefined && value !== null && value !== '') {
+            el.value = value;
+        }
+    }
+
+    function addOptionIfMissing(select, value, label) {
+        for (const opt of select.options) {
+            if (opt.value === String(value)) return;
+        }
+        const opt = document.createElement('option');
+        opt.value = value;
+        opt.textContent = label;
+        select.appendChild(opt);
+    }
+
+    function setSelectValue(id, value, label) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        addOptionIfMissing(el, value, label);
+        el.value = value;
+    }
+
+    async function runInfoSearch() {
+        const title = titleInput.value.trim();
+        const artist = document.getElementById('vinyl-info-artist').value.trim();
+        resultsDiv.innerHTML = '';
+        if (title.length < 2) {
+            statusDiv.textContent = 'Inserisci almeno 2 caratteri del titolo per cercare.';
+            return;
+        }
+        statusDiv.textContent = 'Ricerca in corso...';
+        try {
+            const params = new URLSearchParams({title: title, artist: artist});
+            const resp = await fetch("{% url 'vinyl:search_vinyl_info' %}?" + params.toString(), {signal: AbortSignal.timeout(15000)});
+            const data = await resp.json();
+            if (data.error === 'network_error') {
+                statusDiv.textContent = 'Le fonti online non sono raggiungibili al momento, riprova tra poco.';
+                return;
+            }
+            if (!data.results || !data.results.length) {
+                statusDiv.textContent = 'Nessuna informazione trovata. Prova a semplificare il titolo o rimuovere il filtro artista.';
+                return;
+            }
+            statusDiv.textContent = data.results.length + ' risultati: clicca su uno per compilare i campi.';
+            data.results.forEach(function(r) {
+                const item = document.createElement('button');
+                item.type = 'button';
+                item.className = 'list-group-item list-group-item-action text-start';
+                const badges = [];
+                if (r.cover_url) badges.push('<span class="badge bg-success">copertina</span>');
+                if (r.year) badges.push('<span class="badge bg-info text-dark">' + r.year + '</span>');
+                if (r.tracks) badges.push('<span class="badge bg-secondary">' + r.tracks + ' tracce</span>');
+                const sourceLabel = {deezer: 'Deezer', itunes: 'iTunes'}[r.source] || r.source;
+                badges.push('<span class="badge bg-dark">' + sourceLabel + '</span>');
+                item.innerHTML = '<strong>' + r.title + '</strong>' +
+                    (r.artist ? ' — ' + r.artist : '') +
+                    ' ' + badges.join(' ');
+                item.addEventListener('click', function() {
+                    applyCandidate(r);
+                });
+                resultsDiv.appendChild(item);
+            });
+        } catch (e) {
+            statusDiv.textContent = 'Errore durante la ricerca.';
+        }
+    }
+
+    async function applyCandidate(r) {
+        statusDiv.textContent = 'Compilazione in corso...';
+
+        if (r.source === 'deezer' && r.deezer_id) {
+            try {
+                const dResp = await fetch("{% url 'vinyl:fetch_deezer_album' %}?id=" + encodeURIComponent(r.deezer_id), {signal: AbortSignal.timeout(10000)});
+                const detail = await dResp.json();
+                if (detail.year) r.year = detail.year;
+                if (detail.label) r.label = detail.label;
+                if (detail.tracks) r.tracks = detail.tracks;
+                if (detail.genres && detail.genres.length) r.genres = detail.genres;
+                if (detail.tracklist) r.tracklist = detail.tracklist;
+            } catch (e) {
+                // opzionale: si prosegue con i soli dati della ricerca
+            }
+        }
+
+        if (r.source === 'itunes' && r.itunes_id) {
+            try {
+                const tResp = await fetch("{% url 'vinyl:fetch_itunes_album' %}?id=" + encodeURIComponent(r.itunes_id), {signal: AbortSignal.timeout(10000)});
+                const detail = await tResp.json();
+                if (detail.tracklist) r.tracklist = detail.tracklist;
+                if (detail.tracks) r.tracks = detail.tracks;
+            } catch (e) {
+                // opzionale: si prosegue senza tracklist
+            }
+        }
+
+        let resolved = {};
+        try {
+            const body = new URLSearchParams();
+            body.append('artist', r.artist || '');
+            body.append('label', r.label || '');
+            (r.genres || []).forEach(function(g) { body.append('genres', g); });
+            const aResp = await fetch("{% url 'vinyl:apply_vinyl_metadata' %}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrftoken(),
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: body.toString(),
+            });
+            resolved = await aResp.json();
+        } catch (e) {
+            // opzionale: si prosegue senza artista/etichetta/generi risolti
+        }
+
+        if (resolved.artist) {
+            setSelectValue('id_artist', resolved.artist.id, resolved.artist.label);
+        }
+        if (resolved.label) {
+            setSelectValue('id_label', resolved.label.id, resolved.label.label);
+        }
+        if (resolved.genres && resolved.genres.length) {
+            const genreSelect = document.getElementById('id_genre');
+            if (genreSelect) {
+                resolved.genres.forEach(function(g) {
+                    addOptionIfMissing(genreSelect, g.id, g.label);
+                });
+                for (const opt of genreSelect.options) {
+                    if (resolved.genres.some(g => String(g.id) === opt.value)) {
+                        opt.selected = true;
+                    }
+                }
+            }
+        }
+
+        setFieldValue('id_title', r.title || '');
+        setFieldValue('id_release_year', r.year || '');
+        setFieldValue('id_tracks', r.tracks || '');
+        setFieldValue('id_tracklist', r.tracklist || '');
+
+        if (r.cover_url) {
+            const coverUrlInput = document.getElementById('cover-image-url-input');
+            const coverPreview = document.getElementById('cover-selected-preview');
+            if (coverUrlInput) {
+                coverUrlInput.value = r.cover_url;
+                document.querySelectorAll('.cover-search-thumb').forEach(function(el) {
+                    el.classList.remove('selected');
+                });
+                if (coverPreview) {
+                    coverPreview.innerHTML =
+                        '<p class="small text-success mb-1">Copertina trovata automaticamente (verrà salvata al momento del salvataggio):</p>' +
+                        '<img src="' + r.cover_url + '" class="vinyl-cover-detail rounded border">';
+                }
+            }
+        }
+
+        statusDiv.textContent = 'Campi compilati: controlla e correggi se necessario prima di salvare.';
+    }
+
+    infoBtn.addEventListener('click', runInfoSearch);
+    titleInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            runInfoSearch();
+        }
+    });
+})();
+</script>
+{% endblock %}

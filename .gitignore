@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+django_app_venv/
+.venv/
+venv/
+.env
+db.sqlite3
+media/
+staticfiles/
+.DS_Store
+.idea/
+.vscode/
+db.json
