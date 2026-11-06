@@ -8,23 +8,6 @@ from ..search import search_q
 from .covers import _attach_cover_from_url
 
 
-def search_vinyls(request):
-    query = request.GET.get('q', '')
-    vinyls = Vinyl.objects.all()
-
-    if query:
-        vinyls = vinyls.filter(
-            search_q(query)
-        )
-
-    context = {
-        'vinyls': vinyls,
-        'query': query,
-        'genres': VinylGenre.objects.all(),
-    }
-    return render(request, 'vinyl/vinyl_list.html', context)
-
-
 class VinylListView(ListView):
     model = Vinyl
     template_name = 'vinyl/vinyl_list.html'
@@ -43,10 +26,6 @@ class VinylListView(ListView):
         genre_id = self.request.GET.get('genre')
         if genre_id:
             queryset = queryset.filter(genre__id=genre_id)
-
-        status = self.request.GET.get('status')
-        if status:
-            queryset = queryset.filter(is_available=status == 'true')
 
         sort_by = self.request.GET.get('sort', 'title')
         valid_sorts = ['title', '-title', 'artist__name', '-artist__name',

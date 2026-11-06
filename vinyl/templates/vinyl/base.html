@@ -1,8 +1,8 @@
 {% extends 'library/base.html' %}
 
 {% block navbar_actions %}
-<form class="d-flex" role="search" method="get" action="{% url 'vinyl:search_vinyls' %}">
-    <input class="form-control me-2" type="search" name="q" placeholder="Cerca vinili..." value="{{ query|default:'' }}">
+<form class="d-flex" role="search" method="get" action="{% url 'vinyl:vinyl_list' %}">
+    <input class="form-control me-2" type="search" name="q" data-live-search autocomplete="off" placeholder="Cerca vinili..." value="{{ query|default:'' }}">
     <button class="btn btn-outline-light" type="submit">Cerca</button>
 </form>
 <a href="{% url 'vinyl:vinyl_add' %}" class="btn btn-success ms-2">+ Aggiungi vinile</a>

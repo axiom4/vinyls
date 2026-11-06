@@ -305,3 +305,6 @@ label, .form-label { font-weight: 600; font-size: 0.9rem; }
         left: 0 !important; right: 0 !important; transform: none !important;
     }
 }
+
+/* griglia vuota: il margine negativo del .row sovrapporrebbe il messaggio ai filtri */
+#vinyl-grid:not(:has(.col)) { display: none; }

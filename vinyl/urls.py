@@ -6,7 +6,6 @@ app_name = 'vinyl'
 urlpatterns = [
     # Vinyls
     path('', views.VinylListView.as_view(), name='vinyl_list'),
-    path('search/', views.search_vinyls, name='search_vinyls'),
     path('<uuid:pk>/', views.VinylDetailView.as_view(), name='vinyl_detail'),
     path('add/', views.VinylCreateView.as_view(), name='vinyl_add'),
     path('<uuid:pk>/edit/', views.VinylUpdateView.as_view(), name='vinyl_edit'),
