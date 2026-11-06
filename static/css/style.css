@@ -284,3 +284,24 @@ label, .form-label { font-weight: 600; font-size: 0.9rem; }
 .brand-icon { border-radius: 50%; box-shadow: 0 0 0 1px rgba(21, 22, 26, 0.15); }
 .passkey-add { max-width: 460px; }
 .login-wrap { max-width: 420px; margin-top: 8vh; }
+
+/* Menu mobile a schermo intero: azioni principali ancorate in basso */
+@media (max-width: 991.98px) {
+    .site-nav .navbar-collapse {
+        height: calc(100dvh - 100%);   /* 100% = altezza della navbar */
+        max-height: none;
+    }
+    .site-nav .navbar-collapse.show,
+    .site-nav .navbar-collapse.collapsing { display: flex; flex-direction: column; align-items: stretch; }
+    .site-nav .navbar-collapse > .navbar-nav { margin-right: 0 !important; }
+
+    /* i due pulsanti d'azione scendono in fondo al pannello; l'ordine resta quello originale */
+    .site-nav .navbar-collapse > a.btn.btn-success { margin-top: auto; }
+
+    /* il menu utente si apre verso l'alto, sopra il pulsante */
+    .site-nav .navbar-collapse > .dropdown { position: relative; }
+    .site-nav .navbar-collapse .dropdown > .dropdown-menu {
+        position: absolute !important; top: auto !important; bottom: calc(100% + .5rem) !important;
+        left: 0 !important; right: 0 !important; transform: none !important;
+    }
+}
