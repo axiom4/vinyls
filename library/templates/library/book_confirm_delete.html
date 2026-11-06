@@ -1,15 +1,16 @@
 {% extends 'library/base.html' %}
+{% load i18n %}
 
-{% block title %}Elimina libro - La Mia Libreria{% endblock %}
+{% block title %}{% trans "Elimina libro" %} - {% trans "La Mia Libreria" %}{% endblock %}
 
 {% block content %}
-<h1>Elimina libro</h1>
+<h1>{% trans "Elimina libro" %}</h1>
 
-<p>Sei sicuro di voler eliminare <strong>"{{ book.title }}"</strong> di {{ book.author }}? Questa azione non può essere annullata.</p>
+<p>{% blocktrans with title=book.title author=book.author %}Sei sicuro di voler eliminare <strong>"{{ title }}"</strong> di {{ author }}? Questa azione non può essere annullata.{% endblocktrans %}</p>
 
 <form method="post">
     {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Sì, elimina</button>
-    <a href="{% url 'library:book_detail' book.pk %}" class="btn btn-outline-secondary">Annulla</a>
+    <button type="submit" class="btn btn-danger">{% trans "Sì, elimina" %}</button>
+    <a href="{% url 'library:book_detail' book.pk %}" class="btn btn-outline-secondary">{% trans "Annulla" %}</a>
 </form>
 {% endblock %}

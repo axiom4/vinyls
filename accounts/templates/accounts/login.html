@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-{% load static %}
-<html lang="it">
+{% load static i18n %}
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#212529">
-    <title>Accesso</title>
+    <title>{% trans "Accesso" %}</title>
     <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
     <link rel="preload" href="{% static 'fonts/InstrumentSans-latin-e190a6.woff2' %}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{% static 'vendor/bootstrap/bootstrap.min.css' %}">
@@ -15,20 +15,22 @@
 <body>
 <div class="container login-wrap">
     <div class="login-card"><div class="p-4 p-sm-5">
+        <div class="d-flex justify-content-end mb-2">{% include "library/_lang_switch.html" with mode="select" %}</div>
         <div class="text-center mb-4"><img src="{% static 'img/favicon.svg' %}" alt="" width="56" height="56" class="mb-3"><h1 class="h3 mb-0">Vinyl</h1></div>
-        <button id="passkey-login" type="button" class="btn btn-primary w-100 mb-2">Accedi con impronta digitale</button>
+        <button id="passkey-login" type="button" class="btn btn-primary w-100 mb-2">{% trans "Accedi con impronta digitale" %}</button>
         <div id="passkey-error" class="text-danger small mb-3" hidden></div>
         <hr>
         <form method="post">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}">
-            {% if form.errors %}<div class="alert alert-danger py-2">Credenziali non valide.</div>{% endif %}
-            <div class="mb-3"><input class="form-control" name="username" placeholder="Utente" autocomplete="username webauthn" autofocus required></div>
-            <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password" autocomplete="current-password" required></div>
-            <button class="btn btn-outline-secondary w-100">Accedi con password</button>
+            {% if form.errors %}<div class="alert alert-danger py-2">{% trans "Credenziali non valide." %}</div>{% endif %}
+            <div class="mb-3"><input class="form-control" name="username" placeholder="{% trans 'Utente' %}" autocomplete="username webauthn" autocapitalize="none" autocorrect="off" spellcheck="false" autofocus required></div>
+            <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="{% trans 'Password' %}" autocomplete="current-password" required></div>
+            <button class="btn btn-outline-secondary w-100">{% trans "Accedi con password" %}</button>
         </form>
     </div></div>
 </div>
+{% trans "Accesso con passkey non riuscito: " as t_pkerr %}
 <script>
 const csrf = '{{ csrf_token }}';
 const post = (url, body) => fetch(url, {method: 'POST', headers: {'X-CSRFToken': csrf, 'Content-Type': 'application/json'}, body: JSON.stringify(body || {})});
@@ -54,7 +56,7 @@ async function passkeyLogin(conditional) {
     } catch (e) {
         if (e.name === 'AbortError') return;
         console.error(e);
-        err.textContent = 'Accesso con passkey non riuscito: ' + (e.name || '') + ' ' + (e.message || ''); err.hidden = false;
+        err.textContent = "{{ t_pkerr|escapejs }}" + (e.name || '') + ' ' + (e.message || ''); err.hidden = false;
     }
 }
 
@@ -68,5 +70,6 @@ if (!supported) {
     });
 }
 </script>
+<script src="{% static 'js/lang.js' %}?v={{ CSS_VERSION }}"></script>
 </body>
 </html>

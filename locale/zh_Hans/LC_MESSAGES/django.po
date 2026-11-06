@@ -1,0 +1,771 @@
+# Translations for Vinyl / La Mia Collezione.
+# Distributed under the same license as the project.
+msgid ""
+msgstr ""
+"Project-Id-Version: vinyl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-06 11:04+0000\n"
+"PO-Revision-Date: 2026-11-06 12:00+0000\n"
+"Last-Translator: Riccardo Giannetto\n"
+"Language-Team: zh_Hans\n"
+"Language: zh_Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: accounts/templates/accounts/login.html:8
+msgid "Accesso"
+msgstr "登录"
+
+#: accounts/templates/accounts/login.html:20
+msgid "Accedi con impronta digitale"
+msgstr "使用指纹登录"
+
+#: accounts/templates/accounts/login.html:26
+msgid "Credenziali non valide."
+msgstr "凭据无效。"
+
+#: accounts/templates/accounts/login.html:27
+msgid "Utente"
+msgstr "用户"
+
+#: accounts/templates/accounts/login.html:28
+msgid "Password"
+msgstr "密码"
+
+#: accounts/templates/accounts/login.html:29
+msgid "Accedi con password"
+msgstr "使用密码登录"
+
+#: accounts/templates/accounts/login.html:33
+msgid "Accesso con passkey non riuscito: "
+msgstr "Passkey 登录失败："
+
+#: accounts/templates/accounts/passkeys.html:6
+msgid "Passkey (impronta digitale)"
+msgstr "Passkey（指纹）"
+
+#: accounts/templates/accounts/passkeys.html:12
+msgid "Rimuovi"
+msgstr "移除"
+
+#: accounts/templates/accounts/passkeys.html:14
+msgid "Nessuna passkey registrata."
+msgstr "尚未注册 passkey。"
+
+#: accounts/templates/accounts/passkeys.html:17
+msgid "Nome (es. MacBook Touch ID)"
+msgstr "名称（例如 MacBook Touch ID）"
+
+#: accounts/templates/accounts/passkeys.html:18
+msgid "Aggiungi passkey"
+msgstr "添加 passkey"
+
+#: accounts/templates/accounts/passkeys.html:21
+msgid "Registrazione non riuscita."
+msgstr "注册失败。"
+
+#: accounts/views.py:62
+msgid "Passkey rimossa."
+msgstr "Passkey 已移除。"
+
+#: accounts/views.py:86 accounts/views.py:120
+msgid "challenge mancante"
+msgstr "缺少 challenge"
+
+#: accounts/views.py:98
+msgid "registrazione non valida"
+msgstr "注册无效"
+
+#: accounts/views.py:136
+msgid "autenticazione non valida"
+msgstr "身份验证无效"
+
+#: accounts/views.py:138
+msgid "utente disattivato"
+msgstr "用户已停用"
+
+#: library/forms/book.py:14 vinyl/forms/vinyl.py:14
+msgid "Titolo"
+msgstr "标题"
+
+#: library/forms/book.py:15
+msgid "Autore"
+msgstr "作者"
+
+#: library/forms/book.py:16 library/templates/library/book_detail.html:33
+msgid "Editore"
+msgstr "出版社"
+
+#: library/forms/book.py:17
+msgid "Tipo di ISBN"
+msgstr "ISBN 类型"
+
+#: library/forms/book.py:18
+msgid "Numero ISBN"
+msgstr "ISBN 号码"
+
+#: library/forms/book.py:19 library/templates/library/base.html:35
+#: library/templates/library/genre_list.html:4
+#: library/templates/library/genre_list.html:7 vinyl/forms/vinyl.py:17
+#: vinyl/templates/vinyl/genre_list.html:4
+msgid "Generi"
+msgstr "类型"
+
+#: library/forms/book.py:20 library/templates/library/book_detail.html:35
+msgid "Anno di pubblicazione"
+msgstr "出版年份"
+
+#: library/forms/book.py:21 library/templates/library/book_detail.html:36
+msgid "Pagine"
+msgstr "页数"
+
+#: library/forms/book.py:22 library/templates/library/_lang_switch.html:4
+#: library/templates/library/book_detail.html:37
+msgid "Lingua"
+msgstr "语言"
+
+#: library/forms/book.py:23 library/templates/library/book_detail.html:43
+#: vinyl/forms/vinyl.py:25 vinyl/templates/vinyl/vinyl_detail.html:53
+msgid "Descrizione"
+msgstr "简介"
+
+#: library/forms/book.py:24 vinyl/forms/vinyl.py:26
+msgid "Copertina"
+msgstr "封面"
+
+#: library/forms/book.py:25 library/templates/library/book_list.html:36
+#: vinyl/forms/vinyl.py:27 vinyl/templates/vinyl/_filters.html:23
+msgid "Valutazione"
+msgstr "评分"
+
+#: library/forms/book.py:26 library/templates/library/book_detail.html:23
+#: library/templates/library/book_list.html:23
+#: library/templates/library/book_list.html:58 vinyl/forms/vinyl.py:28
+#: vinyl/templates/vinyl/_vinyl_items.html:22
+#: vinyl/templates/vinyl/vinyl_detail.html:23
+msgid "Disponibile"
+msgstr "可用"
+
+#: library/models/book_record.py:11
+msgid "Non letto"
+msgstr "未读"
+
+#: library/models/book_record.py:12
+msgid "In lettura"
+msgstr "阅读中"
+
+#: library/models/book_record.py:13
+msgid "Letto"
+msgstr "已读"
+
+#: library/models/book_record.py:14
+msgid "Voglio leggere"
+msgstr "想读"
+
+#: library/templates/library/author_list.html:4
+#: library/templates/library/author_list.html:7
+msgid "Autori"
+msgstr "作者"
+
+#: library/templates/library/author_list.html:4
+#: library/templates/library/base.html:11
+#: library/templates/library/book_confirm_delete.html:4
+#: library/templates/library/book_detail.html:4
+#: library/templates/library/book_form.html:4
+#: library/templates/library/book_list.html:4
+#: library/templates/library/genre_list.html:4
+#: library/templates/library/publisher_list.html:4
+#: library/templates/library/statistics.html:4
+msgid "La Mia Libreria"
+msgstr "我的书库"
+
+#: library/templates/library/author_list.html:14
+#: library/templates/library/publisher_list.html:19
+#, python-format
+msgid "%(n)s libro"
+msgid_plural "%(n)s libri"
+msgstr[0] "%(n)s 本书"
+
+#: library/templates/library/author_list.html:19
+msgid "Nessun autore trovato."
+msgstr "未找到作者。"
+
+#: library/templates/library/base.html:21
+#: vinyl/templates/vinyl/artist_list.html:4
+#: vinyl/templates/vinyl/genre_list.html:4
+#: vinyl/templates/vinyl/label_list.html:4
+#: vinyl/templates/vinyl/statistics.html:4
+#: vinyl/templates/vinyl/vinyl_confirm_delete.html:4
+#: vinyl/templates/vinyl/vinyl_detail.html:4
+#: vinyl/templates/vinyl/vinyl_form.html:4
+#: vinyl/templates/vinyl/vinyl_list.html:5
+msgid "La Mia Collezione"
+msgstr "我的收藏"
+
+#: library/templates/library/base.html:28
+#: vinyl/templates/vinyl/vinyl_list.html:5
+#: vinyl/templates/vinyl/vinyl_list.html:16
+msgid "Vinili"
+msgstr "黑胶唱片"
+
+#: library/templates/library/base.html:30
+msgid "Elenco vinili"
+msgstr "黑胶唱片列表"
+
+#: library/templates/library/base.html:31
+#: vinyl/templates/vinyl/vinyl_form.html:4
+#: vinyl/templates/vinyl/vinyl_form.html:7
+msgid "Aggiungi vinile"
+msgstr "添加黑胶唱片"
+
+#: library/templates/library/base.html:33
+#: vinyl/templates/vinyl/artist_list.html:4
+#: vinyl/templates/vinyl/artist_list.html:7
+#: vinyl/templates/vinyl/statistics.html:29
+msgid "Artisti"
+msgstr "艺术家"
+
+#: library/templates/library/base.html:34
+#: vinyl/templates/vinyl/label_list.html:4
+msgid "Etichette"
+msgstr "厂牌"
+
+#: library/templates/library/base.html:36
+#: library/templates/library/statistics.html:4
+#: library/templates/library/statistics.html:7
+msgid "Statistiche"
+msgstr "统计"
+
+#: library/templates/library/base.html:43
+msgid "Cerca libri..."
+msgstr "搜索图书..."
+
+#: library/templates/library/base.html:44
+#: library/templates/library/book_form.html:52
+#: vinyl/templates/vinyl/base.html:7 vinyl/templates/vinyl/vinyl_form.html:42
+msgid "Cerca"
+msgstr "搜索"
+
+#: library/templates/library/base.html:46
+msgid "+ Aggiungi libro"
+msgstr "+ 添加图书"
+
+#: library/templates/library/base.html:56
+msgid "Esci"
+msgstr "退出"
+
+#: library/templates/library/base.html:69
+msgid "Chiudi"
+msgstr "关闭"
+
+#: library/templates/library/book_confirm_delete.html:4
+#: library/templates/library/book_confirm_delete.html:7
+msgid "Elimina libro"
+msgstr "删除图书"
+
+#: library/templates/library/book_confirm_delete.html:9
+#, python-format
+msgid ""
+"Sei sicuro di voler eliminare <strong>\"%(title)s\"</strong> di %(author)s? "
+"Questa azione non può essere annullata."
+msgstr "确定要删除 %(author)s 的<strong>《%(title)s》</strong>吗？此操作无法撤销。"
+
+#: library/templates/library/book_confirm_delete.html:13
+#: vinyl/templates/vinyl/vinyl_confirm_delete.html:13
+msgid "Sì, elimina"
+msgstr "是，删除"
+
+#: library/templates/library/book_confirm_delete.html:14
+#: library/templates/library/book_form.html:63
+#: vinyl/templates/vinyl/vinyl_confirm_delete.html:14
+#: vinyl/templates/vinyl/vinyl_form.html:54
+msgid "Annulla"
+msgstr "取消"
+
+#: library/templates/library/book_detail.html:13
+#: library/templates/library/book_list.html:50
+#: vinyl/templates/vinyl/_vinyl_items.html:11
+#: vinyl/templates/vinyl/vinyl_detail.html:13
+msgid "Nessuna copertina"
+msgstr "无封面"
+
+#: library/templates/library/book_detail.html:23
+#: library/templates/library/book_list.html:24
+#: library/templates/library/book_list.html:58
+#: vinyl/templates/vinyl/_vinyl_items.html:22
+#: vinyl/templates/vinyl/vinyl_detail.html:23
+msgid "Non disponibile"
+msgstr "不可用"
+
+#: library/templates/library/book_detail.html:38
+#: vinyl/templates/vinyl/vinyl_detail.html:39
+msgid "Aggiunto il"
+msgstr "添加日期"
+
+#: library/templates/library/book_detail.html:48
+#: vinyl/templates/vinyl/vinyl_detail.html:58
+msgid "Modifica"
+msgstr "编辑"
+
+#: library/templates/library/book_detail.html:49
+#: vinyl/templates/vinyl/vinyl_detail.html:59
+msgid "Elimina"
+msgstr "删除"
+
+#: library/templates/library/book_detail.html:50
+#: vinyl/templates/vinyl/vinyl_detail.html:60
+msgid "Torna alla lista"
+msgstr "返回列表"
+
+#: library/templates/library/book_detail.html:54
+msgid "Storico letture"
+msgstr "阅读记录"
+
+#: library/templates/library/book_form.html:4
+#: library/templates/library/book_form.html:7
+msgid "Modifica libro"
+msgstr "编辑图书"
+
+#: library/templates/library/book_form.html:4
+#: library/templates/library/book_form.html:7
+msgid "Aggiungi libro"
+msgstr "添加图书"
+
+#: library/templates/library/book_form.html:25
+#: vinyl/templates/vinyl/vinyl_form.html:25
+msgid "Compila automaticamente dai dati online"
+msgstr "根据在线数据自动填写"
+
+#: library/templates/library/book_form.html:28
+msgid "Autore (opzionale, restringe la ricerca)"
+msgstr "作者（可选，缩小搜索范围）"
+
+#: library/templates/library/book_form.html:29
+msgid "Lingua:"
+msgstr "语言："
+
+#: library/templates/library/book_form.html:31
+msgid "Italiano"
+msgstr "意大利语"
+
+#: library/templates/library/book_form.html:32
+msgid "Inglese"
+msgstr "英语"
+
+#: library/templates/library/book_form.html:33
+msgid "Francese"
+msgstr "法语"
+
+#: library/templates/library/book_form.html:34
+msgid "Tedesco"
+msgstr "德语"
+
+#: library/templates/library/book_form.html:35
+msgid "Spagnolo"
+msgstr "西班牙语"
+
+#: library/templates/library/book_form.html:36
+msgid "Portoghese"
+msgstr "葡萄牙语"
+
+#: library/templates/library/book_form.html:37
+msgid "Tutte le lingue"
+msgstr "所有语言"
+
+#: library/templates/library/book_form.html:39
+msgid "Cerca informazioni sul libro"
+msgstr "搜索图书信息"
+
+#: library/templates/library/book_form.html:48
+#: vinyl/templates/vinyl/vinyl_form.html:38
+msgid "Oppure cerca una copertina online"
+msgstr "或在线搜索封面"
+
+#: library/templates/library/book_form.html:51
+msgid "Titolo e autore..."
+msgstr "标题和作者..."
+
+#: library/templates/library/book_form.html:62
+#: vinyl/templates/vinyl/vinyl_form.html:53
+msgid "Salva"
+msgstr "保存"
+
+#: library/templates/library/book_form.html:66
+#: vinyl/templates/vinyl/vinyl_form.html:58
+msgid "Ricerca in corso..."
+msgstr "正在搜索..."
+
+#: library/templates/library/book_form.html:67
+#: vinyl/templates/vinyl/vinyl_form.html:59
+msgid "Nessuna copertina trovata."
+msgstr "未找到封面。"
+
+#: library/templates/library/book_form.html:68
+#: vinyl/templates/vinyl/vinyl_form.html:60
+msgid "Clicca su una copertina per selezionarla:"
+msgstr "点击封面进行选择："
+
+#: library/templates/library/book_form.html:69
+#: vinyl/templates/vinyl/vinyl_form.html:61
+msgid "Copertina selezionata (verrà salvata al momento del salvataggio):"
+msgstr "已选择封面（保存时将一并保存）："
+
+#: library/templates/library/book_form.html:70
+#: vinyl/templates/vinyl/vinyl_form.html:62
+msgid "Errore durante la ricerca."
+msgstr "搜索时出错。"
+
+#: library/templates/library/book_form.html:71
+#: vinyl/templates/vinyl/vinyl_form.html:63
+msgid "Inserisci almeno 2 caratteri del titolo per cercare."
+msgstr "请至少输入标题的 2 个字符进行搜索。"
+
+#: library/templates/library/book_form.html:72
+#: vinyl/templates/vinyl/vinyl_form.html:64
+msgid "Le fonti online non sono raggiungibili al momento, riprova tra poco."
+msgstr "当前无法访问在线来源，请稍后再试。"
+
+#: library/templates/library/book_form.html:73
+#: vinyl/templates/vinyl/vinyl_form.html:65
+#, python-brace-format
+msgid "{n} risultati: clicca su uno per compilare i campi."
+msgstr "共 {n} 个结果：点击其中一个以填写各字段。"
+
+#: library/templates/library/book_form.html:74
+#: vinyl/templates/vinyl/vinyl_form.html:66
+msgid "copertina"
+msgstr "封面"
+
+#: library/templates/library/book_form.html:75
+#: vinyl/templates/vinyl/vinyl_form.html:67
+msgid "Compilazione in corso..."
+msgstr "正在填写..."
+
+#: library/templates/library/book_form.html:76
+#: vinyl/templates/vinyl/vinyl_form.html:68
+msgid ""
+"Copertina trovata automaticamente (verrà salvata al momento del "
+"salvataggio):"
+msgstr "已自动找到封面（保存时将一并保存）："
+
+#: library/templates/library/book_form.html:77
+#: vinyl/templates/vinyl/vinyl_form.html:69
+msgid "Campi compilati: controlla e correggi se necessario prima di salvare."
+msgstr "已填写各字段：保存前请检查并按需修改。"
+
+#: library/templates/library/book_form.html:78
+msgid "Inserisci titolo e/o autore per cercare."
+msgstr "请输入标题和/或作者进行搜索。"
+
+#: library/templates/library/book_form.html:79
+msgid ""
+"Nessuna informazione trovata. Prova a semplificare il titolo o rimuovere il "
+"filtro lingua/autore."
+msgstr "未找到信息。请尝试简化标题，或移除语言/作者筛选。"
+
+#: library/templates/library/book_list.html:4
+#: library/templates/library/book_list.html:8
+msgid "Libri"
+msgstr "图书"
+
+#: library/templates/library/book_list.html:8
+#, python-format
+msgid "Risultati per \"%(query)s\""
+msgstr "“%(query)s”的搜索结果"
+
+#: library/templates/library/book_list.html:14
+#: vinyl/templates/vinyl/_filters.html:7
+msgid "Tutti i generi"
+msgstr "所有类型"
+
+#: library/templates/library/book_list.html:22
+msgid "Tutti gli stati"
+msgstr "所有状态"
+
+#: library/templates/library/book_list.html:29
+#: vinyl/templates/vinyl/_filters.html:18
+msgid "Aggiunti di recente"
+msgstr "最近添加"
+
+#: library/templates/library/book_list.html:30
+#: vinyl/templates/vinyl/_filters.html:16
+msgid "Titolo (A-Z)"
+msgstr "标题（A-Z）"
+
+#: library/templates/library/book_list.html:31
+#: vinyl/templates/vinyl/_filters.html:17
+msgid "Titolo (Z-A)"
+msgstr "标题（Z-A）"
+
+#: library/templates/library/book_list.html:32
+msgid "Autore (A-Z)"
+msgstr "作者（A-Z）"
+
+#: library/templates/library/book_list.html:33
+msgid "Autore (Z-A)"
+msgstr "作者（Z-A）"
+
+#: library/templates/library/book_list.html:34
+#: vinyl/templates/vinyl/_filters.html:21
+msgid "Anno (crescente)"
+msgstr "年份（升序）"
+
+#: library/templates/library/book_list.html:35
+#: vinyl/templates/vinyl/_filters.html:22
+msgid "Anno (decrescente)"
+msgstr "年份（降序）"
+
+#: library/templates/library/book_list.html:63
+msgid "Dettagli"
+msgstr "详情"
+
+#: library/templates/library/book_list.html:71
+msgid "Paginazione libri"
+msgstr "图书分页"
+
+#: library/templates/library/book_list.html:74
+#: library/templates/library/book_list.html:76
+msgid "Precedente"
+msgstr "上一页"
+
+#: library/templates/library/book_list.html:78
+#, python-format
+msgid "Pagina %(n)s di %(total)s"
+msgstr "第 %(n)s 页，共 %(total)s 页"
+
+#: library/templates/library/book_list.html:80
+#: library/templates/library/book_list.html:82
+msgid "Successiva"
+msgstr "下一页"
+
+#: library/templates/library/book_list.html:89
+msgid "Nessun libro trovato."
+msgstr "未找到图书。"
+
+#: library/templates/library/genre_list.html:18
+#: library/templates/library/statistics.html:47
+#: vinyl/templates/vinyl/genre_list.html:18
+#: vinyl/templates/vinyl/statistics.html:47
+msgid "Nessun genere trovato."
+msgstr "未找到类型。"
+
+#: library/templates/library/publisher_list.html:4
+#: library/templates/library/publisher_list.html:7
+msgid "Editori"
+msgstr "出版社"
+
+#: library/templates/library/publisher_list.html:16
+#: vinyl/templates/vinyl/label_list.html:16
+msgid "sito web"
+msgstr "网站"
+
+#: library/templates/library/publisher_list.html:24
+msgid "Nessun editore trovato."
+msgstr "未找到出版社。"
+
+#: library/templates/library/statistics.html:13
+msgid "Totale libri"
+msgstr "图书总数"
+
+#: library/templates/library/statistics.html:21
+#: vinyl/templates/vinyl/statistics.html:21
+msgid "Disponibili"
+msgstr "可用"
+
+#: library/templates/library/statistics.html:29
+msgid "Letti"
+msgstr "已读"
+
+#: library/templates/library/statistics.html:36
+msgid "Libri per genere"
+msgstr "按类型统计图书"
+
+#: vinyl/forms/vinyl.py:15
+msgid "Artista"
+msgstr "艺术家"
+
+#: vinyl/forms/vinyl.py:16 vinyl/templates/vinyl/vinyl_detail.html:33
+msgid "Etichetta"
+msgstr "厂牌"
+
+#: vinyl/forms/vinyl.py:18 vinyl/templates/vinyl/vinyl_detail.html:34
+msgid "Anno di uscita"
+msgstr "发行年份"
+
+#: vinyl/forms/vinyl.py:19
+msgid "Dimensione"
+msgstr "尺寸"
+
+#: vinyl/forms/vinyl.py:20
+msgid "Velocità"
+msgstr "转速"
+
+#: vinyl/forms/vinyl.py:21 vinyl/templates/vinyl/vinyl_detail.html:36
+msgid "Condizione"
+msgstr "品相"
+
+#: vinyl/forms/vinyl.py:22 vinyl/templates/vinyl/vinyl_detail.html:37
+msgid "Numero di catalogo"
+msgstr "目录编号"
+
+#: vinyl/forms/vinyl.py:23 vinyl/templates/vinyl/vinyl_detail.html:38
+msgid "Tracce"
+msgstr "曲目数"
+
+#: vinyl/forms/vinyl.py:24 vinyl/templates/vinyl/vinyl_detail.html:44
+msgid "Canzoni"
+msgstr "歌曲"
+
+#: vinyl/forms/vinyl.py:30
+msgid "Una canzone per riga"
+msgstr "每行一首歌"
+
+#: vinyl/models/vinyl.py:20
+msgid "33 giri"
+msgstr "33 转"
+
+#: vinyl/models/vinyl.py:21
+msgid "45 giri"
+msgstr "45 转"
+
+#: vinyl/models/vinyl.py:22
+msgid "78 giri"
+msgstr "78 转"
+
+#: vinyl/templates/vinyl/_filters.html:2
+msgid "Filtri"
+msgstr "筛选"
+
+#: vinyl/templates/vinyl/_filters.html:5
+msgid "Genere"
+msgstr "类型"
+
+#: vinyl/templates/vinyl/_filters.html:14
+msgid "Ordina per"
+msgstr "排序方式"
+
+#: vinyl/templates/vinyl/_filters.html:19
+msgid "Artista (A-Z)"
+msgstr "艺术家（A-Z）"
+
+#: vinyl/templates/vinyl/_filters.html:20
+msgid "Artista (Z-A)"
+msgstr "艺术家（Z-A）"
+
+#: vinyl/templates/vinyl/artist_list.html:14
+#: vinyl/templates/vinyl/label_list.html:19
+#, python-format
+msgid "%(n)s vinile"
+msgid_plural "%(n)s vinili"
+msgstr[0] "%(n)s 张黑胶唱片"
+
+#: vinyl/templates/vinyl/artist_list.html:19
+msgid "Nessun artista trovato."
+msgstr "未找到艺术家。"
+
+#: vinyl/templates/vinyl/base.html:6
+msgid "Cerca vinili..."
+msgstr "搜索黑胶唱片..."
+
+#: vinyl/templates/vinyl/base.html:9
+msgid "+ Aggiungi vinile"
+msgstr "+ 添加黑胶唱片"
+
+#: vinyl/templates/vinyl/genre_list.html:7
+msgid "Generi musicali"
+msgstr "音乐类型"
+
+#: vinyl/templates/vinyl/label_list.html:7
+msgid "Etichette discografiche"
+msgstr "唱片厂牌"
+
+#: vinyl/templates/vinyl/label_list.html:24
+msgid "Nessuna etichetta trovata."
+msgstr "未找到厂牌。"
+
+#: vinyl/templates/vinyl/statistics.html:4
+#: vinyl/templates/vinyl/statistics.html:7
+msgid "Statistiche vinili"
+msgstr "黑胶唱片统计"
+
+#: vinyl/templates/vinyl/statistics.html:13
+msgid "Totale vinili"
+msgstr "黑胶唱片总数"
+
+#: vinyl/templates/vinyl/statistics.html:36
+msgid "Vinili per genere"
+msgstr "按类型统计黑胶唱片"
+
+#: vinyl/templates/vinyl/vinyl_confirm_delete.html:4
+#: vinyl/templates/vinyl/vinyl_confirm_delete.html:7
+msgid "Elimina vinile"
+msgstr "删除黑胶唱片"
+
+#: vinyl/templates/vinyl/vinyl_confirm_delete.html:9
+#, python-format
+msgid ""
+"Sei sicuro di voler eliminare <strong>\"%(title)s\"</strong> di %(artist)s? "
+"Questa azione non può essere annullata."
+msgstr "确定要删除 %(artist)s 的<strong>《%(title)s》</strong>吗？此操作无法撤销。"
+
+#: vinyl/templates/vinyl/vinyl_detail.html:35
+msgid "Formato"
+msgstr "规格"
+
+#: vinyl/templates/vinyl/vinyl_form.html:4
+#: vinyl/templates/vinyl/vinyl_form.html:7
+msgid "Modifica vinile"
+msgstr "编辑黑胶唱片"
+
+#: vinyl/templates/vinyl/vinyl_form.html:28
+msgid "Artista (opzionale, restringe la ricerca)"
+msgstr "艺术家（可选，缩小搜索范围）"
+
+#: vinyl/templates/vinyl/vinyl_form.html:29
+msgid "Cerca informazioni sul disco"
+msgstr "搜索唱片信息"
+
+#: vinyl/templates/vinyl/vinyl_form.html:41
+msgid "Titolo e artista..."
+msgstr "标题和艺术家..."
+
+#: vinyl/templates/vinyl/vinyl_form.html:70
+msgid "Inserisci titolo e/o artista per cercare."
+msgstr "请输入标题和/或艺术家进行搜索。"
+
+#: vinyl/templates/vinyl/vinyl_form.html:71
+msgid ""
+"Nessuna informazione trovata. Prova a semplificare il titolo o rimuovere il "
+"filtro artista."
+msgstr "未找到信息。请尝试简化标题，或移除艺术家筛选。"
+
+#: vinyl/templates/vinyl/vinyl_form.html:72
+#, python-brace-format
+msgid "{n} tracce"
+msgstr "{n} 首曲目"
+
+#: vinyl/templates/vinyl/vinyl_list.html:9
+msgid "Filtra e ordina"
+msgstr "筛选和排序"
+
+#: vinyl/templates/vinyl/vinyl_list.html:27
+msgid "Nessun vinile trovato."
+msgstr "未找到黑胶唱片。"
+
+#: vinyl/templates/vinyl/vinyl_list.html:27
+msgid "Ricerca non riuscita. Controlla la connessione e riprova."
+msgstr "搜索失败。请检查网络连接后重试。"
+
+#: vinyl/templates/vinyl/vinyl_list.html:29
+msgid "Riprova a caricare"
+msgstr "重新加载"
+
+#: vinyl/templates/vinyl/vinyl_list.html:30
+msgid "Caricamento…"
+msgstr "加载中…"
+
+#: vinyl/templates/vinyl/vinyl_list.html:31
+msgid "Carica altri"
+msgstr "加载更多"

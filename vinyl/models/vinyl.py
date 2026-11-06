@@ -2,6 +2,7 @@ import uuid
 
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 from .artist import Artist
 from .genre import VinylGenre
@@ -16,9 +17,9 @@ class Vinyl(models.Model):
     ]
 
     SPEED_CHOICES = [
-        ('33', '33 giri'),
-        ('45', '45 giri'),
-        ('78', '78 giri'),
+        ('33', _('33 giri')),
+        ('45', _('45 giri')),
+        ('78', _('78 giri')),
     ]
 
     CONDITION_CHOICES = [

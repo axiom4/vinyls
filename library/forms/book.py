@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from ..models import Book
 
@@ -9,6 +10,21 @@ class BookForm(forms.ModelForm):
         fields = ['title', 'author', 'publisher', 'isbn_type', 'isbn_number',
                   'genre', 'publication_year', 'pages', 'language',
                   'description', 'cover_image', 'rating', 'is_available']
+        labels = {
+            'title': _('Titolo'),
+            'author': _('Autore'),
+            'publisher': _('Editore'),
+            'isbn_type': _('Tipo di ISBN'),
+            'isbn_number': _('Numero ISBN'),
+            'genre': _('Generi'),
+            'publication_year': _('Anno di pubblicazione'),
+            'pages': _('Pagine'),
+            'language': _('Lingua'),
+            'description': _('Descrizione'),
+            'cover_image': _('Copertina'),
+            'rating': _('Valutazione'),
+            'is_available': _('Disponibile'),
+        }
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'author': forms.Select(attrs={'class': 'form-select'}),

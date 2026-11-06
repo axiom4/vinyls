@@ -1,20 +1,21 @@
 {% extends 'vinyl/base.html' %}
+{% load i18n %}
 
-{% block title %}Artisti - La Mia Collezione{% endblock %}
+{% block title %}{% trans "Artisti" %} - {% trans "La Mia Collezione" %}{% endblock %}
 
 {% block content %}
-<h1>Artisti</h1>
+<h1>{% trans "Artisti" %}</h1>
 
 {% if artists %}
 <div class="list-group">
     {% for artist in artists %}
     <a href="{% url 'vinyl:vinyl_list' %}?q={{ artist.name }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
         {{ artist }}
-        <span class="badge bg-primary rounded-pill">{{ artist.vinyls.count }} vinile/i</span>
+        <span class="badge bg-primary rounded-pill">{% blocktrans count n=artist.vinyls.count %}{{ n }} vinile{% plural %}{{ n }} vinili{% endblocktrans %}</span>
     </a>
     {% endfor %}
 </div>
 {% else %}
-<div class="alert alert-info">Nessun artista trovato.</div>
+<div class="alert alert-info">{% trans "Nessun artista trovato." %}</div>
 {% endif %}
 {% endblock %}

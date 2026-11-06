@@ -1,0 +1,781 @@
+# Translations for Vinyl / La Mia Collezione.
+# Distributed under the same license as the project.
+msgid ""
+msgstr ""
+"Project-Id-Version: vinyl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-06 11:04+0000\n"
+"PO-Revision-Date: 2026-11-06 12:00+0000\n"
+"Last-Translator: Riccardo Giannetto\n"
+"Language-Team: en\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: accounts/templates/accounts/login.html:8
+msgid "Accesso"
+msgstr "Sign in"
+
+#: accounts/templates/accounts/login.html:20
+msgid "Accedi con impronta digitale"
+msgstr "Sign in with fingerprint"
+
+#: accounts/templates/accounts/login.html:26
+msgid "Credenziali non valide."
+msgstr "Invalid credentials."
+
+#: accounts/templates/accounts/login.html:27
+msgid "Utente"
+msgstr "User"
+
+#: accounts/templates/accounts/login.html:28
+msgid "Password"
+msgstr "Password"
+
+#: accounts/templates/accounts/login.html:29
+msgid "Accedi con password"
+msgstr "Sign in with password"
+
+#: accounts/templates/accounts/login.html:33
+msgid "Accesso con passkey non riuscito: "
+msgstr "Passkey sign-in failed: "
+
+#: accounts/templates/accounts/passkeys.html:6
+msgid "Passkey (impronta digitale)"
+msgstr "Passkeys (fingerprint)"
+
+#: accounts/templates/accounts/passkeys.html:12
+msgid "Rimuovi"
+msgstr "Remove"
+
+#: accounts/templates/accounts/passkeys.html:14
+msgid "Nessuna passkey registrata."
+msgstr "No passkeys registered."
+
+#: accounts/templates/accounts/passkeys.html:17
+msgid "Nome (es. MacBook Touch ID)"
+msgstr "Name (e.g. MacBook Touch ID)"
+
+#: accounts/templates/accounts/passkeys.html:18
+msgid "Aggiungi passkey"
+msgstr "Add passkey"
+
+#: accounts/templates/accounts/passkeys.html:21
+msgid "Registrazione non riuscita."
+msgstr "Registration failed."
+
+#: accounts/views.py:62
+msgid "Passkey rimossa."
+msgstr "Passkey removed."
+
+#: accounts/views.py:86 accounts/views.py:120
+msgid "challenge mancante"
+msgstr "missing challenge"
+
+#: accounts/views.py:98
+msgid "registrazione non valida"
+msgstr "invalid registration"
+
+#: accounts/views.py:136
+msgid "autenticazione non valida"
+msgstr "invalid authentication"
+
+#: accounts/views.py:138
+msgid "utente disattivato"
+msgstr "user disabled"
+
+#: library/forms/book.py:14 vinyl/forms/vinyl.py:14
+msgid "Titolo"
+msgstr "Title"
+
+#: library/forms/book.py:15
+msgid "Autore"
+msgstr "Author"
+
+#: library/forms/book.py:16 library/templates/library/book_detail.html:33
+msgid "Editore"
+msgstr "Publisher"
+
+#: library/forms/book.py:17
+msgid "Tipo di ISBN"
+msgstr "ISBN type"
+
+#: library/forms/book.py:18
+msgid "Numero ISBN"
+msgstr "ISBN number"
+
+#: library/forms/book.py:19 library/templates/library/base.html:35
+#: library/templates/library/genre_list.html:4
+#: library/templates/library/genre_list.html:7 vinyl/forms/vinyl.py:17
+#: vinyl/templates/vinyl/genre_list.html:4
+msgid "Generi"
+msgstr "Genres"
+
+#: library/forms/book.py:20 library/templates/library/book_detail.html:35
+msgid "Anno di pubblicazione"
+msgstr "Publication year"
+
+#: library/forms/book.py:21 library/templates/library/book_detail.html:36
+msgid "Pagine"
+msgstr "Pages"
+
+#: library/forms/book.py:22 library/templates/library/_lang_switch.html:4
+#: library/templates/library/book_detail.html:37
+msgid "Lingua"
+msgstr "Language"
+
+#: library/forms/book.py:23 library/templates/library/book_detail.html:43
+#: vinyl/forms/vinyl.py:25 vinyl/templates/vinyl/vinyl_detail.html:53
+msgid "Descrizione"
+msgstr "Description"
+
+#: library/forms/book.py:24 vinyl/forms/vinyl.py:26
+msgid "Copertina"
+msgstr "Cover"
+
+#: library/forms/book.py:25 library/templates/library/book_list.html:36
+#: vinyl/forms/vinyl.py:27 vinyl/templates/vinyl/_filters.html:23
+msgid "Valutazione"
+msgstr "Rating"
+
+#: library/forms/book.py:26 library/templates/library/book_detail.html:23
+#: library/templates/library/book_list.html:23
+#: library/templates/library/book_list.html:58 vinyl/forms/vinyl.py:28
+#: vinyl/templates/vinyl/_vinyl_items.html:22
+#: vinyl/templates/vinyl/vinyl_detail.html:23
+msgid "Disponibile"
+msgstr "Available"
+
+#: library/models/book_record.py:11
+msgid "Non letto"
+msgstr "Unread"
+
+#: library/models/book_record.py:12
+msgid "In lettura"
+msgstr "Reading"
+
+#: library/models/book_record.py:13
+msgid "Letto"
+msgstr "Read"
+
+#: library/models/book_record.py:14
+msgid "Voglio leggere"
+msgstr "Want to read"
+
+#: library/templates/library/author_list.html:4
+#: library/templates/library/author_list.html:7
+msgid "Autori"
+msgstr "Authors"
+
+#: library/templates/library/author_list.html:4
+#: library/templates/library/base.html:11
+#: library/templates/library/book_confirm_delete.html:4
+#: library/templates/library/book_detail.html:4
+#: library/templates/library/book_form.html:4
+#: library/templates/library/book_list.html:4
+#: library/templates/library/genre_list.html:4
+#: library/templates/library/publisher_list.html:4
+#: library/templates/library/statistics.html:4
+msgid "La Mia Libreria"
+msgstr "My Library"
+
+#: library/templates/library/author_list.html:14
+#: library/templates/library/publisher_list.html:19
+#, python-format
+msgid "%(n)s libro"
+msgid_plural "%(n)s libri"
+msgstr[0] "%(n)s book"
+msgstr[1] "%(n)s books"
+
+#: library/templates/library/author_list.html:19
+msgid "Nessun autore trovato."
+msgstr "No authors found."
+
+#: library/templates/library/base.html:21
+#: vinyl/templates/vinyl/artist_list.html:4
+#: vinyl/templates/vinyl/genre_list.html:4
+#: vinyl/templates/vinyl/label_list.html:4
+#: vinyl/templates/vinyl/statistics.html:4
+#: vinyl/templates/vinyl/vinyl_confirm_delete.html:4
+#: vinyl/templates/vinyl/vinyl_detail.html:4
+#: vinyl/templates/vinyl/vinyl_form.html:4
+#: vinyl/templates/vinyl/vinyl_list.html:5
+msgid "La Mia Collezione"
+msgstr "My Collection"
+
+#: library/templates/library/base.html:28
+#: vinyl/templates/vinyl/vinyl_list.html:5
+#: vinyl/templates/vinyl/vinyl_list.html:16
+msgid "Vinili"
+msgstr "Vinyls"
+
+#: library/templates/library/base.html:30
+msgid "Elenco vinili"
+msgstr "Vinyl list"
+
+#: library/templates/library/base.html:31
+#: vinyl/templates/vinyl/vinyl_form.html:4
+#: vinyl/templates/vinyl/vinyl_form.html:7
+msgid "Aggiungi vinile"
+msgstr "Add vinyl"
+
+#: library/templates/library/base.html:33
+#: vinyl/templates/vinyl/artist_list.html:4
+#: vinyl/templates/vinyl/artist_list.html:7
+#: vinyl/templates/vinyl/statistics.html:29
+msgid "Artisti"
+msgstr "Artists"
+
+#: library/templates/library/base.html:34
+#: vinyl/templates/vinyl/label_list.html:4
+msgid "Etichette"
+msgstr "Labels"
+
+#: library/templates/library/base.html:36
+#: library/templates/library/statistics.html:4
+#: library/templates/library/statistics.html:7
+msgid "Statistiche"
+msgstr "Statistics"
+
+#: library/templates/library/base.html:43
+msgid "Cerca libri..."
+msgstr "Search books..."
+
+#: library/templates/library/base.html:44
+#: library/templates/library/book_form.html:52
+#: vinyl/templates/vinyl/base.html:7 vinyl/templates/vinyl/vinyl_form.html:42
+msgid "Cerca"
+msgstr "Search"
+
+#: library/templates/library/base.html:46
+msgid "+ Aggiungi libro"
+msgstr "+ Add book"
+
+#: library/templates/library/base.html:56
+msgid "Esci"
+msgstr "Log out"
+
+#: library/templates/library/base.html:69
+msgid "Chiudi"
+msgstr "Close"
+
+#: library/templates/library/book_confirm_delete.html:4
+#: library/templates/library/book_confirm_delete.html:7
+msgid "Elimina libro"
+msgstr "Delete book"
+
+#: library/templates/library/book_confirm_delete.html:9
+#, python-format
+msgid ""
+"Sei sicuro di voler eliminare <strong>\"%(title)s\"</strong> di %(author)s? "
+"Questa azione non può essere annullata."
+msgstr ""
+"Are you sure you want to delete <strong>\"%(title)s\"</strong> by "
+"%(author)s? This action cannot be undone."
+
+#: library/templates/library/book_confirm_delete.html:13
+#: vinyl/templates/vinyl/vinyl_confirm_delete.html:13
+msgid "Sì, elimina"
+msgstr "Yes, delete"
+
+#: library/templates/library/book_confirm_delete.html:14
+#: library/templates/library/book_form.html:63
+#: vinyl/templates/vinyl/vinyl_confirm_delete.html:14
+#: vinyl/templates/vinyl/vinyl_form.html:54
+msgid "Annulla"
+msgstr "Cancel"
+
+#: library/templates/library/book_detail.html:13
+#: library/templates/library/book_list.html:50
+#: vinyl/templates/vinyl/_vinyl_items.html:11
+#: vinyl/templates/vinyl/vinyl_detail.html:13
+msgid "Nessuna copertina"
+msgstr "No cover"
+
+#: library/templates/library/book_detail.html:23
+#: library/templates/library/book_list.html:24
+#: library/templates/library/book_list.html:58
+#: vinyl/templates/vinyl/_vinyl_items.html:22
+#: vinyl/templates/vinyl/vinyl_detail.html:23
+msgid "Non disponibile"
+msgstr "Unavailable"
+
+#: library/templates/library/book_detail.html:38
+#: vinyl/templates/vinyl/vinyl_detail.html:39
+msgid "Aggiunto il"
+msgstr "Added on"
+
+#: library/templates/library/book_detail.html:48
+#: vinyl/templates/vinyl/vinyl_detail.html:58
+msgid "Modifica"
+msgstr "Edit"
+
+#: library/templates/library/book_detail.html:49
+#: vinyl/templates/vinyl/vinyl_detail.html:59
+msgid "Elimina"
+msgstr "Delete"
+
+#: library/templates/library/book_detail.html:50
+#: vinyl/templates/vinyl/vinyl_detail.html:60
+msgid "Torna alla lista"
+msgstr "Back to list"
+
+#: library/templates/library/book_detail.html:54
+msgid "Storico letture"
+msgstr "Reading history"
+
+#: library/templates/library/book_form.html:4
+#: library/templates/library/book_form.html:7
+msgid "Modifica libro"
+msgstr "Edit book"
+
+#: library/templates/library/book_form.html:4
+#: library/templates/library/book_form.html:7
+msgid "Aggiungi libro"
+msgstr "Add book"
+
+#: library/templates/library/book_form.html:25
+#: vinyl/templates/vinyl/vinyl_form.html:25
+msgid "Compila automaticamente dai dati online"
+msgstr "Fill in automatically from online data"
+
+#: library/templates/library/book_form.html:28
+msgid "Autore (opzionale, restringe la ricerca)"
+msgstr "Author (optional, narrows the search)"
+
+#: library/templates/library/book_form.html:29
+msgid "Lingua:"
+msgstr "Language:"
+
+#: library/templates/library/book_form.html:31
+msgid "Italiano"
+msgstr "Italian"
+
+#: library/templates/library/book_form.html:32
+msgid "Inglese"
+msgstr "English"
+
+#: library/templates/library/book_form.html:33
+msgid "Francese"
+msgstr "French"
+
+#: library/templates/library/book_form.html:34
+msgid "Tedesco"
+msgstr "German"
+
+#: library/templates/library/book_form.html:35
+msgid "Spagnolo"
+msgstr "Spanish"
+
+#: library/templates/library/book_form.html:36
+msgid "Portoghese"
+msgstr "Portuguese"
+
+#: library/templates/library/book_form.html:37
+msgid "Tutte le lingue"
+msgstr "All languages"
+
+#: library/templates/library/book_form.html:39
+msgid "Cerca informazioni sul libro"
+msgstr "Search book information"
+
+#: library/templates/library/book_form.html:48
+#: vinyl/templates/vinyl/vinyl_form.html:38
+msgid "Oppure cerca una copertina online"
+msgstr "Or search for a cover online"
+
+#: library/templates/library/book_form.html:51
+msgid "Titolo e autore..."
+msgstr "Title and author..."
+
+#: library/templates/library/book_form.html:62
+#: vinyl/templates/vinyl/vinyl_form.html:53
+msgid "Salva"
+msgstr "Save"
+
+#: library/templates/library/book_form.html:66
+#: vinyl/templates/vinyl/vinyl_form.html:58
+msgid "Ricerca in corso..."
+msgstr "Searching..."
+
+#: library/templates/library/book_form.html:67
+#: vinyl/templates/vinyl/vinyl_form.html:59
+msgid "Nessuna copertina trovata."
+msgstr "No cover found."
+
+#: library/templates/library/book_form.html:68
+#: vinyl/templates/vinyl/vinyl_form.html:60
+msgid "Clicca su una copertina per selezionarla:"
+msgstr "Click a cover to select it:"
+
+#: library/templates/library/book_form.html:69
+#: vinyl/templates/vinyl/vinyl_form.html:61
+msgid "Copertina selezionata (verrà salvata al momento del salvataggio):"
+msgstr "Cover selected (it will be saved when you save):"
+
+#: library/templates/library/book_form.html:70
+#: vinyl/templates/vinyl/vinyl_form.html:62
+msgid "Errore durante la ricerca."
+msgstr "Error while searching."
+
+#: library/templates/library/book_form.html:71
+#: vinyl/templates/vinyl/vinyl_form.html:63
+msgid "Inserisci almeno 2 caratteri del titolo per cercare."
+msgstr "Enter at least 2 characters of the title to search."
+
+#: library/templates/library/book_form.html:72
+#: vinyl/templates/vinyl/vinyl_form.html:64
+msgid "Le fonti online non sono raggiungibili al momento, riprova tra poco."
+msgstr "Online sources are currently unreachable, please try again shortly."
+
+#: library/templates/library/book_form.html:73
+#: vinyl/templates/vinyl/vinyl_form.html:65
+#, python-brace-format
+msgid "{n} risultati: clicca su uno per compilare i campi."
+msgstr "{n} results: click one to fill in the fields."
+
+#: library/templates/library/book_form.html:74
+#: vinyl/templates/vinyl/vinyl_form.html:66
+msgid "copertina"
+msgstr "cover"
+
+#: library/templates/library/book_form.html:75
+#: vinyl/templates/vinyl/vinyl_form.html:67
+msgid "Compilazione in corso..."
+msgstr "Filling in..."
+
+#: library/templates/library/book_form.html:76
+#: vinyl/templates/vinyl/vinyl_form.html:68
+msgid ""
+"Copertina trovata automaticamente (verrà salvata al momento del "
+"salvataggio):"
+msgstr "Cover found automatically (it will be saved when you save):"
+
+#: library/templates/library/book_form.html:77
+#: vinyl/templates/vinyl/vinyl_form.html:69
+msgid "Campi compilati: controlla e correggi se necessario prima di salvare."
+msgstr "Fields filled in: check and correct them if needed before saving."
+
+#: library/templates/library/book_form.html:78
+msgid "Inserisci titolo e/o autore per cercare."
+msgstr "Enter a title and/or author to search."
+
+#: library/templates/library/book_form.html:79
+msgid ""
+"Nessuna informazione trovata. Prova a semplificare il titolo o rimuovere il "
+"filtro lingua/autore."
+msgstr ""
+"No information found. Try simplifying the title or removing the "
+"language/author filter."
+
+#: library/templates/library/book_list.html:4
+#: library/templates/library/book_list.html:8
+msgid "Libri"
+msgstr "Books"
+
+#: library/templates/library/book_list.html:8
+#, python-format
+msgid "Risultati per \"%(query)s\""
+msgstr "Results for \"%(query)s\""
+
+#: library/templates/library/book_list.html:14
+#: vinyl/templates/vinyl/_filters.html:7
+msgid "Tutti i generi"
+msgstr "All genres"
+
+#: library/templates/library/book_list.html:22
+msgid "Tutti gli stati"
+msgstr "All statuses"
+
+#: library/templates/library/book_list.html:29
+#: vinyl/templates/vinyl/_filters.html:18
+msgid "Aggiunti di recente"
+msgstr "Recently added"
+
+#: library/templates/library/book_list.html:30
+#: vinyl/templates/vinyl/_filters.html:16
+msgid "Titolo (A-Z)"
+msgstr "Title (A-Z)"
+
+#: library/templates/library/book_list.html:31
+#: vinyl/templates/vinyl/_filters.html:17
+msgid "Titolo (Z-A)"
+msgstr "Title (Z-A)"
+
+#: library/templates/library/book_list.html:32
+msgid "Autore (A-Z)"
+msgstr "Author (A-Z)"
+
+#: library/templates/library/book_list.html:33
+msgid "Autore (Z-A)"
+msgstr "Author (Z-A)"
+
+#: library/templates/library/book_list.html:34
+#: vinyl/templates/vinyl/_filters.html:21
+msgid "Anno (crescente)"
+msgstr "Year (ascending)"
+
+#: library/templates/library/book_list.html:35
+#: vinyl/templates/vinyl/_filters.html:22
+msgid "Anno (decrescente)"
+msgstr "Year (descending)"
+
+#: library/templates/library/book_list.html:63
+msgid "Dettagli"
+msgstr "Details"
+
+#: library/templates/library/book_list.html:71
+msgid "Paginazione libri"
+msgstr "Book pagination"
+
+#: library/templates/library/book_list.html:74
+#: library/templates/library/book_list.html:76
+msgid "Precedente"
+msgstr "Previous"
+
+#: library/templates/library/book_list.html:78
+#, python-format
+msgid "Pagina %(n)s di %(total)s"
+msgstr "Page %(n)s of %(total)s"
+
+#: library/templates/library/book_list.html:80
+#: library/templates/library/book_list.html:82
+msgid "Successiva"
+msgstr "Next"
+
+#: library/templates/library/book_list.html:89
+msgid "Nessun libro trovato."
+msgstr "No books found."
+
+#: library/templates/library/genre_list.html:18
+#: library/templates/library/statistics.html:47
+#: vinyl/templates/vinyl/genre_list.html:18
+#: vinyl/templates/vinyl/statistics.html:47
+msgid "Nessun genere trovato."
+msgstr "No genres found."
+
+#: library/templates/library/publisher_list.html:4
+#: library/templates/library/publisher_list.html:7
+msgid "Editori"
+msgstr "Publishers"
+
+#: library/templates/library/publisher_list.html:16
+#: vinyl/templates/vinyl/label_list.html:16
+msgid "sito web"
+msgstr "website"
+
+#: library/templates/library/publisher_list.html:24
+msgid "Nessun editore trovato."
+msgstr "No publishers found."
+
+#: library/templates/library/statistics.html:13
+msgid "Totale libri"
+msgstr "Total books"
+
+#: library/templates/library/statistics.html:21
+#: vinyl/templates/vinyl/statistics.html:21
+msgid "Disponibili"
+msgstr "Available"
+
+#: library/templates/library/statistics.html:29
+msgid "Letti"
+msgstr "Read"
+
+#: library/templates/library/statistics.html:36
+msgid "Libri per genere"
+msgstr "Books by genre"
+
+#: vinyl/forms/vinyl.py:15
+msgid "Artista"
+msgstr "Artist"
+
+#: vinyl/forms/vinyl.py:16 vinyl/templates/vinyl/vinyl_detail.html:33
+msgid "Etichetta"
+msgstr "Label"
+
+#: vinyl/forms/vinyl.py:18 vinyl/templates/vinyl/vinyl_detail.html:34
+msgid "Anno di uscita"
+msgstr "Release year"
+
+#: vinyl/forms/vinyl.py:19
+msgid "Dimensione"
+msgstr "Size"
+
+#: vinyl/forms/vinyl.py:20
+msgid "Velocità"
+msgstr "Speed"
+
+#: vinyl/forms/vinyl.py:21 vinyl/templates/vinyl/vinyl_detail.html:36
+msgid "Condizione"
+msgstr "Condition"
+
+#: vinyl/forms/vinyl.py:22 vinyl/templates/vinyl/vinyl_detail.html:37
+msgid "Numero di catalogo"
+msgstr "Catalog number"
+
+#: vinyl/forms/vinyl.py:23 vinyl/templates/vinyl/vinyl_detail.html:38
+msgid "Tracce"
+msgstr "Tracks"
+
+#: vinyl/forms/vinyl.py:24 vinyl/templates/vinyl/vinyl_detail.html:44
+msgid "Canzoni"
+msgstr "Songs"
+
+#: vinyl/forms/vinyl.py:30
+msgid "Una canzone per riga"
+msgstr "One song per line"
+
+#: vinyl/models/vinyl.py:20
+msgid "33 giri"
+msgstr "33 RPM"
+
+#: vinyl/models/vinyl.py:21
+msgid "45 giri"
+msgstr "45 RPM"
+
+#: vinyl/models/vinyl.py:22
+msgid "78 giri"
+msgstr "78 RPM"
+
+#: vinyl/templates/vinyl/_filters.html:2
+msgid "Filtri"
+msgstr "Filters"
+
+#: vinyl/templates/vinyl/_filters.html:5
+msgid "Genere"
+msgstr "Genre"
+
+#: vinyl/templates/vinyl/_filters.html:14
+msgid "Ordina per"
+msgstr "Sort by"
+
+#: vinyl/templates/vinyl/_filters.html:19
+msgid "Artista (A-Z)"
+msgstr "Artist (A-Z)"
+
+#: vinyl/templates/vinyl/_filters.html:20
+msgid "Artista (Z-A)"
+msgstr "Artist (Z-A)"
+
+#: vinyl/templates/vinyl/artist_list.html:14
+#: vinyl/templates/vinyl/label_list.html:19
+#, python-format
+msgid "%(n)s vinile"
+msgid_plural "%(n)s vinili"
+msgstr[0] "%(n)s vinyl"
+msgstr[1] "%(n)s vinyls"
+
+#: vinyl/templates/vinyl/artist_list.html:19
+msgid "Nessun artista trovato."
+msgstr "No artists found."
+
+#: vinyl/templates/vinyl/base.html:6
+msgid "Cerca vinili..."
+msgstr "Search vinyls..."
+
+#: vinyl/templates/vinyl/base.html:9
+msgid "+ Aggiungi vinile"
+msgstr "+ Add vinyl"
+
+#: vinyl/templates/vinyl/genre_list.html:7
+msgid "Generi musicali"
+msgstr "Music genres"
+
+#: vinyl/templates/vinyl/label_list.html:7
+msgid "Etichette discografiche"
+msgstr "Record labels"
+
+#: vinyl/templates/vinyl/label_list.html:24
+msgid "Nessuna etichetta trovata."
+msgstr "No labels found."
+
+#: vinyl/templates/vinyl/statistics.html:4
+#: vinyl/templates/vinyl/statistics.html:7
+msgid "Statistiche vinili"
+msgstr "Vinyl statistics"
+
+#: vinyl/templates/vinyl/statistics.html:13
+msgid "Totale vinili"
+msgstr "Total vinyls"
+
+#: vinyl/templates/vinyl/statistics.html:36
+msgid "Vinili per genere"
+msgstr "Vinyls by genre"
+
+#: vinyl/templates/vinyl/vinyl_confirm_delete.html:4
+#: vinyl/templates/vinyl/vinyl_confirm_delete.html:7
+msgid "Elimina vinile"
+msgstr "Delete vinyl"
+
+#: vinyl/templates/vinyl/vinyl_confirm_delete.html:9
+#, python-format
+msgid ""
+"Sei sicuro di voler eliminare <strong>\"%(title)s\"</strong> di %(artist)s? "
+"Questa azione non può essere annullata."
+msgstr ""
+"Are you sure you want to delete <strong>\"%(title)s\"</strong> by "
+"%(artist)s? This action cannot be undone."
+
+#: vinyl/templates/vinyl/vinyl_detail.html:35
+msgid "Formato"
+msgstr "Format"
+
+#: vinyl/templates/vinyl/vinyl_form.html:4
+#: vinyl/templates/vinyl/vinyl_form.html:7
+msgid "Modifica vinile"
+msgstr "Edit vinyl"
+
+#: vinyl/templates/vinyl/vinyl_form.html:28
+msgid "Artista (opzionale, restringe la ricerca)"
+msgstr "Artist (optional, narrows the search)"
+
+#: vinyl/templates/vinyl/vinyl_form.html:29
+msgid "Cerca informazioni sul disco"
+msgstr "Search record information"
+
+#: vinyl/templates/vinyl/vinyl_form.html:41
+msgid "Titolo e artista..."
+msgstr "Title and artist..."
+
+#: vinyl/templates/vinyl/vinyl_form.html:70
+msgid "Inserisci titolo e/o artista per cercare."
+msgstr "Enter a title and/or artist to search."
+
+#: vinyl/templates/vinyl/vinyl_form.html:71
+msgid ""
+"Nessuna informazione trovata. Prova a semplificare il titolo o rimuovere il "
+"filtro artista."
+msgstr ""
+"No information found. Try simplifying the title or removing the artist "
+"filter."
+
+#: vinyl/templates/vinyl/vinyl_form.html:72
+#, python-brace-format
+msgid "{n} tracce"
+msgstr "{n} tracks"
+
+#: vinyl/templates/vinyl/vinyl_list.html:9
+msgid "Filtra e ordina"
+msgstr "Filter and sort"
+
+#: vinyl/templates/vinyl/vinyl_list.html:27
+msgid "Nessun vinile trovato."
+msgstr "No vinyls found."
+
+#: vinyl/templates/vinyl/vinyl_list.html:27
+msgid "Ricerca non riuscita. Controlla la connessione e riprova."
+msgstr "Search failed. Check your connection and try again."
+
+#: vinyl/templates/vinyl/vinyl_list.html:29
+msgid "Riprova a caricare"
+msgstr "Try loading again"
+
+#: vinyl/templates/vinyl/vinyl_list.html:30
+msgid "Caricamento…"
+msgstr "Loading…"
+
+#: vinyl/templates/vinyl/vinyl_list.html:31
+msgid "Carica altri"
+msgstr "Load more"

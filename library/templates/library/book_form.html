@@ -1,9 +1,10 @@
 {% extends 'library/base.html' %}
+{% load i18n %}
 
-{% block title %}{% if object %}Modifica libro{% else %}Aggiungi libro{% endif %} - La Mia Libreria{% endblock %}
+{% block title %}{% if object %}{% trans "Modifica libro" %}{% else %}{% trans "Aggiungi libro" %}{% endif %} - {% trans "La Mia Libreria" %}{% endblock %}
 
 {% block content %}
-<h1>{% if object %}Modifica libro{% else %}Aggiungi libro{% endif %}</h1>
+<h1>{% if object %}{% trans "Modifica libro" %}{% else %}{% trans "Aggiungi libro" %}{% endif %}</h1>
 
 <form method="post" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
@@ -21,21 +22,21 @@
 
     {% if field.name == 'title' %}
     <div class="mb-3 border rounded p-3 bg-body-tertiary">
-        <label class="form-label">Compila automaticamente dai dati online</label>
+        <label class="form-label">{% trans "Compila automaticamente dai dati online" %}</label>
         <div class="d-flex align-items-center gap-2 flex-wrap mb-2">
             <input type="text" id="book-info-author" class="form-control form-control-sm w-auto"
-                   placeholder="Autore (opzionale, restringe la ricerca)">
-            <label for="book-info-language" class="small text-muted mb-0">Lingua:</label>
+                   placeholder="{% trans 'Autore (opzionale, restringe la ricerca)' %}">
+            <label for="book-info-language" class="small text-muted mb-0">{% trans "Lingua:" %}</label>
             <select id="book-info-language" class="form-select form-select-sm w-auto">
-                <option value="ita" selected>Italiano</option>
-                <option value="eng">Inglese</option>
-                <option value="fre">Francese</option>
-                <option value="ger">Tedesco</option>
-                <option value="spa">Spagnolo</option>
-                <option value="por">Portoghese</option>
-                <option value="">Tutte le lingue</option>
+                <option value="ita" selected>{% trans "Italiano" %}</option>
+                <option value="eng">{% trans "Inglese" %}</option>
+                <option value="fre">{% trans "Francese" %}</option>
+                <option value="ger">{% trans "Tedesco" %}</option>
+                <option value="spa">{% trans "Spagnolo" %}</option>
+                <option value="por">{% trans "Portoghese" %}</option>
+                <option value="">{% trans "Tutte le lingue" %}</option>
             </select>
-            <button type="button" id="book-info-search-btn" class="btn btn-outline-secondary btn-sm">Cerca informazioni sul libro</button>
+            <button type="button" id="book-info-search-btn" class="btn btn-outline-secondary btn-sm">{% trans "Cerca informazioni sul libro" %}</button>
         </div>
         <div id="book-info-status" class="small text-muted mt-2 mb-2"></div>
         <div id="book-info-results" class="list-group"></div>
@@ -44,11 +45,11 @@
 
     {% if field.name == 'cover_image' %}
     <div class="mb-3 border rounded p-3 bg-body-tertiary">
-        <label class="form-label">Oppure cerca una copertina online</label>
+        <label class="form-label">{% trans "Oppure cerca una copertina online" %}</label>
         <div class="input-group mb-2">
             <input type="text" id="cover-search-input" class="form-control"
-                   placeholder="Titolo e autore..." value="{{ object.title|default:'' }}">
-            <button type="button" id="cover-search-btn" class="btn btn-outline-secondary">Cerca</button>
+                   placeholder="{% trans 'Titolo e autore...' %}" value="{{ object.title|default:'' }}">
+            <button type="button" id="cover-search-btn" class="btn btn-outline-secondary">{% trans "Cerca" %}</button>
         </div>
         <div id="cover-search-status" class="small text-muted mb-2"></div>
         <div id="cover-search-results" class="d-flex flex-wrap gap-2"></div>
@@ -58,10 +59,42 @@
     {% endif %}
     {% endfor %}
 
-    <button type="submit" class="btn btn-primary">Salva</button>
-    <a href="{% url 'library:book_list' %}" class="btn btn-outline-secondary">Annulla</a>
+    <button type="submit" class="btn btn-primary">{% trans "Salva" %}</button>
+    <a href="{% url 'library:book_list' %}" class="btn btn-outline-secondary">{% trans "Annulla" %}</a>
 </form>
 
+{% trans "Ricerca in corso..." as t_searching %}
+{% trans "Nessuna copertina trovata." as t_noCover %}
+{% trans "Clicca su una copertina per selezionarla:" as t_clickCover %}
+{% trans "Copertina selezionata (verrà salvata al momento del salvataggio):" as t_coverSel %}
+{% trans "Errore durante la ricerca." as t_searchErr %}
+{% trans "Inserisci almeno 2 caratteri del titolo per cercare." as t_short %}
+{% trans "Le fonti online non sono raggiungibili al momento, riprova tra poco." as t_offline %}
+{% trans "{n} risultati: clicca su uno per compilare i campi." as t_resultsN %}
+{% trans "copertina" as t_cover %}
+{% trans "Compilazione in corso..." as t_filling %}
+{% trans "Copertina trovata automaticamente (verrà salvata al momento del salvataggio):" as t_coverAuto %}
+{% trans "Campi compilati: controlla e correggi se necessario prima di salvare." as t_filled %}
+{% trans "Inserisci titolo e/o autore per cercare." as t_needQ %}
+{% trans "Nessuna informazione trovata. Prova a semplificare il titolo o rimuovere il filtro lingua/autore." as t_noInfo %}
+<script>
+const T = {
+    searching: "{{ t_searching|escapejs }}",
+    noCover: "{{ t_noCover|escapejs }}",
+    clickCover: "{{ t_clickCover|escapejs }}",
+    coverSel: "{{ t_coverSel|escapejs }}",
+    searchErr: "{{ t_searchErr|escapejs }}",
+    short: "{{ t_short|escapejs }}",
+    offline: "{{ t_offline|escapejs }}",
+    resultsN: "{{ t_resultsN|escapejs }}",
+    cover: "{{ t_cover|escapejs }}",
+    filling: "{{ t_filling|escapejs }}",
+    coverAuto: "{{ t_coverAuto|escapejs }}",
+    filled: "{{ t_filled|escapejs }}",
+    needQ: "{{ t_needQ|escapejs }}",
+    noInfo: "{{ t_noInfo|escapejs }}",
+};
+</script>
 <script>
 (function() {
     const searchBtn = document.getElementById('cover-search-btn');
@@ -75,18 +108,18 @@
         const q = searchInput.value.trim();
         resultsDiv.innerHTML = '';
         if (!q) {
-            statusDiv.textContent = 'Inserisci titolo e/o autore per cercare.';
+            statusDiv.textContent = T.needQ;
             return;
         }
-        statusDiv.textContent = 'Ricerca in corso...';
+        statusDiv.textContent = T.searching;
         try {
             const resp = await fetch("{% url 'library:search_cover' %}?q=" + encodeURIComponent(q), {signal: AbortSignal.timeout(15000)});
             const data = await resp.json();
             if (!data.results || !data.results.length) {
-                statusDiv.textContent = 'Nessuna copertina trovata.';
+                statusDiv.textContent = T.noCover;
                 return;
             }
-            statusDiv.textContent = 'Clicca su una copertina per selezionarla:';
+            statusDiv.textContent = T.clickCover;
             data.results.forEach(function(r) {
                 const img = document.createElement('img');
                 img.src = r.thumb_url;
@@ -100,13 +133,13 @@
                     });
                     img.classList.add('selected');
                     previewDiv.innerHTML =
-                        '<p class="small text-success mb-1">Copertina selezionata (verrà salvata al momento del salvataggio):</p>' +
+                        '<p class="small text-success mb-1">' + T.coverSel + '</p>' +
                         '<img src="' + r.full_url + '" class="book-cover-detail rounded border">';
                 });
                 resultsDiv.appendChild(img);
             });
         } catch (e) {
-            statusDiv.textContent = 'Errore durante la ricerca.';
+            statusDiv.textContent = T.searchErr;
         }
     }
 
@@ -162,29 +195,29 @@
         const language = document.getElementById('book-info-language').value;
         resultsDiv.innerHTML = '';
         if (title.length < 2) {
-            statusDiv.textContent = 'Inserisci almeno 2 caratteri del titolo per cercare.';
+            statusDiv.textContent = T.short;
             return;
         }
-        statusDiv.textContent = 'Ricerca in corso...';
+        statusDiv.textContent = T.searching;
         try {
             const params = new URLSearchParams({title: title, author: author, language: language});
             const resp = await fetch("{% url 'library:search_book_info' %}?" + params.toString(), {signal: AbortSignal.timeout(15000)});
             const data = await resp.json();
             if (data.error === 'network_error') {
-                statusDiv.textContent = 'Le fonti online non sono raggiungibili al momento, riprova tra poco.';
+                statusDiv.textContent = T.offline;
                 return;
             }
             if (!data.results || !data.results.length) {
-                statusDiv.textContent = 'Nessuna informazione trovata. Prova a semplificare il titolo o rimuovere il filtro lingua/autore.';
+                statusDiv.textContent = T.noInfo;
                 return;
             }
-            statusDiv.textContent = data.results.length + ' risultati: clicca su uno per compilare i campi.';
+            statusDiv.textContent = T.resultsN.replace('{n}', data.results.length);
             data.results.forEach(function(r) {
                 const item = document.createElement('button');
                 item.type = 'button';
                 item.className = 'list-group-item list-group-item-action text-start';
                 const badges = [];
-                if (r.cover_url) badges.push('<span class="badge bg-success">copertina</span>');
+                if (r.cover_url) badges.push('<span class="badge bg-success">' + T.cover + '</span>');
                 if (r.rating) badges.push('<span class="badge bg-warning text-dark">★ ' + r.rating + '</span>');
                 if (r.isbn13 || r.isbn10) badges.push('<span class="badge bg-info text-dark">ISBN</span>');
                 if (r.language) badges.push('<span class="badge bg-secondary">' + r.language + '</span>');
@@ -201,12 +234,12 @@
                 resultsDiv.appendChild(item);
             });
         } catch (e) {
-            statusDiv.textContent = 'Errore durante la ricerca.';
+            statusDiv.textContent = T.searchErr;
         }
     }
 
     async function applyCandidate(r) {
-        statusDiv.textContent = 'Compilazione in corso...';
+        statusDiv.textContent = T.filling;
 
         let description = r.description || '';
         if (!description && r.work_key) {
@@ -276,13 +309,13 @@
                 });
                 if (coverPreview) {
                     coverPreview.innerHTML =
-                        '<p class="small text-success mb-1">Copertina trovata automaticamente (verrà salvata al momento del salvataggio):</p>' +
+                        '<p class="small text-success mb-1">' + T.coverAuto + '</p>' +
                         '<img src="' + r.cover_url + '" class="book-cover-detail rounded border">';
                 }
             }
         }
 
-        statusDiv.textContent = 'Campi compilati: controlla e correggi se necessario prima di salvare.';
+        statusDiv.textContent = T.filled;
     }
 
     infoBtn.addEventListener('click', runInfoSearch);

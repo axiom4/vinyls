@@ -1,9 +1,10 @@
 {% extends 'vinyl/base.html' %}
+{% load i18n %}
 
-{% block title %}Etichette - La Mia Collezione{% endblock %}
+{% block title %}{% trans "Etichette" %} - {% trans "La Mia Collezione" %}{% endblock %}
 
 {% block content %}
-<h1>Etichette discografiche</h1>
+<h1>{% trans "Etichette discografiche" %}</h1>
 
 {% if labels %}
 <div class="list-group">
@@ -12,14 +13,14 @@
         <div>
             {{ label.name }}
             {% if label.website %}
-                <a href="{{ label.website }}" target="_blank" rel="noopener noreferrer" class="ms-2 small">sito web</a>
+                <a href="{{ label.website }}" target="_blank" rel="noopener noreferrer" class="ms-2 small">{% trans "sito web" %}</a>
             {% endif %}
         </div>
-        <span class="badge bg-primary rounded-pill">{{ label.vinyls.count }} vinile/i</span>
+        <span class="badge bg-primary rounded-pill">{% blocktrans count n=label.vinyls.count %}{{ n }} vinile{% plural %}{{ n }} vinili{% endblocktrans %}</span>
     </div>
     {% endfor %}
 </div>
 {% else %}
-<div class="alert alert-info">Nessuna etichetta trovata.</div>
+<div class="alert alert-info">{% trans "Nessuna etichetta trovata." %}</div>
 {% endif %}
 {% endblock %}

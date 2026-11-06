@@ -1,20 +1,21 @@
 {% extends 'library/base.html' %}
+{% load i18n %}
 
-{% block title %}Autori - La Mia Libreria{% endblock %}
+{% block title %}{% trans "Autori" %} - {% trans "La Mia Libreria" %}{% endblock %}
 
 {% block content %}
-<h1>Autori</h1>
+<h1>{% trans "Autori" %}</h1>
 
 {% if authors %}
 <div class="list-group">
     {% for author in authors %}
     <a href="{% url 'library:book_list' %}?q={{ author.last_name }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
         {{ author }}
-        <span class="badge bg-primary rounded-pill">{{ author.books.count }} libro/i</span>
+        <span class="badge bg-primary rounded-pill">{% blocktrans count n=author.books.count %}{{ n }} libro{% plural %}{{ n }} libri{% endblocktrans %}</span>
     </a>
     {% endfor %}
 </div>
 {% else %}
-<div class="alert alert-info">Nessun autore trovato.</div>
+<div class="alert alert-info">{% trans "Nessun autore trovato." %}</div>
 {% endif %}
 {% endblock %}

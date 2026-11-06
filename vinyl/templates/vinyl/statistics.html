@@ -1,15 +1,16 @@
 {% extends 'vinyl/base.html' %}
+{% load i18n %}
 
-{% block title %}Statistiche vinili - La Mia Collezione{% endblock %}
+{% block title %}{% trans "Statistiche vinili" %} - {% trans "La Mia Collezione" %}{% endblock %}
 
 {% block content %}
-<h1>Statistiche vinili</h1>
+<h1>{% trans "Statistiche vinili" %}</h1>
 
 <div class="row g-4 mb-4">
     <div class="col-md-4">
         <div class="card text-center">
             <div class="card-body">
-                <h5 class="card-title">Totale vinili</h5>
+                <h5 class="card-title">{% trans "Totale vinili" %}</h5>
                 <p class="display-5">{{ total_vinyls }}</p>
             </div>
         </div>
@@ -17,7 +18,7 @@
     <div class="col-md-4">
         <div class="card text-center">
             <div class="card-body">
-                <h5 class="card-title">Disponibili</h5>
+                <h5 class="card-title">{% trans "Disponibili" %}</h5>
                 <p class="display-5">{{ available_vinyls }}</p>
             </div>
         </div>
@@ -25,14 +26,14 @@
     <div class="col-md-4">
         <div class="card text-center">
             <div class="card-body">
-                <h5 class="card-title">Artisti</h5>
+                <h5 class="card-title">{% trans "Artisti" %}</h5>
                 <p class="display-5">{{ total_artists }}</p>
             </div>
         </div>
     </div>
 </div>
 
-<h3>Vinili per genere</h3>
+<h3>{% trans "Vinili per genere" %}</h3>
 {% if genres %}
 <ul class="list-group">
     {% for genre in genres %}
@@ -43,6 +44,6 @@
     {% endfor %}
 </ul>
 {% else %}
-<div class="alert alert-info">Nessun genere trovato.</div>
+<div class="alert alert-info">{% trans "Nessun genere trovato." %}</div>
 {% endif %}
 {% endblock %}

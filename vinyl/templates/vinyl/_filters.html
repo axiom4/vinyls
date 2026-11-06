@@ -1,25 +1,26 @@
-<form method="get" class="{{ form_class }}" aria-label="Filtri">
+{% load i18n %}
+<form method="get" class="{{ form_class }}" aria-label="{% trans 'Filtri' %}">
     <input type="hidden" name="q" value="{{ query|default:'' }}" class="js-q">
     <div class="{{ col_class }}">
-        <label class="d-block small text-secondary mb-1">Genere
+        <label class="d-block small text-secondary mb-1">{% trans "Genere" %}
         <select name="genre" class="form-select mt-1" onchange="this.form.submit()">
-            <option value="">Tutti i generi</option>
+            <option value="">{% trans "Tutti i generi" %}</option>
             {% for genre in genres %}
                 <option value="{{ genre.id }}" {% if request.GET.genre == genre.id|stringformat:"s" %}selected{% endif %}>{{ genre.name }}</option>
             {% endfor %}
         </select></label>
     </div>
     <div class="{{ col_class }}">
-        <label class="d-block small text-secondary mb-1">Ordina per
+        <label class="d-block small text-secondary mb-1">{% trans "Ordina per" %}
         <select name="sort" class="form-select mt-1" onchange="this.form.submit()">
-            <option value="title" {% if not request.GET.sort or request.GET.sort == 'title' %}selected{% endif %}>Titolo (A-Z)</option>
-            <option value="-title" {% if request.GET.sort == '-title' %}selected{% endif %}>Titolo (Z-A)</option>
-            <option value="-added_date" {% if request.GET.sort == '-added_date' %}selected{% endif %}>Aggiunti di recente</option>
-            <option value="artist__name" {% if request.GET.sort == 'artist__name' %}selected{% endif %}>Artista (A-Z)</option>
-            <option value="-artist__name" {% if request.GET.sort == '-artist__name' %}selected{% endif %}>Artista (Z-A)</option>
-            <option value="release_year" {% if request.GET.sort == 'release_year' %}selected{% endif %}>Anno (crescente)</option>
-            <option value="-release_year" {% if request.GET.sort == '-release_year' %}selected{% endif %}>Anno (decrescente)</option>
-            <option value="-rating" {% if request.GET.sort == '-rating' %}selected{% endif %}>Valutazione</option>
+            <option value="title" {% if not request.GET.sort or request.GET.sort == 'title' %}selected{% endif %}>{% trans "Titolo (A-Z)" %}</option>
+            <option value="-title" {% if request.GET.sort == '-title' %}selected{% endif %}>{% trans "Titolo (Z-A)" %}</option>
+            <option value="-added_date" {% if request.GET.sort == '-added_date' %}selected{% endif %}>{% trans "Aggiunti di recente" %}</option>
+            <option value="artist__name" {% if request.GET.sort == 'artist__name' %}selected{% endif %}>{% trans "Artista (A-Z)" %}</option>
+            <option value="-artist__name" {% if request.GET.sort == '-artist__name' %}selected{% endif %}>{% trans "Artista (Z-A)" %}</option>
+            <option value="release_year" {% if request.GET.sort == 'release_year' %}selected{% endif %}>{% trans "Anno (crescente)" %}</option>
+            <option value="-release_year" {% if request.GET.sort == '-release_year' %}selected{% endif %}>{% trans "Anno (decrescente)" %}</option>
+            <option value="-rating" {% if request.GET.sort == '-rating' %}selected{% endif %}>{% trans "Valutazione" %}</option>
         </select></label>
     </div>
 </form>

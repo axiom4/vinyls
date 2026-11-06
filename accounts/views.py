@@ -8,6 +8,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.http import url_has_allowed_host_and_scheme
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 from webauthn import (
     generate_authentication_options, generate_registration_options, options_to_json,
@@ -58,7 +59,7 @@ def passkey_list(request):
 @require_POST
 def passkey_delete(request, pk):
     get_object_or_404(Passkey, pk=pk, user=request.user).delete()
-    messages.success(request, 'Passkey rimossa.')
+    messages.success(request, _('Passkey rimossa.'))
     return redirect('accounts:passkey_list')
 
 
@@ -82,7 +83,7 @@ def register_options(request):
 def register_verify(request):
     challenge = request.session.pop('webauthn_reg_challenge', None)
     if not challenge:
-        return JsonResponse({'error': 'challenge mancante'}, status=400)
+        return JsonResponse({'error': _('challenge mancante')}, status=400)
     try:
         body = json.loads(request.body)
         verified = verify_registration_response(
@@ -94,7 +95,7 @@ def register_verify(request):
         )
     except Exception:
         logger.exception('registrazione passkey fallita')
-        return JsonResponse({'error': 'registrazione non valida'}, status=400)
+        return JsonResponse({'error': _('registrazione non valida')}, status=400)
     Passkey.objects.create(
         user=request.user,
         credential_id=verified.credential_id,
@@ -116,7 +117,7 @@ def login_options(request):
 def login_verify(request):
     challenge = request.session.pop('webauthn_auth_challenge', None)
     if not challenge:
-        return JsonResponse({'error': 'challenge mancante'}, status=400)
+        return JsonResponse({'error': _('challenge mancante')}, status=400)
     try:
         body = json.loads(request.body)
         passkey = Passkey.objects.select_related('user').get(
@@ -132,9 +133,9 @@ def login_verify(request):
         )
     except Exception:
         logger.exception('verifica passkey fallita')
-        return JsonResponse({'error': 'autenticazione non valida'}, status=400)
+        return JsonResponse({'error': _('autenticazione non valida')}, status=400)
     if not passkey.user.is_active:
-        return JsonResponse({'error': 'utente disattivato'}, status=403)
+        return JsonResponse({'error': _('utente disattivato')}, status=403)
     passkey.sign_count = verified.new_sign_count
     passkey.save(update_fields=['sign_count'])
     login(request, passkey.user, backend=BACKEND)

@@ -318,3 +318,10 @@ label, .form-label { font-weight: 600; font-size: 0.9rem; }
     vertical-align: baseline;
     letter-spacing: .02em;
 }
+
+/* Selettore lingua */
+.lang-switch .form-select { width: auto; }
+@media (max-width: 991.98px) {
+    .navbar-collapse .lang-switch { margin-left: 0 !important; margin-bottom: .5rem; }
+    .navbar-collapse .lang-switch .form-select { width: 100%; }
+}

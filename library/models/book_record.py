@@ -1,16 +1,17 @@
 import uuid
 
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from .book import Book
 
 
 class BookRecord(models.Model):
     STATUS_CHOICES = [
-        ('unread', 'Non letto'),
-        ('reading', 'In lettura'),
-        ('read', 'Letto'),
-        ('want_to_read', 'Voglio leggere'),
+        ('unread', _('Non letto')),
+        ('reading', _('In lettura')),
+        ('read', _('Letto')),
+        ('want_to_read', _('Voglio leggere')),
     ]
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

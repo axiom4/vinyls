@@ -1,22 +1,24 @@
 {% extends 'library/base.html' %}
+{% load i18n %}
 {% block title %}Passkey{% endblock %}
 {% block navbar_actions %}{% endblock %}
 {% block content %}
-<h1 class="h4 mb-3">🔑 Passkey (impronta digitale)</h1>
+<h1 class="h4 mb-3">🔑 {% trans "Passkey (impronta digitale)" %}</h1>
 <ul class="list-group mb-3">
     {% for p in passkeys %}
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span>{{ p.name }} <small class="text-muted">· {{ p.created_at|date:"d/m/Y" }}</small></span>
+        <span>{{ p.name }} <small class="text-muted">· {{ p.created_at|date:"SHORT_DATE_FORMAT" }}</small></span>
         <form method="post" action="{% url 'accounts:passkey_delete' p.pk %}">{% csrf_token %}
-            <button class="btn btn-sm btn-outline-danger">Rimuovi</button></form>
+            <button class="btn btn-sm btn-outline-danger">{% trans "Rimuovi" %}</button></form>
     </li>
-    {% empty %}<li class="list-group-item text-muted">Nessuna passkey registrata.</li>{% endfor %}
+    {% empty %}<li class="list-group-item text-muted">{% trans "Nessuna passkey registrata." %}</li>{% endfor %}
 </ul>
 <div class="input-group passkey-add">
-    <input id="pk-name" class="form-control" placeholder="Nome (es. MacBook Touch ID)">
-    <button id="pk-add" class="btn btn-dark">Aggiungi passkey</button>
+    <input id="pk-name" class="form-control" placeholder="{% trans 'Nome (es. MacBook Touch ID)' %}">
+    <button id="pk-add" class="btn btn-dark">{% trans "Aggiungi passkey" %}</button>
 </div>
 <div id="pk-error" class="text-danger small mt-2" hidden></div>
+{% trans "Registrazione non riuscita." as t_regerr %}
 <script>
 const csrf = '{{ csrf_token }}';
 const post = (url, body) => fetch(url, {method: 'POST', headers: {'X-CSRFToken': csrf, 'Content-Type': 'application/json'}, body: JSON.stringify(body || {})});
@@ -30,7 +32,7 @@ document.getElementById('pk-add').addEventListener('click', async () => {
         const r = await post('{% url "accounts:register_verify" %}', {credential: cred.toJSON(), name: document.getElementById('pk-name').value});
         if (!r.ok) throw new Error();
         location.reload();
-    } catch (e) { err.textContent = 'Registrazione non riuscita.'; err.hidden = false; }
+    } catch (e) { err.textContent = "{{ t_regerr|escapejs }}"; err.hidden = false; }
 });
 </script>
 {% endblock %}

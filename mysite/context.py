@@ -1,6 +1,6 @@
 from django.conf import settings
 
-_ASSETS = ('static/css/style.css', 'static/js/vinyl-list.js')
+_ASSETS = ('static/css/style.css', 'static/js/vinyl-list.js', 'static/js/lang.js')
 
 
 def css_version(request):

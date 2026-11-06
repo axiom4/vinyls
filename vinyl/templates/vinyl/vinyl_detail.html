@@ -1,6 +1,7 @@
 {% extends 'vinyl/base.html' %}
+{% load i18n %}
 
-{% block title %}{{ vinyl.title }} - La Mia Collezione{% endblock %}
+{% block title %}{{ vinyl.title }} - {% trans "La Mia Collezione" %}{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -9,7 +10,7 @@
             <img src="{{ vinyl.cover_image.url }}" class="rounded shadow vinyl-cover-detail" alt="{{ vinyl.title }}">
         {% else %}
             <div class="bg-secondary-subtle rounded vinyl-cover-detail vinyl-cover-placeholder">
-                <span class="text-muted">Nessuna copertina</span>
+                <span class="text-muted">{% trans "Nessuna copertina" %}</span>
             </div>
         {% endif %}
     </div>
@@ -19,7 +20,7 @@
 
         <p class="mt-3">
             <span class="badge bg-{% if vinyl.is_available %}success{% else %}secondary{% endif %}">
-                {% if vinyl.is_available %}Disponibile{% else %}Non disponibile{% endif %}
+                {% if vinyl.is_available %}{% trans "Disponibile" %}{% else %}{% trans "Non disponibile" %}{% endif %}
             </span>
             {% if vinyl.rating %}<span class="badge bg-warning text-dark">★ {{ vinyl.rating }}</span>{% endif %}
             {% for genre in vinyl.genre.all %}
@@ -29,18 +30,18 @@
 
         <div class="table-scroll"><table class="table table-sm w-auto">
             <tbody>
-                <tr><th>Etichetta</th><td>{{ vinyl.label|default:"-" }}</td></tr>
-                <tr><th>Anno di uscita</th><td>{{ vinyl.release_year }}</td></tr>
-                <tr><th>Formato</th><td>{{ vinyl.get_size_display }} - {{ vinyl.get_speed_display }}</td></tr>
-                <tr><th>Condizione</th><td>{{ vinyl.get_condition_display }}</td></tr>
-                <tr><th>Numero di catalogo</th><td>{{ vinyl.catalog_number|default:"-" }}</td></tr>
-                <tr><th>Tracce</th><td>{{ vinyl.tracks|default:"-" }}</td></tr>
-                <tr><th>Aggiunto il</th><td>{{ vinyl.added_date }}</td></tr>
+                <tr><th>{% trans "Etichetta" %}</th><td>{{ vinyl.label|default:"-" }}</td></tr>
+                <tr><th>{% trans "Anno di uscita" %}</th><td>{{ vinyl.release_year }}</td></tr>
+                <tr><th>{% trans "Formato" %}</th><td>{{ vinyl.get_size_display }} - {{ vinyl.get_speed_display }}</td></tr>
+                <tr><th>{% trans "Condizione" %}</th><td>{{ vinyl.get_condition_display }}</td></tr>
+                <tr><th>{% trans "Numero di catalogo" %}</th><td>{{ vinyl.catalog_number|default:"-" }}</td></tr>
+                <tr><th>{% trans "Tracce" %}</th><td>{{ vinyl.tracks|default:"-" }}</td></tr>
+                <tr><th>{% trans "Aggiunto il" %}</th><td>{{ vinyl.added_date }}</td></tr>
             </tbody>
         </table></div>
 
         {% if vinyl.tracklist %}
-        <h5>Canzoni</h5>
+        <h5>{% trans "Canzoni" %}</h5>
         <ol class="list-group list-group-numbered mb-3">
             {% for track in vinyl.tracklist.splitlines %}
                 {% if track %}<li class="list-group-item">{{ track }}</li>{% endif %}
@@ -49,14 +50,14 @@
         {% endif %}
 
         {% if vinyl.description %}
-        <h5>Descrizione</h5>
+        <h5>{% trans "Descrizione" %}</h5>
         <p>{{ vinyl.description|linebreaks }}</p>
         {% endif %}
 
         <div class="mt-3 actions-stack">
-            <a href="{% url 'vinyl:vinyl_edit' vinyl.pk %}" class="btn btn-primary">Modifica</a>
-            <a href="{% url 'vinyl:vinyl_delete' vinyl.pk %}" class="btn btn-danger">Elimina</a>
-            <a href="{% url 'vinyl:vinyl_list' %}" class="btn btn-outline-secondary">Torna alla lista</a>
+            <a href="{% url 'vinyl:vinyl_edit' vinyl.pk %}" class="btn btn-primary">{% trans "Modifica" %}</a>
+            <a href="{% url 'vinyl:vinyl_delete' vinyl.pk %}" class="btn btn-danger">{% trans "Elimina" %}</a>
+            <a href="{% url 'vinyl:vinyl_list' %}" class="btn btn-outline-secondary">{% trans "Torna alla lista" %}</a>
         </div>
     </div>
 </div>

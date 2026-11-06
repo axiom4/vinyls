@@ -1,0 +1,787 @@
+# Translations for Vinyl / La Mia Collezione.
+# Distributed under the same license as the project.
+msgid ""
+msgstr ""
+"Project-Id-Version: vinyl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-06 11:04+0000\n"
+"PO-Revision-Date: 2026-11-06 12:00+0000\n"
+"Last-Translator: Riccardo Giannetto\n"
+"Language-Team: ru\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: accounts/templates/accounts/login.html:8
+msgid "Accesso"
+msgstr "Вход"
+
+#: accounts/templates/accounts/login.html:20
+msgid "Accedi con impronta digitale"
+msgstr "Войти по отпечатку пальца"
+
+#: accounts/templates/accounts/login.html:26
+msgid "Credenziali non valide."
+msgstr "Неверные учётные данные."
+
+#: accounts/templates/accounts/login.html:27
+msgid "Utente"
+msgstr "Пользователь"
+
+#: accounts/templates/accounts/login.html:28
+msgid "Password"
+msgstr "Пароль"
+
+#: accounts/templates/accounts/login.html:29
+msgid "Accedi con password"
+msgstr "Войти по паролю"
+
+#: accounts/templates/accounts/login.html:33
+msgid "Accesso con passkey non riuscito: "
+msgstr "Не удалось войти с помощью passkey: "
+
+#: accounts/templates/accounts/passkeys.html:6
+msgid "Passkey (impronta digitale)"
+msgstr "Passkey (отпечаток пальца)"
+
+#: accounts/templates/accounts/passkeys.html:12
+msgid "Rimuovi"
+msgstr "Удалить"
+
+#: accounts/templates/accounts/passkeys.html:14
+msgid "Nessuna passkey registrata."
+msgstr "Нет зарегистрированных passkey."
+
+#: accounts/templates/accounts/passkeys.html:17
+msgid "Nome (es. MacBook Touch ID)"
+msgstr "Название (например, MacBook Touch ID)"
+
+#: accounts/templates/accounts/passkeys.html:18
+msgid "Aggiungi passkey"
+msgstr "Добавить passkey"
+
+#: accounts/templates/accounts/passkeys.html:21
+msgid "Registrazione non riuscita."
+msgstr "Не удалось зарегистрировать."
+
+#: accounts/views.py:62
+msgid "Passkey rimossa."
+msgstr "Passkey удалён."
+
+#: accounts/views.py:86 accounts/views.py:120
+msgid "challenge mancante"
+msgstr "отсутствует challenge"
+
+#: accounts/views.py:98
+msgid "registrazione non valida"
+msgstr "недопустимая регистрация"
+
+#: accounts/views.py:136
+msgid "autenticazione non valida"
+msgstr "недопустимая аутентификация"
+
+#: accounts/views.py:138
+msgid "utente disattivato"
+msgstr "пользователь отключён"
+
+#: library/forms/book.py:14 vinyl/forms/vinyl.py:14
+msgid "Titolo"
+msgstr "Название"
+
+#: library/forms/book.py:15
+msgid "Autore"
+msgstr "Автор"
+
+#: library/forms/book.py:16 library/templates/library/book_detail.html:33
+msgid "Editore"
+msgstr "Издатель"
+
+#: library/forms/book.py:17
+msgid "Tipo di ISBN"
+msgstr "Тип ISBN"
+
+#: library/forms/book.py:18
+msgid "Numero ISBN"
+msgstr "Номер ISBN"
+
+#: library/forms/book.py:19 library/templates/library/base.html:35
+#: library/templates/library/genre_list.html:4
+#: library/templates/library/genre_list.html:7 vinyl/forms/vinyl.py:17
+#: vinyl/templates/vinyl/genre_list.html:4
+msgid "Generi"
+msgstr "Жанры"
+
+#: library/forms/book.py:20 library/templates/library/book_detail.html:35
+msgid "Anno di pubblicazione"
+msgstr "Год издания"
+
+#: library/forms/book.py:21 library/templates/library/book_detail.html:36
+msgid "Pagine"
+msgstr "Страницы"
+
+#: library/forms/book.py:22 library/templates/library/_lang_switch.html:4
+#: library/templates/library/book_detail.html:37
+msgid "Lingua"
+msgstr "Язык"
+
+#: library/forms/book.py:23 library/templates/library/book_detail.html:43
+#: vinyl/forms/vinyl.py:25 vinyl/templates/vinyl/vinyl_detail.html:53
+msgid "Descrizione"
+msgstr "Описание"
+
+#: library/forms/book.py:24 vinyl/forms/vinyl.py:26
+msgid "Copertina"
+msgstr "Обложка"
+
+#: library/forms/book.py:25 library/templates/library/book_list.html:36
+#: vinyl/forms/vinyl.py:27 vinyl/templates/vinyl/_filters.html:23
+msgid "Valutazione"
+msgstr "Рейтинг"
+
+#: library/forms/book.py:26 library/templates/library/book_detail.html:23
+#: library/templates/library/book_list.html:23
+#: library/templates/library/book_list.html:58 vinyl/forms/vinyl.py:28
+#: vinyl/templates/vinyl/_vinyl_items.html:22
+#: vinyl/templates/vinyl/vinyl_detail.html:23
+msgid "Disponibile"
+msgstr "Доступно"
+
+#: library/models/book_record.py:11
+msgid "Non letto"
+msgstr "Не прочитано"
+
+#: library/models/book_record.py:12
+msgid "In lettura"
+msgstr "Читаю"
+
+#: library/models/book_record.py:13
+msgid "Letto"
+msgstr "Прочитано"
+
+#: library/models/book_record.py:14
+msgid "Voglio leggere"
+msgstr "Хочу прочитать"
+
+#: library/templates/library/author_list.html:4
+#: library/templates/library/author_list.html:7
+msgid "Autori"
+msgstr "Авторы"
+
+#: library/templates/library/author_list.html:4
+#: library/templates/library/base.html:11
+#: library/templates/library/book_confirm_delete.html:4
+#: library/templates/library/book_detail.html:4
+#: library/templates/library/book_form.html:4
+#: library/templates/library/book_list.html:4
+#: library/templates/library/genre_list.html:4
+#: library/templates/library/publisher_list.html:4
+#: library/templates/library/statistics.html:4
+msgid "La Mia Libreria"
+msgstr "Моя библиотека"
+
+#: library/templates/library/author_list.html:14
+#: library/templates/library/publisher_list.html:19
+#, python-format
+msgid "%(n)s libro"
+msgid_plural "%(n)s libri"
+msgstr[0] "%(n)s книга"
+msgstr[1] "%(n)s книги"
+msgstr[2] "%(n)s книг"
+msgstr[3] "%(n)s книги"
+
+#: library/templates/library/author_list.html:19
+msgid "Nessun autore trovato."
+msgstr "Авторы не найдены."
+
+#: library/templates/library/base.html:21
+#: vinyl/templates/vinyl/artist_list.html:4
+#: vinyl/templates/vinyl/genre_list.html:4
+#: vinyl/templates/vinyl/label_list.html:4
+#: vinyl/templates/vinyl/statistics.html:4
+#: vinyl/templates/vinyl/vinyl_confirm_delete.html:4
+#: vinyl/templates/vinyl/vinyl_detail.html:4
+#: vinyl/templates/vinyl/vinyl_form.html:4
+#: vinyl/templates/vinyl/vinyl_list.html:5
+msgid "La Mia Collezione"
+msgstr "Моя коллекция"
+
+#: library/templates/library/base.html:28
+#: vinyl/templates/vinyl/vinyl_list.html:5
+#: vinyl/templates/vinyl/vinyl_list.html:16
+msgid "Vinili"
+msgstr "Пластинки"
+
+#: library/templates/library/base.html:30
+msgid "Elenco vinili"
+msgstr "Список пластинок"
+
+#: library/templates/library/base.html:31
+#: vinyl/templates/vinyl/vinyl_form.html:4
+#: vinyl/templates/vinyl/vinyl_form.html:7
+msgid "Aggiungi vinile"
+msgstr "Добавить пластинку"
+
+#: library/templates/library/base.html:33
+#: vinyl/templates/vinyl/artist_list.html:4
+#: vinyl/templates/vinyl/artist_list.html:7
+#: vinyl/templates/vinyl/statistics.html:29
+msgid "Artisti"
+msgstr "Исполнители"
+
+#: library/templates/library/base.html:34
+#: vinyl/templates/vinyl/label_list.html:4
+msgid "Etichette"
+msgstr "Лейблы"
+
+#: library/templates/library/base.html:36
+#: library/templates/library/statistics.html:4
+#: library/templates/library/statistics.html:7
+msgid "Statistiche"
+msgstr "Статистика"
+
+#: library/templates/library/base.html:43
+msgid "Cerca libri..."
+msgstr "Поиск книг..."
+
+#: library/templates/library/base.html:44
+#: library/templates/library/book_form.html:52
+#: vinyl/templates/vinyl/base.html:7 vinyl/templates/vinyl/vinyl_form.html:42
+msgid "Cerca"
+msgstr "Поиск"
+
+#: library/templates/library/base.html:46
+msgid "+ Aggiungi libro"
+msgstr "+ Добавить книгу"
+
+#: library/templates/library/base.html:56
+msgid "Esci"
+msgstr "Выйти"
+
+#: library/templates/library/base.html:69
+msgid "Chiudi"
+msgstr "Закрыть"
+
+#: library/templates/library/book_confirm_delete.html:4
+#: library/templates/library/book_confirm_delete.html:7
+msgid "Elimina libro"
+msgstr "Удалить книгу"
+
+#: library/templates/library/book_confirm_delete.html:9
+#, python-format
+msgid ""
+"Sei sicuro di voler eliminare <strong>\"%(title)s\"</strong> di %(author)s? "
+"Questa azione non può essere annullata."
+msgstr ""
+"Вы уверены, что хотите удалить <strong>«%(title)s»</strong> (%(author)s)? "
+"Это действие нельзя отменить."
+
+#: library/templates/library/book_confirm_delete.html:13
+#: vinyl/templates/vinyl/vinyl_confirm_delete.html:13
+msgid "Sì, elimina"
+msgstr "Да, удалить"
+
+#: library/templates/library/book_confirm_delete.html:14
+#: library/templates/library/book_form.html:63
+#: vinyl/templates/vinyl/vinyl_confirm_delete.html:14
+#: vinyl/templates/vinyl/vinyl_form.html:54
+msgid "Annulla"
+msgstr "Отмена"
+
+#: library/templates/library/book_detail.html:13
+#: library/templates/library/book_list.html:50
+#: vinyl/templates/vinyl/_vinyl_items.html:11
+#: vinyl/templates/vinyl/vinyl_detail.html:13
+msgid "Nessuna copertina"
+msgstr "Нет обложки"
+
+#: library/templates/library/book_detail.html:23
+#: library/templates/library/book_list.html:24
+#: library/templates/library/book_list.html:58
+#: vinyl/templates/vinyl/_vinyl_items.html:22
+#: vinyl/templates/vinyl/vinyl_detail.html:23
+msgid "Non disponibile"
+msgstr "Недоступно"
+
+#: library/templates/library/book_detail.html:38
+#: vinyl/templates/vinyl/vinyl_detail.html:39
+msgid "Aggiunto il"
+msgstr "Добавлено"
+
+#: library/templates/library/book_detail.html:48
+#: vinyl/templates/vinyl/vinyl_detail.html:58
+msgid "Modifica"
+msgstr "Изменить"
+
+#: library/templates/library/book_detail.html:49
+#: vinyl/templates/vinyl/vinyl_detail.html:59
+msgid "Elimina"
+msgstr "Удалить"
+
+#: library/templates/library/book_detail.html:50
+#: vinyl/templates/vinyl/vinyl_detail.html:60
+msgid "Torna alla lista"
+msgstr "Назад к списку"
+
+#: library/templates/library/book_detail.html:54
+msgid "Storico letture"
+msgstr "История чтения"
+
+#: library/templates/library/book_form.html:4
+#: library/templates/library/book_form.html:7
+msgid "Modifica libro"
+msgstr "Изменить книгу"
+
+#: library/templates/library/book_form.html:4
+#: library/templates/library/book_form.html:7
+msgid "Aggiungi libro"
+msgstr "Добавить книгу"
+
+#: library/templates/library/book_form.html:25
+#: vinyl/templates/vinyl/vinyl_form.html:25
+msgid "Compila automaticamente dai dati online"
+msgstr "Заполнить автоматически по данным из интернета"
+
+#: library/templates/library/book_form.html:28
+msgid "Autore (opzionale, restringe la ricerca)"
+msgstr "Автор (необязательно, сужает поиск)"
+
+#: library/templates/library/book_form.html:29
+msgid "Lingua:"
+msgstr "Язык:"
+
+#: library/templates/library/book_form.html:31
+msgid "Italiano"
+msgstr "Итальянский"
+
+#: library/templates/library/book_form.html:32
+msgid "Inglese"
+msgstr "Английский"
+
+#: library/templates/library/book_form.html:33
+msgid "Francese"
+msgstr "Французский"
+
+#: library/templates/library/book_form.html:34
+msgid "Tedesco"
+msgstr "Немецкий"
+
+#: library/templates/library/book_form.html:35
+msgid "Spagnolo"
+msgstr "Испанский"
+
+#: library/templates/library/book_form.html:36
+msgid "Portoghese"
+msgstr "Португальский"
+
+#: library/templates/library/book_form.html:37
+msgid "Tutte le lingue"
+msgstr "Все языки"
+
+#: library/templates/library/book_form.html:39
+msgid "Cerca informazioni sul libro"
+msgstr "Найти информацию о книге"
+
+#: library/templates/library/book_form.html:48
+#: vinyl/templates/vinyl/vinyl_form.html:38
+msgid "Oppure cerca una copertina online"
+msgstr "Или найдите обложку в интернете"
+
+#: library/templates/library/book_form.html:51
+msgid "Titolo e autore..."
+msgstr "Название и автор..."
+
+#: library/templates/library/book_form.html:62
+#: vinyl/templates/vinyl/vinyl_form.html:53
+msgid "Salva"
+msgstr "Сохранить"
+
+#: library/templates/library/book_form.html:66
+#: vinyl/templates/vinyl/vinyl_form.html:58
+msgid "Ricerca in corso..."
+msgstr "Идёт поиск..."
+
+#: library/templates/library/book_form.html:67
+#: vinyl/templates/vinyl/vinyl_form.html:59
+msgid "Nessuna copertina trovata."
+msgstr "Обложки не найдены."
+
+#: library/templates/library/book_form.html:68
+#: vinyl/templates/vinyl/vinyl_form.html:60
+msgid "Clicca su una copertina per selezionarla:"
+msgstr "Нажмите на обложку, чтобы выбрать её:"
+
+#: library/templates/library/book_form.html:69
+#: vinyl/templates/vinyl/vinyl_form.html:61
+msgid "Copertina selezionata (verrà salvata al momento del salvataggio):"
+msgstr "Обложка выбрана (будет сохранена при сохранении):"
+
+#: library/templates/library/book_form.html:70
+#: vinyl/templates/vinyl/vinyl_form.html:62
+msgid "Errore durante la ricerca."
+msgstr "Ошибка при поиске."
+
+#: library/templates/library/book_form.html:71
+#: vinyl/templates/vinyl/vinyl_form.html:63
+msgid "Inserisci almeno 2 caratteri del titolo per cercare."
+msgstr "Введите не менее 2 символов названия для поиска."
+
+#: library/templates/library/book_form.html:72
+#: vinyl/templates/vinyl/vinyl_form.html:64
+msgid "Le fonti online non sono raggiungibili al momento, riprova tra poco."
+msgstr "Онлайн-источники сейчас недоступны, повторите попытку позже."
+
+#: library/templates/library/book_form.html:73
+#: vinyl/templates/vinyl/vinyl_form.html:65
+#, python-brace-format
+msgid "{n} risultati: clicca su uno per compilare i campi."
+msgstr "Результатов: {n}. Нажмите на один из них, чтобы заполнить поля."
+
+#: library/templates/library/book_form.html:74
+#: vinyl/templates/vinyl/vinyl_form.html:66
+msgid "copertina"
+msgstr "обложка"
+
+#: library/templates/library/book_form.html:75
+#: vinyl/templates/vinyl/vinyl_form.html:67
+msgid "Compilazione in corso..."
+msgstr "Заполнение..."
+
+#: library/templates/library/book_form.html:76
+#: vinyl/templates/vinyl/vinyl_form.html:68
+msgid ""
+"Copertina trovata automaticamente (verrà salvata al momento del "
+"salvataggio):"
+msgstr "Обложка найдена автоматически (будет сохранена при сохранении):"
+
+#: library/templates/library/book_form.html:77
+#: vinyl/templates/vinyl/vinyl_form.html:69
+msgid "Campi compilati: controlla e correggi se necessario prima di salvare."
+msgstr ""
+"Поля заполнены: при необходимости проверьте и исправьте их перед "
+"сохранением."
+
+#: library/templates/library/book_form.html:78
+msgid "Inserisci titolo e/o autore per cercare."
+msgstr "Введите название и/или автора для поиска."
+
+#: library/templates/library/book_form.html:79
+msgid ""
+"Nessuna informazione trovata. Prova a semplificare il titolo o rimuovere il "
+"filtro lingua/autore."
+msgstr ""
+"Информация не найдена. Попробуйте упростить название или убрать фильтр по "
+"языку/автору."
+
+#: library/templates/library/book_list.html:4
+#: library/templates/library/book_list.html:8
+msgid "Libri"
+msgstr "Книги"
+
+#: library/templates/library/book_list.html:8
+#, python-format
+msgid "Risultati per \"%(query)s\""
+msgstr "Результаты для «%(query)s»"
+
+#: library/templates/library/book_list.html:14
+#: vinyl/templates/vinyl/_filters.html:7
+msgid "Tutti i generi"
+msgstr "Все жанры"
+
+#: library/templates/library/book_list.html:22
+msgid "Tutti gli stati"
+msgstr "Все статусы"
+
+#: library/templates/library/book_list.html:29
+#: vinyl/templates/vinyl/_filters.html:18
+msgid "Aggiunti di recente"
+msgstr "Недавно добавленные"
+
+#: library/templates/library/book_list.html:30
+#: vinyl/templates/vinyl/_filters.html:16
+msgid "Titolo (A-Z)"
+msgstr "Название (А-Я)"
+
+#: library/templates/library/book_list.html:31
+#: vinyl/templates/vinyl/_filters.html:17
+msgid "Titolo (Z-A)"
+msgstr "Название (Я-А)"
+
+#: library/templates/library/book_list.html:32
+msgid "Autore (A-Z)"
+msgstr "Автор (А-Я)"
+
+#: library/templates/library/book_list.html:33
+msgid "Autore (Z-A)"
+msgstr "Автор (Я-А)"
+
+#: library/templates/library/book_list.html:34
+#: vinyl/templates/vinyl/_filters.html:21
+msgid "Anno (crescente)"
+msgstr "Год (по возрастанию)"
+
+#: library/templates/library/book_list.html:35
+#: vinyl/templates/vinyl/_filters.html:22
+msgid "Anno (decrescente)"
+msgstr "Год (по убыванию)"
+
+#: library/templates/library/book_list.html:63
+msgid "Dettagli"
+msgstr "Подробнее"
+
+#: library/templates/library/book_list.html:71
+msgid "Paginazione libri"
+msgstr "Постраничная навигация по книгам"
+
+#: library/templates/library/book_list.html:74
+#: library/templates/library/book_list.html:76
+msgid "Precedente"
+msgstr "Назад"
+
+#: library/templates/library/book_list.html:78
+#, python-format
+msgid "Pagina %(n)s di %(total)s"
+msgstr "Страница %(n)s из %(total)s"
+
+#: library/templates/library/book_list.html:80
+#: library/templates/library/book_list.html:82
+msgid "Successiva"
+msgstr "Вперёд"
+
+#: library/templates/library/book_list.html:89
+msgid "Nessun libro trovato."
+msgstr "Книги не найдены."
+
+#: library/templates/library/genre_list.html:18
+#: library/templates/library/statistics.html:47
+#: vinyl/templates/vinyl/genre_list.html:18
+#: vinyl/templates/vinyl/statistics.html:47
+msgid "Nessun genere trovato."
+msgstr "Жанры не найдены."
+
+#: library/templates/library/publisher_list.html:4
+#: library/templates/library/publisher_list.html:7
+msgid "Editori"
+msgstr "Издатели"
+
+#: library/templates/library/publisher_list.html:16
+#: vinyl/templates/vinyl/label_list.html:16
+msgid "sito web"
+msgstr "сайт"
+
+#: library/templates/library/publisher_list.html:24
+msgid "Nessun editore trovato."
+msgstr "Издатели не найдены."
+
+#: library/templates/library/statistics.html:13
+msgid "Totale libri"
+msgstr "Всего книг"
+
+#: library/templates/library/statistics.html:21
+#: vinyl/templates/vinyl/statistics.html:21
+msgid "Disponibili"
+msgstr "Доступно"
+
+#: library/templates/library/statistics.html:29
+msgid "Letti"
+msgstr "Прочитано"
+
+#: library/templates/library/statistics.html:36
+msgid "Libri per genere"
+msgstr "Книги по жанрам"
+
+#: vinyl/forms/vinyl.py:15
+msgid "Artista"
+msgstr "Исполнитель"
+
+#: vinyl/forms/vinyl.py:16 vinyl/templates/vinyl/vinyl_detail.html:33
+msgid "Etichetta"
+msgstr "Лейбл"
+
+#: vinyl/forms/vinyl.py:18 vinyl/templates/vinyl/vinyl_detail.html:34
+msgid "Anno di uscita"
+msgstr "Год выпуска"
+
+#: vinyl/forms/vinyl.py:19
+msgid "Dimensione"
+msgstr "Размер"
+
+#: vinyl/forms/vinyl.py:20
+msgid "Velocità"
+msgstr "Скорость"
+
+#: vinyl/forms/vinyl.py:21 vinyl/templates/vinyl/vinyl_detail.html:36
+msgid "Condizione"
+msgstr "Состояние"
+
+#: vinyl/forms/vinyl.py:22 vinyl/templates/vinyl/vinyl_detail.html:37
+msgid "Numero di catalogo"
+msgstr "Каталожный номер"
+
+#: vinyl/forms/vinyl.py:23 vinyl/templates/vinyl/vinyl_detail.html:38
+msgid "Tracce"
+msgstr "Треки"
+
+#: vinyl/forms/vinyl.py:24 vinyl/templates/vinyl/vinyl_detail.html:44
+msgid "Canzoni"
+msgstr "Песни"
+
+#: vinyl/forms/vinyl.py:30
+msgid "Una canzone per riga"
+msgstr "Одна песня на строку"
+
+#: vinyl/models/vinyl.py:20
+msgid "33 giri"
+msgstr "33 об/мин"
+
+#: vinyl/models/vinyl.py:21
+msgid "45 giri"
+msgstr "45 об/мин"
+
+#: vinyl/models/vinyl.py:22
+msgid "78 giri"
+msgstr "78 об/мин"
+
+#: vinyl/templates/vinyl/_filters.html:2
+msgid "Filtri"
+msgstr "Фильтры"
+
+#: vinyl/templates/vinyl/_filters.html:5
+msgid "Genere"
+msgstr "Жанр"
+
+#: vinyl/templates/vinyl/_filters.html:14
+msgid "Ordina per"
+msgstr "Сортировать по"
+
+#: vinyl/templates/vinyl/_filters.html:19
+msgid "Artista (A-Z)"
+msgstr "Исполнитель (А-Я)"
+
+#: vinyl/templates/vinyl/_filters.html:20
+msgid "Artista (Z-A)"
+msgstr "Исполнитель (Я-А)"
+
+#: vinyl/templates/vinyl/artist_list.html:14
+#: vinyl/templates/vinyl/label_list.html:19
+#, python-format
+msgid "%(n)s vinile"
+msgid_plural "%(n)s vinili"
+msgstr[0] "%(n)s пластинка"
+msgstr[1] "%(n)s пластинки"
+msgstr[2] "%(n)s пластинок"
+msgstr[3] "%(n)s пластинки"
+
+#: vinyl/templates/vinyl/artist_list.html:19
+msgid "Nessun artista trovato."
+msgstr "Исполнители не найдены."
+
+#: vinyl/templates/vinyl/base.html:6
+msgid "Cerca vinili..."
+msgstr "Поиск пластинок..."
+
+#: vinyl/templates/vinyl/base.html:9
+msgid "+ Aggiungi vinile"
+msgstr "+ Добавить пластинку"
+
+#: vinyl/templates/vinyl/genre_list.html:7
+msgid "Generi musicali"
+msgstr "Музыкальные жанры"
+
+#: vinyl/templates/vinyl/label_list.html:7
+msgid "Etichette discografiche"
+msgstr "Звукозаписывающие лейблы"
+
+#: vinyl/templates/vinyl/label_list.html:24
+msgid "Nessuna etichetta trovata."
+msgstr "Лейблы не найдены."
+
+#: vinyl/templates/vinyl/statistics.html:4
+#: vinyl/templates/vinyl/statistics.html:7
+msgid "Statistiche vinili"
+msgstr "Статистика пластинок"
+
+#: vinyl/templates/vinyl/statistics.html:13
+msgid "Totale vinili"
+msgstr "Всего пластинок"
+
+#: vinyl/templates/vinyl/statistics.html:36
+msgid "Vinili per genere"
+msgstr "Пластинки по жанрам"
+
+#: vinyl/templates/vinyl/vinyl_confirm_delete.html:4
+#: vinyl/templates/vinyl/vinyl_confirm_delete.html:7
+msgid "Elimina vinile"
+msgstr "Удалить пластинку"
+
+#: vinyl/templates/vinyl/vinyl_confirm_delete.html:9
+#, python-format
+msgid ""
+"Sei sicuro di voler eliminare <strong>\"%(title)s\"</strong> di %(artist)s? "
+"Questa azione non può essere annullata."
+msgstr ""
+"Вы уверены, что хотите удалить <strong>«%(title)s»</strong> (%(artist)s)? "
+"Это действие нельзя отменить."
+
+#: vinyl/templates/vinyl/vinyl_detail.html:35
+msgid "Formato"
+msgstr "Формат"
+
+#: vinyl/templates/vinyl/vinyl_form.html:4
+#: vinyl/templates/vinyl/vinyl_form.html:7
+msgid "Modifica vinile"
+msgstr "Изменить пластинку"
+
+#: vinyl/templates/vinyl/vinyl_form.html:28
+msgid "Artista (opzionale, restringe la ricerca)"
+msgstr "Исполнитель (необязательно, сужает поиск)"
+
+#: vinyl/templates/vinyl/vinyl_form.html:29
+msgid "Cerca informazioni sul disco"
+msgstr "Найти информацию о пластинке"
+
+#: vinyl/templates/vinyl/vinyl_form.html:41
+msgid "Titolo e artista..."
+msgstr "Название и исполнитель..."
+
+#: vinyl/templates/vinyl/vinyl_form.html:70
+msgid "Inserisci titolo e/o artista per cercare."
+msgstr "Введите название и/или исполнителя для поиска."
+
+#: vinyl/templates/vinyl/vinyl_form.html:71
+msgid ""
+"Nessuna informazione trovata. Prova a semplificare il titolo o rimuovere il "
+"filtro artista."
+msgstr ""
+"Информация не найдена. Попробуйте упростить название или убрать фильтр по "
+"исполнителю."
+
+#: vinyl/templates/vinyl/vinyl_form.html:72
+#, python-brace-format
+msgid "{n} tracce"
+msgstr "треков: {n}"
+
+#: vinyl/templates/vinyl/vinyl_list.html:9
+msgid "Filtra e ordina"
+msgstr "Фильтры и сортировка"
+
+#: vinyl/templates/vinyl/vinyl_list.html:27
+msgid "Nessun vinile trovato."
+msgstr "Пластинки не найдены."
+
+#: vinyl/templates/vinyl/vinyl_list.html:27
+msgid "Ricerca non riuscita. Controlla la connessione e riprova."
+msgstr "Поиск не удался. Проверьте подключение и повторите попытку."
+
+#: vinyl/templates/vinyl/vinyl_list.html:29
+msgid "Riprova a caricare"
+msgstr "Повторить загрузку"
+
+#: vinyl/templates/vinyl/vinyl_list.html:30
+msgid "Caricamento…"
+msgstr "Загрузка…"
+
+#: vinyl/templates/vinyl/vinyl_list.html:31
+msgid "Carica altri"
+msgstr "Загрузить ещё"

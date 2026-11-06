@@ -6,6 +6,8 @@
     const empty = document.getElementById('empty-msg');
     const title = document.getElementById('list-title');
     const spinner = sentinel.innerHTML;
+    // testi tradotti: arrivano dal template (data-*)
+    const T = {empty: empty.dataset.empty, error: empty.dataset.error, retry: sentinel.dataset.retry};
     let gen = 0;          // incrementa a ogni nuova ricerca: scarta risposte vecchie
     let ctrl = new AbortController();
     let loading = false;
@@ -37,7 +39,8 @@
             setNext(r.headers.get('X-Next-Page'));
         } catch (e) {
             if (e.name === 'AbortError' || my !== gen) return;
-            sentinel.innerHTML = '<button type="button" class="btn btn-outline-secondary">Riprova a caricare</button>';
+            sentinel.innerHTML = '<button type="button" class="btn btn-outline-secondary"></button>';
+            sentinel.querySelector('button').textContent = T.retry;
             sentinel.querySelector('button').onclick = () => { sentinel.innerHTML = spinner; loadMore(); };
         } finally { if (my === gen) loading = false; }
     }
@@ -61,14 +64,14 @@
             const html = await r.text();
             if (my !== gen) return;
             grid.innerHTML = html;
-            empty.textContent = 'Nessun vinile trovato.';
+            empty.textContent = T.empty;
             empty.hidden = grid.children.length > 0;
             title.textContent = q ? ' (' + q + ')' : '';
             setNext(r.headers.get('X-Next-Page'));
         } catch (e) {
             if (e.name === 'AbortError' || my !== gen) return;
             grid.innerHTML = '';
-            empty.textContent = 'Ricerca non riuscita. Controlla la connessione e riprova.';
+            empty.textContent = T.error;
             empty.hidden = false;
             setNext('');
         }

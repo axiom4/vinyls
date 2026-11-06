@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.auth.views import redirect_to_login
 
 # Percorsi raggiungibili senza login (l'admin ha già il suo login)
-PUBLIC_PREFIXES = ('/accounts/login/', '/accounts/passkey/login/', '/admin/')
+PUBLIC_PREFIXES = ('/accounts/login/', '/accounts/passkey/login/', '/admin/', '/i18n/')
 
 
 class LoginRequiredMiddleware:

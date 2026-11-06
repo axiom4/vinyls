@@ -1,3 +1,4 @@
+{% load i18n %}
     {% for vinyl in vinyls %}
     <div class="col">
         <a href="{% url 'vinyl:vinyl_detail' vinyl.pk %}" class="sleeve">
@@ -7,7 +8,7 @@
                 {% if vinyl.cover_image %}
                     <img src="{{ vinyl.cover_image.url }}" class="vinyl-cover" alt="" loading="lazy">
                 {% else %}
-                    <div class="vinyl-cover-placeholder"><span class="text-muted small">Nessuna copertina</span></div>
+                    <div class="vinyl-cover-placeholder"><span class="text-muted small">{% trans "Nessuna copertina" %}</span></div>
                 {% endif %}
             </div>
             </div>
@@ -18,7 +19,7 @@
                     <span>{{ vinyl.release_year }}</span>
                     <span>{{ vinyl.get_speed_display }}</span>
                     {% if vinyl.rating %}<span>★ {{ vinyl.rating }}</span>{% endif %}
-                    <span class="d-inline-flex align-items-center gap-1"><span class="sleeve-dot{% if vinyl.is_available %} on{% endif %}"></span>{% if vinyl.is_available %}Disponibile{% else %}Non disponibile{% endif %}</span>
+                    <span class="d-inline-flex align-items-center gap-1"><span class="sleeve-dot{% if vinyl.is_available %} on{% endif %}"></span>{% if vinyl.is_available %}{% trans "Disponibile" %}{% else %}{% trans "Non disponibile" %}{% endif %}</span>
                 </div>
             </div>
         </a>

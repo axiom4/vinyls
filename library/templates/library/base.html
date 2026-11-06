@@ -1,13 +1,14 @@
+{% load i18n %}
 <!DOCTYPE html>
-{% load static %}
-<html lang="it">
+{% load static i18n %}
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#212529">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>{% block title %}La Mia Libreria{% endblock %}</title>
+    <title>{% block title %}{% trans "La Mia Libreria" %}{% endblock %}</title>
     <link rel="preload" href="{% static 'fonts/InstrumentSans-latin-e190a6.woff2' %}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{% static 'vendor/bootstrap/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
@@ -17,33 +18,34 @@
 <body>
     <nav class="navbar navbar-expand-lg site-nav mb-4">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="{% url 'vinyl:vinyl_list' %}"><img src="{% static 'img/favicon.svg' %}" alt="" width="28" height="28" class="brand-icon me-2">La Mia Collezione</a>
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'vinyl:vinyl_list' %}"><img src="{% static 'img/favicon.svg' %}" alt="" width="28" height="28" class="brand-icon me-2">{% trans "La Mia Collezione" %}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Vinili</a>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">{% trans "Vinili" %}</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'vinyl:vinyl_list' %}">Elenco vinili</a></li>
-                            <li><a class="dropdown-item" href="{% url 'vinyl:vinyl_add' %}">Aggiungi vinile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'vinyl:vinyl_list' %}">{% trans "Elenco vinili" %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'vinyl:vinyl_add' %}">{% trans "Aggiungi vinile" %}</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{% url 'vinyl:artist_list' %}">Artisti</a></li>
-                            <li><a class="dropdown-item" href="{% url 'vinyl:label_list' %}">Etichette</a></li>
-                            <li><a class="dropdown-item" href="{% url 'vinyl:genre_list' %}">Generi</a></li>
-                            <li><a class="dropdown-item" href="{% url 'vinyl:statistics' %}">Statistiche</a></li>
+                            <li><a class="dropdown-item" href="{% url 'vinyl:artist_list' %}">{% trans "Artisti" %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'vinyl:label_list' %}">{% trans "Etichette" %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'vinyl:genre_list' %}">{% trans "Generi" %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'vinyl:statistics' %}">{% trans "Statistiche" %}</a></li>
                         </ul>
                     </li>
                 </ul>
                 {% block navbar_filters %}{% endblock %}
                 {% block navbar_actions %}
                 <form class="d-flex" role="search" method="get" action="{% url 'library:search_books' %}">
-                    <input class="form-control me-2" type="search" name="q" placeholder="Cerca libri..." value="{{ query|default:'' }}">
-                    <button class="btn btn-outline-light" type="submit">Cerca</button>
+                    <input class="form-control me-2" type="search" name="q" placeholder="{% trans 'Cerca libri...' %}" value="{{ query|default:'' }}">
+                    <button class="btn btn-outline-light" type="submit">{% trans "Cerca" %}</button>
                 </form>
-                <a href="{% url 'library:book_add' %}" class="btn btn-success ms-2">+ Aggiungi libro</a>
+                <a href="{% url 'library:book_add' %}" class="btn btn-success ms-2">{% trans "+ Aggiungi libro" %}</a>
                 {% endblock %}
+                {% include "library/_lang_switch.html" %}
                 {% if user.is_authenticated %}
                 <div class="dropdown ms-2">
                     <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">👤 {{ user.get_username }}</button>
@@ -51,7 +53,7 @@
                         <li><a class="dropdown-item" href="{% url 'accounts:passkey_list' %}">🔑 Passkey</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><form method="post" action="{% url 'accounts:logout' %}">{% csrf_token %}
-                            <button class="dropdown-item">Esci</button></form></li>
+                            <button class="dropdown-item">{% trans "Esci" %}</button></form></li>
                     </ul>
                 </div>
                 {% endif %}
@@ -64,7 +66,7 @@
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
                     {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{% trans 'Chiudi' %}"></button>
                 </div>
             {% endfor %}
         {% endif %}
@@ -73,6 +75,7 @@
     </main>
 
     <script src="{% static 'vendor/bootstrap/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/lang.js' %}?v={{ CSS_VERSION }}"></script>
     {% block scripts %}{% endblock %}
 </body>
 </html>

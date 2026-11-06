@@ -1,18 +1,19 @@
 {% extends 'vinyl/base.html' %}
+{% load i18n %}
 {% load static %}
 
-{% block title %}Vinili - La Mia Collezione{% endblock %}
+{% block title %}{% trans "Vinili" %} - {% trans "La Mia Collezione" %}{% endblock %}
 
 {% block navbar_filters %}
 <div class="nav-filters d-lg-none mb-2">
-    <div class="nav-filters-title">Filtra e ordina</div>
+    <div class="nav-filters-title">{% trans "Filtra e ordina" %}</div>
     {% include "vinyl/_filters.html" with form_class="d-grid gap-2" col_class="" %}
 </div>
 {% endblock %}
 
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Vinili{% if active_genre %} <small class="title-sub">({{ active_genre.name }})</small>{% endif %}<span id="list-title" class="title-sub">{% if query %} ({{ query }}){% endif %}</span></h1>
+    <h1>{% trans "Vinili" %}{% if active_genre %} <small class="title-sub">({{ active_genre.name }})</small>{% endif %}<span id="list-title" class="title-sub">{% if query %} ({{ query }}){% endif %}</span></h1>
 </div>
 
 <div class="d-none d-lg-block mb-4">
@@ -23,11 +24,11 @@
     {% include "vinyl/_vinyl_items.html" %}
 </div>
 
-<div id="empty-msg" class="alert alert-info" {% if vinyls %}hidden{% endif %}>Nessun vinile trovato.</div>
+<div id="empty-msg" class="alert alert-info" {% if vinyls %}hidden{% endif %} data-empty="{% trans 'Nessun vinile trovato.' %}" data-error="{% trans 'Ricerca non riuscita. Controlla la connessione e riprova.' %}">{% trans "Nessun vinile trovato." %}</div>
 
-<div id="scroll-sentinel" class="text-center py-4" {% if is_paginated and page_obj.has_next %}data-next="{{ page_obj.next_page_number }}"{% else %}hidden{% endif %}>
-    <div class="spinner-border spinner-border-sm text-secondary" role="status"><span class="visually-hidden">Caricamento…</span></div>
-    {% if is_paginated and page_obj.has_next %}<noscript><a class="btn btn-outline-secondary" href="?{% for k, v in request.GET.items %}{% if k != 'page' and k != 'partial' %}{{ k }}={{ v|urlencode }}&amp;{% endif %}{% endfor %}page={{ page_obj.next_page_number }}">Carica altri</a></noscript>{% endif %}
+<div id="scroll-sentinel" class="text-center py-4" {% if is_paginated and page_obj.has_next %}data-next="{{ page_obj.next_page_number }}"{% else %}hidden{% endif %} data-retry="{% trans 'Riprova a caricare' %}">
+    <div class="spinner-border spinner-border-sm text-secondary" role="status"><span class="visually-hidden">{% trans "Caricamento…" %}</span></div>
+    {% if is_paginated and page_obj.has_next %}<noscript><a class="btn btn-outline-secondary" href="?{% for k, v in request.GET.items %}{% if k != 'page' and k != 'partial' %}{{ k }}={{ v|urlencode }}&amp;{% endif %}{% endfor %}page={{ page_obj.next_page_number }}">{% trans "Carica altri" %}</a></noscript>{% endif %}
 </div>
 {% endblock %}
 

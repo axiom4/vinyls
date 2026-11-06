@@ -1,15 +1,16 @@
 {% extends 'vinyl/base.html' %}
+{% load i18n %}
 
-{% block title %}Elimina vinile - La Mia Collezione{% endblock %}
+{% block title %}{% trans "Elimina vinile" %} - {% trans "La Mia Collezione" %}{% endblock %}
 
 {% block content %}
-<h1>Elimina vinile</h1>
+<h1>{% trans "Elimina vinile" %}</h1>
 
-<p>Sei sicuro di voler eliminare <strong>"{{ vinyl.title }}"</strong> di {{ vinyl.artist }}? Questa azione non può essere annullata.</p>
+<p>{% blocktrans with title=vinyl.title artist=vinyl.artist %}Sei sicuro di voler eliminare <strong>"{{ title }}"</strong> di {{ artist }}? Questa azione non può essere annullata.{% endblocktrans %}</p>
 
 <form method="post">
     {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Sì, elimina</button>
-    <a href="{% url 'vinyl:vinyl_detail' vinyl.pk %}" class="btn btn-outline-secondary">Annulla</a>
+    <button type="submit" class="btn btn-danger">{% trans "Sì, elimina" %}</button>
+    <a href="{% url 'vinyl:vinyl_detail' vinyl.pk %}" class="btn btn-outline-secondary">{% trans "Annulla" %}</a>
 </form>
 {% endblock %}

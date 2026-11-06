@@ -1,9 +1,10 @@
 {% extends 'vinyl/base.html' %}
+{% load i18n %}
 
-{% block title %}{% if object %}Modifica vinile{% else %}Aggiungi vinile{% endif %} - La Mia Collezione{% endblock %}
+{% block title %}{% if object %}{% trans "Modifica vinile" %}{% else %}{% trans "Aggiungi vinile" %}{% endif %} - {% trans "La Mia Collezione" %}{% endblock %}
 
 {% block content %}
-<h1>{% if object %}Modifica vinile{% else %}Aggiungi vinile{% endif %}</h1>
+<h1>{% if object %}{% trans "Modifica vinile" %}{% else %}{% trans "Aggiungi vinile" %}{% endif %}</h1>
 
 <form method="post" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
@@ -21,11 +22,11 @@
 
     {% if field.name == 'title' %}
     <div class="mb-3 border rounded p-3 bg-body-tertiary">
-        <label class="form-label">Compila automaticamente dai dati online</label>
+        <label class="form-label">{% trans "Compila automaticamente dai dati online" %}</label>
         <div class="d-flex align-items-center gap-2 flex-wrap mb-2">
             <input type="text" id="vinyl-info-artist" class="form-control form-control-sm w-auto"
-                   placeholder="Artista (opzionale, restringe la ricerca)">
-            <button type="button" id="vinyl-info-search-btn" class="btn btn-outline-secondary btn-sm">Cerca informazioni sul disco</button>
+                   placeholder="{% trans 'Artista (opzionale, restringe la ricerca)' %}">
+            <button type="button" id="vinyl-info-search-btn" class="btn btn-outline-secondary btn-sm">{% trans "Cerca informazioni sul disco" %}</button>
         </div>
         <div id="vinyl-info-status" class="small text-muted mt-2 mb-2"></div>
         <div id="vinyl-info-results" class="list-group"></div>
@@ -34,11 +35,11 @@
 
     {% if field.name == 'cover_image' %}
     <div class="mb-3 border rounded p-3 bg-body-tertiary">
-        <label class="form-label">Oppure cerca una copertina online</label>
+        <label class="form-label">{% trans "Oppure cerca una copertina online" %}</label>
         <div class="input-group mb-2">
             <input type="text" id="cover-search-input" class="form-control"
-                   placeholder="Titolo e artista..." value="{{ object.title|default:'' }}">
-            <button type="button" id="cover-search-btn" class="btn btn-outline-secondary">Cerca</button>
+                   placeholder="{% trans 'Titolo e artista...' %}" value="{{ object.title|default:'' }}">
+            <button type="button" id="cover-search-btn" class="btn btn-outline-secondary">{% trans "Cerca" %}</button>
         </div>
         <div id="cover-search-status" class="small text-muted mb-2"></div>
         <div id="cover-search-results" class="d-flex flex-wrap gap-2"></div>
@@ -49,11 +50,45 @@
     {% endfor %}
 
     <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Salva</button>
-        <a href="{% url 'vinyl:vinyl_list' %}" class="btn btn-outline-secondary">Annulla</a>
+        <button type="submit" class="btn btn-primary">{% trans "Salva" %}</button>
+        <a href="{% url 'vinyl:vinyl_list' %}" class="btn btn-outline-secondary">{% trans "Annulla" %}</a>
     </div>
 </form>
 
+{% trans "Ricerca in corso..." as t_searching %}
+{% trans "Nessuna copertina trovata." as t_noCover %}
+{% trans "Clicca su una copertina per selezionarla:" as t_clickCover %}
+{% trans "Copertina selezionata (verrà salvata al momento del salvataggio):" as t_coverSel %}
+{% trans "Errore durante la ricerca." as t_searchErr %}
+{% trans "Inserisci almeno 2 caratteri del titolo per cercare." as t_short %}
+{% trans "Le fonti online non sono raggiungibili al momento, riprova tra poco." as t_offline %}
+{% trans "{n} risultati: clicca su uno per compilare i campi." as t_resultsN %}
+{% trans "copertina" as t_cover %}
+{% trans "Compilazione in corso..." as t_filling %}
+{% trans "Copertina trovata automaticamente (verrà salvata al momento del salvataggio):" as t_coverAuto %}
+{% trans "Campi compilati: controlla e correggi se necessario prima di salvare." as t_filled %}
+{% trans "Inserisci titolo e/o artista per cercare." as t_needQ %}
+{% trans "Nessuna informazione trovata. Prova a semplificare il titolo o rimuovere il filtro artista." as t_noInfo %}
+{% trans "{n} tracce" as t_tracksN %}
+<script>
+const T = {
+    searching: "{{ t_searching|escapejs }}",
+    noCover: "{{ t_noCover|escapejs }}",
+    clickCover: "{{ t_clickCover|escapejs }}",
+    coverSel: "{{ t_coverSel|escapejs }}",
+    searchErr: "{{ t_searchErr|escapejs }}",
+    short: "{{ t_short|escapejs }}",
+    offline: "{{ t_offline|escapejs }}",
+    resultsN: "{{ t_resultsN|escapejs }}",
+    cover: "{{ t_cover|escapejs }}",
+    filling: "{{ t_filling|escapejs }}",
+    coverAuto: "{{ t_coverAuto|escapejs }}",
+    filled: "{{ t_filled|escapejs }}",
+    needQ: "{{ t_needQ|escapejs }}",
+    noInfo: "{{ t_noInfo|escapejs }}",
+    tracksN: "{{ t_tracksN|escapejs }}",
+};
+</script>
 <script>
 (function() {
     const searchBtn = document.getElementById('cover-search-btn');
@@ -67,18 +102,18 @@
         const q = searchInput.value.trim();
         resultsDiv.innerHTML = '';
         if (!q) {
-            statusDiv.textContent = 'Inserisci titolo e/o artista per cercare.';
+            statusDiv.textContent = T.needQ;
             return;
         }
-        statusDiv.textContent = 'Ricerca in corso...';
+        statusDiv.textContent = T.searching;
         try {
             const resp = await fetch("{% url 'vinyl:search_cover' %}?q=" + encodeURIComponent(q), {signal: AbortSignal.timeout(15000)});
             const data = await resp.json();
             if (!data.results || !data.results.length) {
-                statusDiv.textContent = 'Nessuna copertina trovata.';
+                statusDiv.textContent = T.noCover;
                 return;
             }
-            statusDiv.textContent = 'Clicca su una copertina per selezionarla:';
+            statusDiv.textContent = T.clickCover;
             data.results.forEach(function(r) {
                 const img = document.createElement('img');
                 img.src = r.thumb_url;
@@ -92,13 +127,13 @@
                     });
                     img.classList.add('selected');
                     previewDiv.innerHTML =
-                        '<p class="small text-success mb-1">Copertina selezionata (verrà salvata al momento del salvataggio):</p>' +
+                        '<p class="small text-success mb-1">' + T.coverSel + '</p>' +
                         '<img src="' + r.full_url + '" class="vinyl-cover-detail rounded border">';
                 });
                 resultsDiv.appendChild(img);
             });
         } catch (e) {
-            statusDiv.textContent = 'Errore durante la ricerca.';
+            statusDiv.textContent = T.searchErr;
         }
     }
 
@@ -153,31 +188,31 @@
         const artist = document.getElementById('vinyl-info-artist').value.trim();
         resultsDiv.innerHTML = '';
         if (title.length < 2) {
-            statusDiv.textContent = 'Inserisci almeno 2 caratteri del titolo per cercare.';
+            statusDiv.textContent = T.short;
             return;
         }
-        statusDiv.textContent = 'Ricerca in corso...';
+        statusDiv.textContent = T.searching;
         try {
             const params = new URLSearchParams({title: title, artist: artist});
             const resp = await fetch("{% url 'vinyl:search_vinyl_info' %}?" + params.toString(), {signal: AbortSignal.timeout(15000)});
             const data = await resp.json();
             if (data.error === 'network_error') {
-                statusDiv.textContent = 'Le fonti online non sono raggiungibili al momento, riprova tra poco.';
+                statusDiv.textContent = T.offline;
                 return;
             }
             if (!data.results || !data.results.length) {
-                statusDiv.textContent = 'Nessuna informazione trovata. Prova a semplificare il titolo o rimuovere il filtro artista.';
+                statusDiv.textContent = T.noInfo;
                 return;
             }
-            statusDiv.textContent = data.results.length + ' risultati: clicca su uno per compilare i campi.';
+            statusDiv.textContent = T.resultsN.replace('{n}', data.results.length);
             data.results.forEach(function(r) {
                 const item = document.createElement('button');
                 item.type = 'button';
                 item.className = 'list-group-item list-group-item-action text-start';
                 const badges = [];
-                if (r.cover_url) badges.push('<span class="badge bg-success">copertina</span>');
+                if (r.cover_url) badges.push('<span class="badge bg-success">' + T.cover + '</span>');
                 if (r.year) badges.push('<span class="badge bg-info text-dark">' + r.year + '</span>');
-                if (r.tracks) badges.push('<span class="badge bg-secondary">' + r.tracks + ' tracce</span>');
+                if (r.tracks) badges.push('<span class="badge bg-secondary">' + T.tracksN.replace('{n}', r.tracks) + '</span>');
                 const sourceLabel = {deezer: 'Deezer', itunes: 'iTunes'}[r.source] || r.source;
                 badges.push('<span class="badge bg-dark">' + sourceLabel + '</span>');
                 item.innerHTML = '<strong>' + r.title + '</strong>' +
@@ -189,12 +224,12 @@
                 resultsDiv.appendChild(item);
             });
         } catch (e) {
-            statusDiv.textContent = 'Errore durante la ricerca.';
+            statusDiv.textContent = T.searchErr;
         }
     }
 
     async function applyCandidate(r) {
-        statusDiv.textContent = 'Compilazione in corso...';
+        statusDiv.textContent = T.filling;
 
         if (r.source === 'deezer' && r.deezer_id) {
             try {
@@ -275,13 +310,13 @@
                 });
                 if (coverPreview) {
                     coverPreview.innerHTML =
-                        '<p class="small text-success mb-1">Copertina trovata automaticamente (verrà salvata al momento del salvataggio):</p>' +
+                        '<p class="small text-success mb-1">' + T.coverAuto + '</p>' +
                         '<img src="' + r.cover_url + '" class="vinyl-cover-detail rounded border">';
                 }
             }
         }
 
-        statusDiv.textContent = 'Campi compilati: controlla e correggi se necessario prima di salvare.';
+        statusDiv.textContent = T.filled;
     }
 
     infoBtn.addEventListener('click', runInfoSearch);

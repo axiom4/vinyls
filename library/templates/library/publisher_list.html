@@ -1,9 +1,10 @@
 {% extends 'library/base.html' %}
+{% load i18n %}
 
-{% block title %}Editori - La Mia Libreria{% endblock %}
+{% block title %}{% trans "Editori" %} - {% trans "La Mia Libreria" %}{% endblock %}
 
 {% block content %}
-<h1>Editori</h1>
+<h1>{% trans "Editori" %}</h1>
 
 {% if publishers %}
 <div class="list-group">
@@ -12,14 +13,14 @@
         <div>
             {{ publisher.name }}
             {% if publisher.website %}
-                <a href="{{ publisher.website }}" target="_blank" rel="noopener noreferrer" class="ms-2 small">sito web</a>
+                <a href="{{ publisher.website }}" target="_blank" rel="noopener noreferrer" class="ms-2 small">{% trans "sito web" %}</a>
             {% endif %}
         </div>
-        <span class="badge bg-primary rounded-pill">{{ publisher.books.count }} libro/i</span>
+        <span class="badge bg-primary rounded-pill">{% blocktrans count n=publisher.books.count %}{{ n }} libro{% plural %}{{ n }} libri{% endblocktrans %}</span>
     </div>
     {% endfor %}
 </div>
 {% else %}
-<div class="alert alert-info">Nessun editore trovato.</div>
+<div class="alert alert-info">{% trans "Nessun editore trovato." %}</div>
 {% endif %}
 {% endblock %}

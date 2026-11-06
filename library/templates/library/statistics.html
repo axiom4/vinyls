@@ -1,15 +1,16 @@
 {% extends 'library/base.html' %}
+{% load i18n %}
 
-{% block title %}Statistiche - La Mia Libreria{% endblock %}
+{% block title %}{% trans "Statistiche" %} - {% trans "La Mia Libreria" %}{% endblock %}
 
 {% block content %}
-<h1>Statistiche</h1>
+<h1>{% trans "Statistiche" %}</h1>
 
 <div class="row g-4 mb-4">
     <div class="col-md-4">
         <div class="card text-center">
             <div class="card-body">
-                <h5 class="card-title">Totale libri</h5>
+                <h5 class="card-title">{% trans "Totale libri" %}</h5>
                 <p class="display-5">{{ total_books }}</p>
             </div>
         </div>
@@ -17,7 +18,7 @@
     <div class="col-md-4">
         <div class="card text-center">
             <div class="card-body">
-                <h5 class="card-title">Disponibili</h5>
+                <h5 class="card-title">{% trans "Disponibili" %}</h5>
                 <p class="display-5">{{ available_books }}</p>
             </div>
         </div>
@@ -25,14 +26,14 @@
     <div class="col-md-4">
         <div class="card text-center">
             <div class="card-body">
-                <h5 class="card-title">Letti</h5>
+                <h5 class="card-title">{% trans "Letti" %}</h5>
                 <p class="display-5">{{ read_books }}</p>
             </div>
         </div>
     </div>
 </div>
 
-<h3>Libri per genere</h3>
+<h3>{% trans "Libri per genere" %}</h3>
 {% if genres %}
 <ul class="list-group">
     {% for genre in genres %}
@@ -43,6 +44,6 @@
     {% endfor %}
 </ul>
 {% else %}
-<div class="alert alert-info">Nessun genere trovato.</div>
+<div class="alert alert-info">{% trans "Nessun genere trovato." %}</div>
 {% endif %}
 {% endblock %}

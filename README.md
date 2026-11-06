@@ -105,6 +105,22 @@ With `DEBUG=False` the app enforces HTTPS and secure cookies. The example below 
 
    The example file contains the domain and paths of the original installation (`vinyl.axiom4.net`, `/home/axiom/www/...`): replace them with your own.
 
+## Languages
+
+The interface is available in English, Italian, French, German, Russian, Simplified Chinese, Spanish and Japanese. The language is picked from the browser (`Accept-Language`) and can be changed with the selector in the navigation bar; the choice is stored in a cookie. Italian is the fallback.
+
+Source strings are in Italian and wrapped with Django's gettext. Translations live in `locale/<language>/LC_MESSAGES/django.po`, and the compiled `django.mo` files are committed.
+
+After changing any text, update and recompile the catalogs (requires GNU gettext):
+
+```bash
+python manage.py makemessages -a --ignore=venv --ignore=staticfiles
+# translate the new empty msgstr entries in locale/*/LC_MESSAGES/django.po
+python manage.py compilemessages -l en -l fr -l de -l ru -l zh_Hans -l es -l ja
+```
+
+To add a language, add it to `LANGUAGES` in `mysite/settings.py` and run `makemessages -l <code>`. The `cleanup_vinyl` command output is not translated.
+
 ## Updating
 
 ```bash
