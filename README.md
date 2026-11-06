@@ -59,7 +59,82 @@ After your first password login, open the user menu at the top right → **Passk
 | `CSRF_TRUSTED_ORIGINS` | Trusted origins for forms, e.g. `https://vinyl.example.com`. | empty |
 | `SECURE_HSTS_SECONDS` | HSTS duration in production. Keep `0` until HTTPS is stable. | `0` |
 
-With an external database, also install the driver: `pip install "psycopg[binary]"` for PostgreSQL or `pip install mysqlclient` for MySQL.
+For PostgreSQL or MySQL, see [Using PostgreSQL or MySQL](#using-postgresql-or-mysql).
+
+## Using PostgreSQL or MySQL
+
+By default the app uses SQLite. To use PostgreSQL or MySQL instead, create an empty database, install the driver in the virtual environment and set `DATABASE_URL` in `.env`.
+
+### PostgreSQL
+
+1. Install the driver:
+
+   ```bash
+   pip install "psycopg[binary]"
+   ```
+
+2. Create the user and the database (as the `postgres` superuser):
+
+   ```sql
+   CREATE USER vinyl WITH PASSWORD 'choose-a-password';
+   CREATE DATABASE vinyl OWNER vinyl ENCODING 'UTF8';
+   ```
+
+3. Set the connection string in `.env`:
+
+   ```ini
+   DATABASE_URL=postgres://vinyl:choose-a-password@localhost:5432/vinyl
+   ```
+
+### MySQL / MariaDB
+
+1. Install the driver. `mysqlclient` is compiled against the MySQL client library, so install that first (macOS: `brew install mysql pkg-config`; Debian/Ubuntu: `sudo apt install libmysqlclient-dev pkg-config build-essential python3-dev`). Then:
+
+   ```bash
+   pip install mysqlclient
+   ```
+
+2. Create the user and the database with the `utf8mb4` character set:
+
+   ```sql
+   CREATE DATABASE vinyl CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+   CREATE USER 'vinyl'@'localhost' IDENTIFIED BY 'choose-a-password';
+   GRANT ALL PRIVILEGES ON vinyl.* TO 'vinyl'@'localhost';
+   ```
+
+3. Set the connection string in `.env`:
+
+   ```ini
+   DATABASE_URL=mysql://vinyl:choose-a-password@localhost:3306/vinyl
+   ```
+
+If the password contains special characters (`@`, `:`, `/`, `#`, `%`), URL-encode them in `DATABASE_URL`.
+
+### Create the tables
+
+```bash
+python manage.py migrate
+python manage.py createsuperuser
+```
+
+### Moving existing data from SQLite
+
+To keep the data you already have, export it **before** changing `DATABASE_URL`, then load it into the new database:
+
+```bash
+# 1. with the current SQLite configuration
+python manage.py dumpdata --natural-foreign --natural-primary \
+    -e contenttypes -e auth.permission -e admin.logentry -e sessions \
+    --indent 2 -o db.json
+
+# 2. set DATABASE_URL in .env, then create the tables
+python manage.py migrate
+
+# 3. load the data
+python manage.py loaddata db.json
+```
+
+Passkeys are stored in the database and are copied too, so they keep working as long as `WEBAUTHN_RP_ID` stays the same. `db.json` contains your users and password hashes: delete it when you are done and never commit it (`db.json` is already in `.gitignore`). The `media/` folder is not part of the database and does not need to move.
 
 ## Production installation
 
@@ -144,7 +219,7 @@ python manage.py cleanup_vinyl --apply   # performs the cleanup
 
 ## Backup
 
-You need two things: the database (`db.sqlite3`, or a dump of the external database) and the `media/` folder. The `.env` file contains the secret key: keep it safe and do not commit it to the repository.
+You need two things: the database (`db.sqlite3`, or a dump of the external database made with `pg_dump` or `mysqldump`) and the `media/` folder. The `.env` file contains the secret key: keep it safe and do not commit it to the repository.
 
 ## License
 
