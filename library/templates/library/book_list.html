@@ -10,7 +10,7 @@
 
 <form method="get" class="row g-2 mb-4">
     <div class="col-auto">
-        <select name="genre" class="form-select" onchange="this.form.submit()">
+        <select name="genre" class="form-select" data-autosubmit>
             <option value="">{% trans "Tutti i generi" %}</option>
             {% for genre in genres %}
                 <option value="{{ genre.id }}" {% if request.GET.genre == genre.id|stringformat:"s" %}selected{% endif %}>{{ genre.name }}</option>
@@ -18,14 +18,14 @@
         </select>
     </div>
     <div class="col-auto">
-        <select name="status" class="form-select" onchange="this.form.submit()">
+        <select name="status" class="form-select" data-autosubmit>
             <option value="">{% trans "Tutti gli stati" %}</option>
             <option value="true" {% if request.GET.status == 'true' %}selected{% endif %}>{% trans "Disponibile" %}</option>
             <option value="false" {% if request.GET.status == 'false' %}selected{% endif %}>{% trans "Non disponibile" %}</option>
         </select>
     </div>
     <div class="col-auto">
-        <select name="sort" class="form-select" onchange="this.form.submit()">
+        <select name="sort" class="form-select" data-autosubmit>
             <option value="-added_date" {% if request.GET.sort == '-added_date' %}selected{% endif %}>{% trans "Aggiunti di recente" %}</option>
             <option value="title" {% if request.GET.sort == 'title' %}selected{% endif %}>{% trans "Titolo (A-Z)" %}</option>
             <option value="-title" {% if request.GET.sort == '-title' %}selected{% endif %}>{% trans "Titolo (Z-A)" %}</option>

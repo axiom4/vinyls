@@ -3,7 +3,7 @@
     <input type="hidden" name="q" value="{{ query|default:'' }}" class="js-q">
     <div class="{{ col_class }}">
         <label class="d-block small text-secondary mb-1">{% trans "Genere" %}
-        <select name="genre" class="form-select mt-1" onchange="this.form.submit()">
+        <select name="genre" class="form-select mt-1" data-autosubmit>
             <option value="">{% trans "Tutti i generi" %}</option>
             {% for genre in genres %}
                 <option value="{{ genre.id }}" {% if request.GET.genre == genre.id|stringformat:"s" %}selected{% endif %}>{{ genre.name }}</option>
@@ -12,7 +12,7 @@
     </div>
     <div class="{{ col_class }}">
         <label class="d-block small text-secondary mb-1">{% trans "Ordina per" %}
-        <select name="sort" class="form-select mt-1" onchange="this.form.submit()">
+        <select name="sort" class="form-select mt-1" data-autosubmit>
             <option value="title" {% if not request.GET.sort or request.GET.sort == 'title' %}selected{% endif %}>{% trans "Titolo (A-Z)" %}</option>
             <option value="-title" {% if request.GET.sort == '-title' %}selected{% endif %}>{% trans "Titolo (Z-A)" %}</option>
             <option value="-added_date" {% if request.GET.sort == '-added_date' %}selected{% endif %}>{% trans "Aggiunti di recente" %}</option>

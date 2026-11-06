@@ -77,7 +77,7 @@
 {% trans "Campi compilati: controlla e correggi se necessario prima di salvare." as t_filled %}
 {% trans "Inserisci titolo e/o autore per cercare." as t_needQ %}
 {% trans "Nessuna informazione trovata. Prova a semplificare il titolo o rimuovere il filtro lingua/autore." as t_noInfo %}
-<script>
+<script nonce="{{ request.csp_nonce }}">
 const T = {
     searching: "{{ t_searching|escapejs }}",
     noCover: "{{ t_noCover|escapejs }}",
@@ -95,7 +95,7 @@ const T = {
     noInfo: "{{ t_noInfo|escapejs }}",
 };
 </script>
-<script>
+<script nonce="{{ request.csp_nonce }}">
 (function() {
     const searchBtn = document.getElementById('cover-search-btn');
     const searchInput = document.getElementById('cover-search-input');

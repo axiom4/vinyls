@@ -19,7 +19,7 @@
 </div>
 <div id="pk-error" class="text-danger small mt-2" hidden></div>
 {% trans "Registrazione non riuscita." as t_regerr %}
-<script>
+<script nonce="{{ request.csp_nonce }}">
 const csrf = '{{ csrf_token }}';
 const post = (url, body) => fetch(url, {method: 'POST', headers: {'X-CSRFToken': csrf, 'Content-Type': 'application/json'}, body: JSON.stringify(body || {})});
 const err = document.getElementById('pk-error');

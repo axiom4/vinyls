@@ -21,3 +21,7 @@
     data.set('language', saved);
     fetch(form.action, {method: 'POST', body: data}).then(() => location.reload());
 })();
+
+document.addEventListener('change', e => {
+    if (e.target.matches('[data-autosubmit]')) e.target.form.submit();
+});

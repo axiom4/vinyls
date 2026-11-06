@@ -32,7 +32,7 @@
     </div></div>
 </div>
 {% trans "Accesso con passkey non riuscito: " as t_pkerr %}
-<script>
+<script nonce="{{ request.csp_nonce }}">
 const csrf = '{{ csrf_token }}';
 const post = (url, body) => fetch(url, {method: 'POST', headers: {'X-CSRFToken': csrf, 'Content-Type': 'application/json'}, body: JSON.stringify(body || {})});
 const btn = document.getElementById('passkey-login'), err = document.getElementById('passkey-error');

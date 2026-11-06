@@ -70,7 +70,7 @@
 {% trans "Inserisci titolo e/o artista per cercare." as t_needQ %}
 {% trans "Nessuna informazione trovata. Prova a semplificare il titolo o rimuovere il filtro artista." as t_noInfo %}
 {% trans "{n} tracce" as t_tracksN %}
-<script>
+<script nonce="{{ request.csp_nonce }}">
 const T = {
     searching: "{{ t_searching|escapejs }}",
     noCover: "{{ t_noCover|escapejs }}",
@@ -89,7 +89,7 @@ const T = {
     tracksN: "{{ t_tracksN|escapejs }}",
 };
 </script>
-<script>
+<script nonce="{{ request.csp_nonce }}">
 (function() {
     const searchBtn = document.getElementById('cover-search-btn');
     const searchInput = document.getElementById('cover-search-input');
