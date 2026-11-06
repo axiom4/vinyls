@@ -6,7 +6,7 @@
             <span class="sleeve-disc" aria-hidden="true"></span>
             <div class="sleeve-art">
                 {% if vinyl.cover_image %}
-                    <img src="{{ vinyl.cover_image|thumb:400 }}" srcset="{{ vinyl.cover_image|thumb:200 }} 200w, {{ vinyl.cover_image|thumb:400 }} 400w" sizes="(max-width: 575px) 100vw, 200px" class="vinyl-cover" alt="" {% if forloop.first and not page_obj.has_previous %}fetchpriority="high"{% elif forloop.counter0 < 5 and not page_obj.has_previous %}{% else %}loading="lazy"{% endif %}>
+                    <img src="{{ vinyl.cover_image|thumb:300 }}" srcset="{{ vinyl.cover_image|thumb:200 }} 200w, {{ vinyl.cover_image|thumb:300 }} 300w" sizes="(max-width: 575px) 100vw, 200px" class="vinyl-cover" alt="" {% if forloop.first and not page_obj.has_previous %}fetchpriority="high"{% elif forloop.counter0 < 5 and not page_obj.has_previous %}{% else %}loading="lazy"{% endif %}>
                 {% else %}
                     <div class="vinyl-cover-placeholder"><span class="text-muted small">{% trans "Nessuna copertina" %}</span></div>
                 {% endif %}

@@ -7,7 +7,7 @@ register = template.Library()
 
 
 @register.filter
-def thumb(field, size=400):
+def thumb(field, size=300):
     """URL di una miniatura WebP (creata al primo uso accanto all'originale); in caso di errore, l'originale."""
     if not field:
         return ''
@@ -17,7 +17,7 @@ def thumb(field, size=400):
         if not dst.exists() or dst.stat().st_mtime < src.stat().st_mtime:
             with Image.open(src) as im:
                 im.thumbnail((size, size))
-                im.convert('RGB').save(dst, 'WEBP', quality=70)
+                im.convert('RGB').save(dst, 'WEBP', quality=60)
         return field.url.rsplit('/', 1)[0] + '/' + dst.name
     except (OSError, ValueError):
         return field.url
