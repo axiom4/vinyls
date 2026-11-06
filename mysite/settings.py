@@ -89,6 +89,22 @@ DATABASES = {
 }
 
 
+# Cache: Redis se REDIS_URL è impostato (es. redis://localhost:6379/1), altrimenti cache in memoria locale.
+if os.environ.get('REDIS_URL'):
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+            'LOCATION': os.environ['REDIS_URL'],
+            'KEY_PREFIX': 'collezione',
+        }
+    }
+else:
+    CACHES = {'default': {'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'}}
+
+# Durata cache delle risposte API esterne (copertine/metadati), in secondi. 0 = non cachare.
+EXTERNAL_API_CACHE_SECONDS = int(os.environ.get('EXTERNAL_API_CACHE_SECONDS', 86400))
+
+
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 

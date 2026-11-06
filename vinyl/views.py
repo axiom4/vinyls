@@ -1,11 +1,14 @@
 import difflib
 import itertools
+import hashlib
 import json
 import re
 import urllib.parse
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
+from django.conf import settings
+from django.core.cache import cache
 from django.core.files.base import ContentFile
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -34,12 +37,25 @@ _OPENER = urllib.request.build_opener(_NoRedirect)
 
 
 def _http_get_json(url, timeout=6):
+    """GET JSON con cache (EXTERNAL_API_CACHE_SECONDS). Gli errori non si cachano; se la cache è giù si va diretti."""
+    key = 'extapi:' + hashlib.sha256(url.encode()).hexdigest()
+    try:
+        cached = cache.get(key)
+    except Exception:
+        cached = None
+    if cached is not None:
+        return cached
     req = urllib.request.Request(url, headers={'User-Agent': 'PersonalLibraryApp/1.0'})
     try:
         with _OPENER.open(req, timeout=timeout) as resp:
-            return json.load(resp)
+            data = json.load(resp)
     except Exception:
         return None
+    try:
+        cache.set(key, data, settings.EXTERNAL_API_CACHE_SECONDS)
+    except Exception:
+        pass
+    return data
 
 
 def _run_sources_parallel(tasks, timeout=8):
