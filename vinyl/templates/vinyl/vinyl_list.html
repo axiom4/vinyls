@@ -32,4 +32,4 @@
 </div>
 {% endblock %}
 
-{% block scripts %}<script src="{% static 'js/vinyl-list.js' %}?v={{ CSS_VERSION }}"></script>{% endblock %}
+{% block scripts %}<script nonce="{{ request.csp_nonce }}" src="{% static 'js/vinyl-list.js' %}?v={{ CSS_VERSION }}"></script>{% endblock %}

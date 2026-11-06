@@ -71,7 +71,7 @@ if (!supported) {
     });
 }
 </script>
-<script src="{% static 'vendor/bootstrap/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'js/lang.js' %}?v={{ CSS_VERSION }}"></script>
+<script nonce="{{ request.csp_nonce }}" src="{% static 'vendor/bootstrap/bootstrap.bundle.min.js' %}"></script>
+<script nonce="{{ request.csp_nonce }}" src="{% static 'js/lang.js' %}?v={{ CSS_VERSION }}"></script>
 </body>
 </html>

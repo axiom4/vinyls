@@ -27,7 +27,7 @@ class CspMiddleware:
         request.csp_nonce = secrets.token_urlsafe(16)
         response = self.get_response(request)
         response['Content-Security-Policy'] = (
-            f"default-src 'none'; script-src 'self' 'nonce-{request.csp_nonce}'; style-src 'self'; "
+            f"default-src 'none'; script-src 'nonce-{request.csp_nonce}' 'strict-dynamic'; style-src 'self'; "
             "img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; "
             "object-src 'none'; frame-ancestors 'none'; manifest-src 'self'; worker-src 'none'"
         )
