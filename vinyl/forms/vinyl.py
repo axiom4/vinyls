@@ -1,5 +1,6 @@
 from django import forms
-from .models import Vinyl, Artist, RecordLabel, VinylGenre
+
+from ..models import Vinyl
 
 
 class VinylForm(forms.ModelForm):
@@ -24,32 +25,4 @@ class VinylForm(forms.ModelForm):
             'cover_image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'rating': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.1', 'min': '0', 'max': '5'}),
             'is_available': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
-        }
-
-
-class ArtistForm(forms.ModelForm):
-    class Meta:
-        model = Artist
-        fields = ['name']
-        widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-        }
-
-
-class RecordLabelForm(forms.ModelForm):
-    class Meta:
-        model = RecordLabel
-        fields = ['name', 'website']
-        widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'website': forms.URLInput(attrs={'class': 'form-control'}),
-        }
-
-
-class VinylGenreForm(forms.ModelForm):
-    class Meta:
-        model = VinylGenre
-        fields = ['name']
-        widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
         }

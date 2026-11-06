@@ -1,31 +1,11 @@
-from django.db import models
-from django.urls import reverse
 import uuid
 
+from django.db import models
+from django.urls import reverse
 
-class Artist(models.Model):
-    name = models.CharField(max_length=200)
-
-    class Meta:
-        ordering = ['name']
-
-    def __str__(self):
-        return self.name
-
-
-class RecordLabel(models.Model):
-    name = models.CharField(max_length=200)
-    website = models.URLField(blank=True, null=True)
-
-    def __str__(self):
-        return self.name
-
-
-class VinylGenre(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-
-    def __str__(self):
-        return self.name
+from .artist import Artist
+from .genre import VinylGenre
+from .record_label import RecordLabel
 
 
 class Vinyl(models.Model):

@@ -1,5 +1,6 @@
 from django import forms
-from .models import Book, BookGenre, Author, Publisher
+
+from ..models import Book
 
 
 class BookForm(forms.ModelForm):
@@ -22,33 +23,4 @@ class BookForm(forms.ModelForm):
             'cover_image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'rating': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.1', 'min': '0', 'max': '5'}),
             'is_available': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
-        }
-
-
-class AuthorForm(forms.ModelForm):
-    class Meta:
-        model = Author
-        fields = ['first_name', 'last_name']
-        widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-        }
-
-
-class PublisherForm(forms.ModelForm):
-    class Meta:
-        model = Publisher
-        fields = ['name', 'website']
-        widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'website': forms.URLInput(attrs={'class': 'form-control'}),
-        }
-
-
-class BookGenreForm(forms.ModelForm):
-    class Meta:
-        model = BookGenre
-        fields = ['name']
-        widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
         }
