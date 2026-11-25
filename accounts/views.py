@@ -1,9 +1,10 @@
 import json
 import logging
+import time
 
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import login, logout
+from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -23,6 +24,8 @@ from webauthn.helpers.structs import (
 from .models import Passkey
 
 logger = logging.getLogger(__name__)
+PENDING_KEY = 'pending_2fa'
+PENDING_TTL = 300  # secondi per completare la passkey dopo la password
 BACKEND = 'django.contrib.auth.backends.ModelBackend'
 UV = UserVerificationRequirement.REQUIRED  # impronta / PIN obbligatori
 
@@ -33,17 +36,38 @@ def _safe_next(request):
     return nxt if ok else '/'
 
 
+def _pending_user(request):
+    """Utente che ha superato la password e deve ancora presentare la passkey."""
+    pending = request.session.get(PENDING_KEY)
+    if not pending or time.time() - pending['ts'] > PENDING_TTL:
+        request.session.pop(PENDING_KEY, None)
+        return None
+    return get_user_model().objects.filter(pk=pending['uid'], is_active=True).first()
+
+
 def login_view(request):
     if request.user.is_authenticated:
         return redirect('/')
     form = AuthenticationForm(request, data=request.POST or None)
     if request.method == 'POST' and form.is_valid():
-        login(request, form.get_user())
-        nxt = request.POST.get('next', '')
-        if url_has_allowed_host_and_scheme(nxt, allowed_hosts={request.get_host()}, require_https=request.is_secure()):
-            return redirect(nxt)
-        return redirect('/')
+        user = form.get_user()
+        nxt = _safe_next(request)
+        # shortcut: chi non ha ancora una passkey entra con la sola password per poterla registrare; rendi obbligatorio l'enrollment se serve
+        if user.passkeys.exists():
+            request.session.flush()
+            request.session[PENDING_KEY] = {'uid': user.pk, 'ts': time.time(), 'next': nxt}
+            return redirect('accounts:second_factor')
+        login(request, user)
+        return redirect(nxt)
     return render(request, 'accounts/login.html', {'form': form, 'next': _safe_next(request)})
+
+
+def second_factor(request):
+    if request.user.is_authenticated:
+        return redirect('/')
+    if not _pending_user(request):
+        return redirect('accounts:login')
+    return render(request, 'accounts/second_factor.html')
 
 
 @require_POST
@@ -108,20 +132,29 @@ def register_verify(request):
 
 @require_POST
 def login_options(request):
-    options = generate_authentication_options(rp_id=settings.WEBAUTHN_RP_ID, user_verification=UV)
+    user = _pending_user(request)
+    if not user:
+        return JsonResponse({'error': _('sessione scaduta')}, status=403)
+    options = generate_authentication_options(
+        rp_id=settings.WEBAUTHN_RP_ID, user_verification=UV,
+        allow_credentials=[PublicKeyCredentialDescriptor(id=bytes(p.credential_id)) for p in user.passkeys.all()],
+    )
     request.session['webauthn_auth_challenge'] = bytes_to_base64url(options.challenge)
     return HttpResponse(options_to_json(options), content_type='application/json')
 
 
 @require_POST
 def login_verify(request):
+    user = _pending_user(request)
+    if not user:
+        return JsonResponse({'error': _('sessione scaduta')}, status=403)
     challenge = request.session.pop('webauthn_auth_challenge', None)
     if not challenge:
         return JsonResponse({'error': _('challenge mancante')}, status=400)
     try:
         body = json.loads(request.body)
-        passkey = Passkey.objects.select_related('user').get(
-            credential_id=base64url_to_bytes(body['credential']['rawId']))
+        passkey = Passkey.objects.get(
+            user=user, credential_id=base64url_to_bytes(body['credential']['rawId']))
         verified = verify_authentication_response(
             credential=body['credential'],
             expected_challenge=base64url_to_bytes(challenge),
@@ -134,9 +167,9 @@ def login_verify(request):
     except Exception:
         logger.exception('verifica passkey fallita')
         return JsonResponse({'error': _('autenticazione non valida')}, status=400)
-    if not passkey.user.is_active:
-        return JsonResponse({'error': _('utente disattivato')}, status=403)
     passkey.sign_count = verified.new_sign_count
     passkey.save(update_fields=['sign_count'])
-    login(request, passkey.user, backend=BACKEND)
-    return JsonResponse({'ok': True, 'next': _safe_next(request)})
+    nxt = request.session[PENDING_KEY]['next']
+    request.session.pop(PENDING_KEY)
+    login(request, user, backend=BACKEND)
+    return JsonResponse({'ok': True, 'next': nxt})

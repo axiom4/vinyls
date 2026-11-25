@@ -5,6 +5,7 @@ app_name = 'accounts'
 
 urlpatterns = [
     path('login/', views.login_view, name='login'),
+    path('2fa/', views.second_factor, name='second_factor'),
     path('logout/', views.logout_view, name='logout'),
     path('passkeys/', views.passkey_list, name='passkey_list'),
     path('passkeys/<int:pk>/delete/', views.passkey_delete, name='passkey_delete'),

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static i18n %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="{% trans "La mia collezione di vinili e libri" %}">
+    <meta name="theme-color" content="#212529">
+    <title>{% trans "Verifica passkey" %}</title>
+    <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
+    <link rel="preload" href="{% static 'fonts/InstrumentSans-latin-e190a6.woff2' %}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v={{ CSS_VERSION }}">
+</head>
+<body>
+<div class="container login-wrap">
+    <div class="login-card"><div class="p-4 p-sm-5">
+        <div class="text-center mb-4"><img src="{% static 'img/favicon.svg' %}" alt="" width="56" height="56" class="mb-3"><h1 class="h3 mb-0">{% trans "Secondo fattore" %}</h1></div>
+        <p class="text-center text-muted">{% trans "Conferma con la tua passkey (impronta, volto o PIN) per completare l'accesso." %}</p>
+        <button id="passkey-login" type="button" class="btn btn-primary w-100 mb-2">{% trans "Usa la passkey" %}</button>
+        <div id="passkey-error" class="text-danger small mb-3" hidden></div>
+        <a href="{% url 'accounts:login' %}" class="btn btn-link w-100">{% trans "Annulla" %}</a>
+    </div></div>
+</div>
+{% trans "Accesso con passkey non riuscito: " as t_pkerr %}
+<script nonce="{{ request.csp_nonce }}">
+const csrf = '{{ csrf_token }}';
+const post = (url, body) => fetch(url, {method: 'POST', headers: {'X-CSRFToken': csrf, 'Content-Type': 'application/json'}, body: JSON.stringify(body || {})});
+const btn = document.getElementById('passkey-login'), err = document.getElementById('passkey-error');
+
+async function passkeyLogin() {
+    err.hidden = true;
+    try {
+        const o = await post('{% url "accounts:passkey_login_options" %}');
+        const opts = await o.json();
+        if (!o.ok) throw new Error(opts.error);
+        const cred = await navigator.credentials.get({publicKey: PublicKeyCredential.parseRequestOptionsFromJSON(opts)});
+        const r = await post('{% url "accounts:passkey_login_verify" %}', {credential: cred.toJSON()});
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error);
+        location.href = data.next;
+    } catch (e) {
+        if (e.name === 'NotAllowedError') return;
+        console.error(e);
+        err.textContent = "{{ t_pkerr|escapejs }}" + (e.name || '') + ' ' + (e.message || ''); err.hidden = false;
+    }
+}
+
+if (!(window.PublicKeyCredential && PublicKeyCredential.parseRequestOptionsFromJSON)) {
+    btn.disabled = true;
+} else {
+    btn.addEventListener('click', passkeyLogin);
+    passkeyLogin();
+}
+</script>
+</body>
+</html>
